@@ -9,6 +9,7 @@ from false_rule import reglaFalsa
 from fixed_point import Punto_Fijo
 from LUsimple import Lusimple
 from CubicPlotter import CubicPlotter
+from Doolittle import Doolittle
 
 app = Flask(__name__)
 
@@ -201,6 +202,26 @@ def FlaskCubicPlotter():
     A,b,S = CubicPlotter(n,x,y)
 
     return render_template("cubicplotterT.html", A=A, b=b, S=S)
+
+@app.route("/doolittle")
+def doolittle():
+    return render_template('doolittle.html')
+
+@app.route("/doolittleTable", methods=["GET", "POST"])
+def FlaskDoolittle():
+    m=request.form.get("m")
+    n=request.form.get("n")
+    A=request.form.get("A")
+    l_b=request.form.get("l_b")
+    b=request.form.get("b")
+    if n=='' or m=='' or A=='':
+        return "<h1 style='text-align: center;'>Check Values Entered</h1>"
+    
+    
+    lis_stage,lis_m,list_L,list_U,result = Doolittle(m,n,A,l_b,b)
+    x = len(lis_stage)
+    z = list(range(0,x))
+    return render_template("dataDoolittle.html",stage = lis_stage,M = lis_m, L=list_L,U=list_U,result = result,Z = z)
 
 
 

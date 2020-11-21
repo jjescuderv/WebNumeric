@@ -36,13 +36,22 @@ def back_subst(M): #U,z = x
     return x
 
 
-def Doolittle():
+def Doolittle(m,n,values_A,b_len,values_b):
+    m,n,A,b = data_input(m,n,values_A,b_len,values_b)
     L=np.eye(n)
     U=np.eye(n)
     print(L)
     print("Stage 0")
     print(A)
     print()
+    lis_stage=[]
+    lis_m=[]
+    list_L=[]
+    list_U=[]
+    lis_stage.append("Stage 0")
+    lis_m.append(A)
+    list_L.append(" ")
+    list_U.append(" ")
     cont = 1
     for i in range(0,n-1):
         for j in range(i,n):
@@ -58,6 +67,12 @@ def Doolittle():
         print("U: ", U)
         cont += 1
         print()
+        string = "Stage " + str(i+1)
+        lis_stage.append(string)
+        lis_m.append(A)
+        list_L.append(L)
+        list_U.append(U)
+        
     
     
     U[n-1,n-1] = A[n-1,n-1] - (np.dot(L[n-1,0:n-1],np.transpose(U[0:n-1,n-1])))
@@ -67,6 +82,11 @@ def Doolittle():
     print("U: ", U)
     print()
     MLB = np.concatenate((L, b), axis=1)
+    string = "Stage " + str(i+2)
+    lis_stage.append(string)
+    lis_m.append(A)
+    list_L.append(L)
+    list_U.append(U)
     
     z = prog_subst(MLB)
     
@@ -74,40 +94,43 @@ def Doolittle():
     print("Results: ")
     print()
     print(back_subst(MUZ))
+    result = back_subst(MUZ)
+    return lis_stage,lis_m,list_L,list_U,result
     
-def data_input():
-    print("Doolittle")
-    global A, b, m, n
+def data_input(m,n,values_A,b_len,values_b):
+    #print("LU_SIMPLE")
+    #global A, b, m, n
 
     # For A
-    print("MATRIX DATA (A)")
-    m = int(input("Enter the number of rows: "))
-    n = int(input("Enter the number of columns: "))
+    #print("MATRIX DATA (A)")
+    m = int(m)
+    n = int(n)
     # Check for square matrix
     if(m != n):
-        print("ERROR: Matrix must be square. \n")
+        #print("ERROR: Matrix must be square. \n")
         return
-    print("Enter the elements of the matrix (rowwise) separated by space: ")
-    values_A = list(map(float, input().split()))
+    #print("Enter the elements of the matrix (rowwise) separated by space: ")
+    values_A = list(map(float, values_A.split()))
     A = np.array(values_A).reshape(m, n)
 
     # Check for nonsingular matrix
     det = np.linalg.det(A)
     if(det == 0):
-        print("det(A) = " + str(det))
-        print("ERROR: Matrix must be nonsingular. \n")
+        #print("det(A) = " + str(det))
+        #print("ERROR: Matrix must be nonsingular. \n")
         return
 
     # For b
-    print("\nVECTOR DATA (b)")
-    b_len = int(input("Enter the length of b: "))
+    #print("\nVECTOR DATA (b)")
+    b_len = int(b_len)
     # Check for vector length
     if(b_len != m):
-        print("ERROR: b must have length n. \n")
+        #print("ERROR: b must have length n. \n")
         return
-    print("Enter the elements of the vector separated by space: ")
-    values_b = list(map(float, input().split()))
+    #print("Enter the elements of the vector separated by space: ")
+    values_b = list(map(float, values_b.split()))
     b = np.array(values_b).reshape(b_len, 1)
+    return m,n,A,b
     
 if __name__ == "__main__":
     np.set_printoptions(formatter={'float': '{: f}'.format})
