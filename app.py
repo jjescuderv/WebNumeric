@@ -8,6 +8,7 @@ from QuadraticPlotter import QuadraticPlotter
 from false_rule import reglaFalsa
 from fixed_point import Punto_Fijo
 from LUsimple import Lusimple
+from CubicPlotter import CubicPlotter
 
 app = Flask(__name__)
 
@@ -101,8 +102,11 @@ def FlaskLUsimple():
     if n=='' or m=='' or A=='':
         return "<h1 style='text-align: center;'>Check Values Entered</h1>"
     
+    
     lis_stage,lis_m,list_L,list_U,result = Lusimple(m,n,A,l_b,b)
-    return render_template("dataLuSimple.html",stage = lis_stage,M = lis_m, L=list_L,U=list_U,result = result)
+    x = len(lis_stage)
+    z = list(range(0,x))
+    return render_template("dataLuSimple.html",stage = lis_stage,M = lis_m, L=list_L,U=list_U,result = result,Z = z)
 
 @app.route("/vandermonde")
 def vandermonde():
@@ -180,6 +184,25 @@ def FlaskQuadraticp():
     A,b,S = QuadraticPlotter(n,x,y)
 
     return render_template("quadraticplotterT.html", A=A, b=b, S=S)
+
+@app.route("/cubicplotter")
+def cubicplotter():
+    return render_template('cubicplotter.html')
+
+@app.route("/cubicplotterTable", methods=["GET", "POST"])
+def FlaskCubicPlotter():
+    n=request.form.get("n")
+    x=request.form.get("x")
+    y=request.form.get("y")
+    
+    if n=='' or x=='' or y=='':
+        return "<h1 style='text-align: center;'>Check Values Entered</h1>"
+
+    A,b,S = CubicPlotter(n,x,y)
+
+    return render_template("cubicplotterT.html", A=A, b=b, S=S)
+
+
 
 if __name__=="__main__":
     app.run(debug=True)

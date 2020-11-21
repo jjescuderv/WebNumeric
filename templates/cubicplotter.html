@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cubic Plotter</title>
+    <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
+    <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
+    <style>
+        input {
+            width: 30%;
+          }
+        form{
+            text-align: center;
+        }
+        h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cubic Plotter Data</h1>
+    <form method="post" action="{{ url_for('FlaskCubicPlotter') }}">
+        <label for="n">Number of X and Y elements</label>
+        <p><input name="n" type="number" placeholder="Example: 4"></p>
+        <label for="x">Enter the elements of X separated by space</label>
+        <p><input name="x" type="text" placeholder="Example: -1 0 3 4"></p>
+        <label for="y">Enter the elements of Y separated by space</label>
+        <p><input name="y" type="text" placeholder="Example: 15.5 3 8 1"></p>
+        <input type="submit" value="Acept">
+    </form>
+</body>
+</html>
