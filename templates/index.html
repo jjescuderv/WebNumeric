@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
-    <title>Funciones</title>
+    <title>Main Menu</title>
 </head>
+
+<h1 style="text-align: center;">Numerical Methods Web</h1>
+
 <body>
-    <p><input type="submit" value="Secant" onclick= "location='/secant'" class='boton container' ></p>
-    <p><input type="submit" value="Multiple Roots" onclick= "location='/multipleRoots'" class='boton container' ></p>
+    <p><input type="submit" value="Secant" onclick= "location='/secant'"></p>
+    <p><input type="submit" value="Multiple Roots" onclick= "location='/multipleRoots'"></p>
+    <p><input type="submit" value="Vandermonde" onclick= "location='/vandermonde'"></p>
+    <p><input type="submit" value="SOR" onclick= "location='/sor'"></p>
+    <p><input type="submit" value="Lineal Plotter" onclick= "location='/linealplotter'"></p>
+    <p><input type="submit" value="Quadratic Plotter" onclick= "location='/quadraticplotter'"></p>
     <p><input type="submit" value="False Rule" onclick= "location='/false-rule'" class='boton container' ></p>
     <p><input type="submit" value="Fixed Point" onclick= "location='/fixed-point'" class='boton container' ></p>
 </body>

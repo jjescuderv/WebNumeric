@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadratic Plotter Results</title>
+    <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
+    <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
+    <style>
+        h1, h3, p, pre{
+            text-align: center;
+        } 
+    </style>
+</head>
+<body>
+    <h1>Quadratic Plotter</h1>
+
+    <h3>Quadratic Plotter A Matrix</h3>
+    <pre>
+        {{A}}
+    </pre>
+
+    <h3>Quadratic Plotter B Vector</h3>
+    <p>
+        {{b}}
+    </p>
+
+    <h3>Polynomial Coefficients</h3>
+    <p> {{S}} </p>
+    <p>To assemble the function in strokes, take groups of 3 elements</p>
+
+    <p><input type="submit" value="Back to Main Menu" onclick= "location='/'" ></p>
+
+</body>
+</html>

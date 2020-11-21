@@ -1,23 +1,23 @@
 import numpy as np
 
-def QuadraticPlotter():
+def QuadraticPlotter(n,x,y):
     
-    n = int(input("Enter the number of elements of x and y: "))
-    
+    #n = int(input("Enter the number of elements of x and y: "))
+    n=int(n)
     # For x
-    print("\nVECTOR DATA (x)")
+    #print("\nVECTOR DATA (x)")
     x_len = n
-    print("Enter the elements of the vector separated by space: ")
-    values_x = list(map(float, input().split()))
+    #print("Enter the elements of the vector separated by space: ")
+    values_x = list(map(float, x.split()))
     X = np.array(values_x).reshape(x_len, 1)
 
     #print('x:\n',x)
 
     #For y
-    print("\nVECTOR DATA (y)")
+    #print("\nVECTOR DATA (y)")
     y_len = n
-    print("Enter the elements of the vector separated by space:")
-    values_y = list(map(float, input().split()))
+    #print("Enter the elements of the vector separated by space:")
+    values_y = list(map(float, y.split()))
     Y = np.array(values_y).reshape(y_len, 1)
 
     #print('y:\n',y)
@@ -51,8 +51,8 @@ def QuadraticPlotter():
 
     print('Tracer coefficients:\n', S,'\n')
     
-    
-    
+    return A,b,S    
+
 
 if __name__ == "__main__":
-    QuadraticPlotter()
+    QuadraticPlotter(4,'-1 0 3 4','15.5 3 8 1')

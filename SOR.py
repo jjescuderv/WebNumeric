@@ -3,102 +3,105 @@ import numpy as np
 import pandas as pd
 import math
 
-A=b=m=n = None
-def Sor():
-    global A, b, m, n
+def Sor(m,n,A,b,x0,iter,error,w):
 
     # For A
-    print("MATRIX DATA (A)")
-    m = int(input("Enter the number of rows: "))
-    n = int(input("Enter the number of columns: "))
+    #print("MATRIX DATA (A)")
+    #m = int(input("Enter the number of rows: "))
+    m=int(m)
+    #n = int(input("Enter the number of columns: "))
+    n=int(n)
     # Check for square matrix
     if(m != n):
-        print("ERROR: Matrix must be square. \n")
+        #print("ERROR: Matrix must be square. \n")
         return
-    print("Enter the elements of the matrix (rowwise) separated by space: ")
-    values_A = list(map(float, input().split()))
+    #print("Enter the elements of the matrix (rowwise) separated by space: ")
+    values_A = list(map(float, A.split()))
     A = np.array(values_A).reshape(m, n)
 
     # Check for nonsingular matrix
     det = np.linalg.det(A)
     if(det == 0):
-        print("det(A) = " + str(det))
-        print("ERROR: Matrix must be nonsingular. \n")
+        #print("det(A) = " + str(det))
+        #print("ERROR: Matrix must be nonsingular. \n")
         return
 
     # For b
-    print("\nVECTOR DATA (b)")
+    #print("\nVECTOR DATA (b)")
     b_len = n#int(input("Enter the length of b: "))
     # Check for vector length
     if(b_len != m):
-        print("ERROR: b must have length n. \n")
+        #print("ERROR: b must have length n. \n")
         return
-    print("Enter the elements of the vector separated by space: ")
-    values_b = list(map(float, input().split()))
+    #print("Enter the elements of the vector separated by space: ")
+    values_b = list(map(float, b.split()))
     b = np.array(values_b).reshape(b_len, 1)
 
     #For x0
-    print("\nVECTOR DATA (X0)")
+    #print("\nVECTOR DATA (X0)")
     x0_len = n#int(input("Enter the length of x0: "))
     # Check for vector length
     if(x0_len != m):
-        print("ERROR: X0 must have length n. \n")
+        #print("ERROR: X0 must have length n. \n")
         return
-    print("Enter the elements of the vector separated by space: ")
-    values_x0 = list(map(float, input().split()))
+    #print("Enter the elements of the vector separated by space: ")
+    values_x0 = list(map(float, x0.split()))
     x0 = np.array(values_x0).reshape(x0_len, 1)
 
-    iter=float(input("Enter the maximum number of iterations: "))
-    error=float(eval(input("Enter the maximum absolute error accepted: ")))
-    w=float(input("Enter the lambda of relaxation: "))
+    #iter=float(input("Enter the maximum number of iterations: "))
+    iter=float(iter)
+    #error=float(eval(input("Enter the maximum absolute error accepted: ")))
+    error=float(eval(error))
+    #w=float(input("Enter the lambda of relaxation: "))
+    w=float(w)
 
-    #print(A)
-    #print(b)
-    #print(x0)
-    #print(iter)
-    #print(error)
-    #print(w)
+    ##print(A)
+    ##print(b)
+    ##print(x0)
+    ##print(iter)
+    ##print(error)
+    ##print(w)
 
     k= np.linalg.norm(A)* np.linalg.norm(np.linalg.inv(A))
 
-    print('Conditional: ', k)
+    #print('Conditional: ', k)
 
     d= np.zeros((m, n), float)
     np.fill_diagonal(d,(A.diagonal()))
 
-    #print('d: \n',d)
+    ##print('d: \n',d)
 
    
     l= d-(np.tril(A,0))
-    print(l)
+    #print(l)
    
     u= d-(np.triu(A,0))
-    #print(u)
+    ##print(u)
 
-    print('\n SOLUTION:\n');
-    print('\nThe gaussian transition matrix seidel:\n');
+    #print('\n SOLUTION:\n');
+    #print('\nThe gaussian transition matrix seidel:\n');
     Tw=(np.linalg.inv((d-(w*l)))).dot(((1-w)*d+(w*u)))
-    print(Tw)
+    #print(Tw)
 
     #re=max(np.absolute(np.linalg.eig(Tw)))
     valores, vectores = np.linalg.eig(Tw)
-    print(valores)
+    #print(valores)
     z=np.absolute(valores)
     y=max(z)
     re=y
-    print('re:', re)
+    #print('re:', re)
 
     if re>1:
-        print('Spectral radius greater than 1\n The method does not converge')
+        #print('Spectral radius greater than 1\n The method does not converge')
         exit()
 
-    print('\nThe constant vector is:\n')
+    #print('\nThe constant vector is:\n')
     y= np.linalg.inv(d-(w*l))
-    #print('y: \n',y)
-    #print(b)
+    ##print('y: \n',y)
+    ##print(b)
     Cw= w*(y.dot(b))
-    #print('\n')
-    print(Cw)
+    ##print('\n')
+    #print(Cw)
 
     i=0
     err=error+1;
@@ -120,7 +123,8 @@ def Sor():
 
     data_frame = pd.DataFrame(data=d)
     pd.set_option('precision', 15)
-    print(data_frame)
+    #print(data_frame)
+    return Tw,re,Cw,x1,x2,x3,er
 
 if __name__ == "__main__":
-    Sor()
+    Sor(4,4,'4 -1 0 3 1 15.5 3 8 0 -1.3 -4 1.1 14 5 -2 30','1 1 1 1','0 0 0 0',100,'10**-7',1.5)

@@ -1,22 +1,23 @@
 import numpy as np
+from polynomial import Polynomial as P
 
-def LinealPlotter():
-    n = int(input("Enter the number of elements of x and y: "))
-    
+def LinealPlotter(n,x,y):
+    #n = int(input("Enter the number of elements of x and y: "))
+    n=int(n)
     # For x
-    print("\nVECTOR DATA (x)")
+    #print("\nVECTOR DATA (x)")
     x_len = n
-    print("Enter the elements of the vector separated by space: ")
-    values_x = list(map(float, input().split()))
+    #print("Enter the elements of the vector separated by space: ")
+    values_x = list(map(float, x.split()))
     x = np.array(values_x).reshape(x_len, 1)
 
     #print('x:\n',x)
 
     #For y
-    print("\nVECTOR DATA (y)")
+    #print("\nVECTOR DATA (y)")
     y_len = n
-    print("Enter the elements of the vector separated by space:")
-    values_y = list(map(float, input().split()))
+    #print("Enter the elements of the vector separated by space:")
+    values_y = list(map(float, y.split()))
     y = np.array(values_y).reshape(y_len, 1)
 
     #print('y:\n',y)
@@ -47,12 +48,16 @@ def LinealPlotter():
         #b[(n)+(i)]=0
         i+=1
 
-    print('A:\n',A)
-    print('B:\n',b)
+    #print('A:\n',A)
+    #print('B:\n',b)
 
     S = np.linalg.solve(A, b)
 
+    #print(S)
+
     print('Tracer coefficients: \n', S)
 
+    return A,b,S
+
 if __name__ == "__main__":
-    LinealPlotter()
+    LinealPlotter(4,'-1 0 3 4','15.5 3 8 1')
