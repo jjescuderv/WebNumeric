@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOR</title>
+    <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
+    <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
+    <style>
+        input {
+            width: 30%;
+          }
+        form{
+            text-align: center;
+        }
+        h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>SOR DATA</h1>
+
+    <form method="post" action="{{ url_for('FlaskJacobi') }}">
+        <label for="m">Enter size of m</label>
+        <p><input name="m" type="number" placeholder="Example: 4"></p>
+        <label for="n">Enter size of n</label>
+        <p><input name="n" type="number" placeholder="Example: 4"></p>
+        <label for="A">Enter the elements of the A Matrix separated by space:</label>
+        <p><input name="A" type="text" placeholder="Example: 4 -1 0 3 1 15.5 3 8 0 -1.3 -4 1.1 14 5 -2 30"></p>
+        <label for="lb">Enter the length b vector </label>
+        <p><input name="lb" type="text" placeholder="4"></p>
+        <label for="b">Enter the elements of the b vector separated by space:</label>
+        <p><input name="b" type="text" placeholder="Example: 1 1 1 1"></p>
+        <label for="lx0">Enter the length x0 vector </label>
+        <p><input name="lx0" type="text" placeholder="4"></p>
+        <label for="x0">Enter the elements of the x0 vector separated by space:</label>
+        <p><input name="x0" type="text" placeholder="Example: 0 0 0 0"></p>
+        <label for="iter">Enter the maximum number of iterations:</label>
+        <p><input name="iter" type="number" placeholder="Example: 100"></p>
+        <label for="error">Enter the maximum absolute error accepted:</label>
+        <p><input name="error" type="text" placeholder="Exaple: 10**-7"></p>
+
+        <input type="submit" value="Acept">
+    </form>
+</body>
+</html>

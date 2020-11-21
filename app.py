@@ -10,6 +10,7 @@ from fixed_point import Punto_Fijo
 from LUsimple import Lusimple
 from CubicPlotter import CubicPlotter
 from Doolittle import Doolittle
+from Jacobi import jacobi
 
 app = Flask(__name__)
 
@@ -223,7 +224,31 @@ def FlaskDoolittle():
     z = list(range(0,x))
     return render_template("dataDoolittle.html",stage = lis_stage,M = lis_m, L=list_L,U=list_U,result = result,Z = z)
 
+@app.route("/jacobi")
+def Jacobi():
+    return render_template('jacobi.html')
 
+@app.route("/JacobiTable", methods=["GET", "POST"])
+def FlaskJacobi():
+    m=request.form.get("m")
+    n=request.form.get("n")
+    A=request.form.get("A")
+    b=request.form.get("b")
+    x0=request.form.get("x0")
+    Nmax=request.form.get("iter")
+    tol=request.form.get("error")
+    lb=request.form.get("lb")
+    lx0=request.form.get("lx0")
+    
+    if m == ''  or n=='' or A=='' or b=='' or x0=='' or iter=='' or tol=='' or  m!=n:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
+
+    T,C,respect1,lis_iter,lis_er,lis_xi = jacobi(A,b,x0,tol,Nmax,m,n,lb,lx0)
+
+    a=len(lis_iter)
+    lis_a=list(range(0,a))
+
+    return render_template("JacobiT.html", T=T,C=C,radio=respect1,iter=lis_iter,er=lis_er,xi=lis_xi,lis_a=lis_a)
 
 if __name__=="__main__":
     app.run(debug=True)
