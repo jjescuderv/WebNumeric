@@ -8,6 +8,7 @@ from QuadraticPlotter import QuadraticPlotter
 from false_rule import reglaFalsa
 from fixed_point import Punto_Fijo
 from LUsimple import Lusimple
+from newton import Newton
 from CubicPlotter import CubicPlotter
 from Doolittle import Doolittle
 from Jacobi import jacobi
@@ -187,6 +188,26 @@ def FlaskQuadraticp():
 
     return render_template("quadraticplotterT.html", A=A, b=b, S=S)
 
+@app.route("/newton")
+def newton():
+    return render_template("newton.html")
+
+@app.route("/newtonTable", methods=["GET", "POST"])
+def newtonTable():
+    itera=request.form.get("itera")
+    x0=request.form.get("x0")
+    fun=request.form.get("fun")
+    dfun=request.form.get("dfun")
+    tol=request.form.get("tol")
+    
+    if itera =='' or x0 =='' or fun=='' or dfun=='' or tol=='':
+        return "<h1 style='text-align: center;'>Check Values Entered</h1>" 
+
+    list_a,list_f,list_e=Newton(100,0.5,"log(sin(x)**2+1)-1/2","2*((sin(x)**2+1)**-1)*sin(x)*cos(x)","10**-7")
+
+    it=len(list_a)
+    list_it=list(range(0,it))
+    return render_template("newton.html", list_a=list_a,list_f=list_f,list_e=list_e, list_it=list_it)
 @app.route("/cubicplotter")
 def cubicplotter():
     return render_template('cubicplotter.html')

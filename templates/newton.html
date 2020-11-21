@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newton</title>
+    <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
+    <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
+    <style>
+        input {
+            width: 30%;
+            text-align: center;
+        }
+        form{
+            text-align: center;
+        }
+        h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Newton</h1>
+    <form method="post" action="{{ url_for('newtonTable') }}">
+        <label for="itera">Number of Iterations</label>
+        <p><input name="itera" type="text" placeholder="Exaple: 100"></p>
+        <label for="x0">Initial Value</label>
+        <p><input name="x0" type="text" placeholder="Example: 1.0"></p>
+        <label for="fun">Function</label>
+        <p><input name="fun" type="text" placeholder="Example log"></p>
+        <label for="dfun">Function's derivative</label>
+        <p><input name="dfun" type="text" placeholder="Example log(derivative)""></p>
+        <label for="tol">Error Acepted</label>
+        <p><input name="tol" type="text" placeholder="Example: 10**-7"></p>
+
+        <input type="submit" class="btn btn-success btn-lg" value="Run">
+    </form>
+</body>
+<footer>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Table</title>
+        <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
+        <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            h1, h3, p, pre{
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Newton's Results Table</h1>
+        <table style="width:30%">
+        <tr>
+            <th>Iterations</th>
+            <th>Xi</th> 
+            <th>f(Xi)</th>
+            <th>error</th>
+        </tr>
+        {%for i in list_it %}
+        <tr>
+            <td>{{i}}</td>
+            <td>{{list_a[i]}}</td>
+            <td>{{list_f[i]}}</td>
+            <td>{{list_e[i]}}</td>
+        </tr>
+        {%endfor%}
+        </table>
+    
+    </body>
+</footer>
+</html>
