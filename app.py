@@ -187,7 +187,6 @@ def FlaskQuadraticp():
 
     return render_template("quadraticplotterT.html", A=A, b=b, S=S)
 
-<<<<<<< HEAD
 @app.route("/newton")
 def newton():
     return render_template("newton.html")
@@ -208,7 +207,6 @@ def newtonTable():
     it=len(list_a)
     list_it=list(range(0,it))
     return render_template("newton.html", list_a=list_a,list_f=list_f,list_e=list_e, list_it=list_it)
-=======
 @app.route("/cubicplotter")
 def cubicplotter():
     return render_template('cubicplotter.html')
@@ -247,7 +245,6 @@ def FlaskDoolittle():
     return render_template("dataDoolittle.html",stage = lis_stage,M = lis_m, L=list_L,U=list_U,result = result,Z = z)
 
 
->>>>>>> 238a61d0ad64cf9fe3f80342b2c6980b6a864416
 
 if __name__=="__main__":
     app.run(debug=True)
