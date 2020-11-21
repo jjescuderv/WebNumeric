@@ -36,51 +36,64 @@ def back_subst(M): #U,z = x
     return x
 
 
-def Lusimple(m,n,values_A,b_len,values_b):
+def Doolittle(m,n,values_A,b_len,values_b):
     m,n,A,b = data_input(m,n,values_A,b_len,values_b)
-    n = np.size(A,1)
     L=np.eye(n)
-    U=np.zeros((n,n))
-    M=A
+    U=np.eye(n)
+    print(L)
+    print("Stage 0")
+    print(A)
+    print()
     lis_stage=[]
     lis_m=[]
     list_L=[]
     list_U=[]
-    #print("Stage 0")
-    #print(M)
     lis_stage.append("Stage 0")
-    lis_m.append(M)
+    lis_m.append(A)
     list_L.append(" ")
     list_U.append(" ")
-    #print()
+    cont = 1
     for i in range(0,n-1):
+        for j in range(i,n):
+            U[i,j] = A[i,j] - (np.dot(L[i,0:i],np.transpose(U[0:i,j])))
+        print()
         for j in range(i+1,n):
-            if M[j,i] != 0:
-                L[j,i]=np.divide(M[j,i], M[i,i])
-                M[j,i:n]= np.subtract(M[j,i:n], (np.divide(M[j,i], M[i,i]))*M[i,i:n])
-        U[i,i:n]=M[i,i:n]
-        U[i+1,i+1:n]=M[i+1,i+1:n]
-        #print("Stage ", i+1)
+            L[j,i]=(A[j,i]-(np.dot(L[j,0:i],np.transpose(U[0:i,i]))))/U[i,i] 
+        
+        print("Stage ", i+1)
+        print()
+        print("L: ", L)
+        print()
+        print("U: ", U)
+        cont += 1
+        print()
         string = "Stage " + str(i+1)
         lis_stage.append(string)
-        lis_m.append(M)
+        lis_m.append(A)
         list_L.append(L)
         list_U.append(U)
-        #print(M)
-        #print()
-        #print("L: ", L)
-        #print()
-        #print("U: ", U)
-        #print()
         
+    
+    
+    U[n-1,n-1] = A[n-1,n-1] - (np.dot(L[n-1,0:n-1],np.transpose(U[0:n-1,n-1])))
+    print("Stage ", cont)
+    print("L: ", L)
+    print()
+    print("U: ", U)
+    print()
     MLB = np.concatenate((L, b), axis=1)
+    string = "Stage " + str(i+2)
+    lis_stage.append(string)
+    lis_m.append(A)
+    list_L.append(L)
+    list_U.append(U)
     
     z = prog_subst(MLB)
     
     MUZ = np.concatenate((U,z), axis=1)
-    #print("Results: ")
-    #print()
-    #print(back_subst(MUZ))
+    print("Results: ")
+    print()
+    print(back_subst(MUZ))
     result = back_subst(MUZ)
     return lis_stage,lis_m,list_L,list_U,result
     
@@ -122,7 +135,7 @@ def data_input(m,n,values_A,b_len,values_b):
 if __name__ == "__main__":
     np.set_printoptions(formatter={'float': '{: f}'.format})
     data_input()
-    Lusimple()
+    Doolittle()
             
             
     

@@ -9,6 +9,8 @@ from false_rule import reglaFalsa
 from fixed_point import Punto_Fijo
 from LUsimple import Lusimple
 from newton import Newton
+from CubicPlotter import CubicPlotter
+from Doolittle import Doolittle
 
 app = Flask(__name__)
 
@@ -102,8 +104,11 @@ def FlaskLUsimple():
     if n=='' or m=='' or A=='':
         return "<h1 style='text-align: center;'>Check Values Entered</h1>"
     
+    
     lis_stage,lis_m,list_L,list_U,result = Lusimple(m,n,A,l_b,b)
-    return render_template("dataLuSimple.html",stage = lis_stage,M = lis_m, L=list_L,U=list_U,result = result)
+    x = len(lis_stage)
+    z = list(range(0,x))
+    return render_template("dataLuSimple.html",stage = lis_stage,M = lis_m, L=list_L,U=list_U,result = result,Z = z)
 
 @app.route("/vandermonde")
 def vandermonde():
@@ -182,6 +187,7 @@ def FlaskQuadraticp():
 
     return render_template("quadraticplotterT.html", A=A, b=b, S=S)
 
+<<<<<<< HEAD
 @app.route("/newton")
 def newton():
     return render_template("newton.html")
@@ -202,6 +208,46 @@ def newtonTable():
     it=len(list_a)
     list_it=list(range(0,it))
     return render_template("newton.html", list_a=list_a,list_f=list_f,list_e=list_e, list_it=list_it)
+=======
+@app.route("/cubicplotter")
+def cubicplotter():
+    return render_template('cubicplotter.html')
+
+@app.route("/cubicplotterTable", methods=["GET", "POST"])
+def FlaskCubicPlotter():
+    n=request.form.get("n")
+    x=request.form.get("x")
+    y=request.form.get("y")
+    
+    if n=='' or x=='' or y=='':
+        return "<h1 style='text-align: center;'>Check Values Entered</h1>"
+
+    A,b,S = CubicPlotter(n,x,y)
+
+    return render_template("cubicplotterT.html", A=A, b=b, S=S)
+
+@app.route("/doolittle")
+def doolittle():
+    return render_template('doolittle.html')
+
+@app.route("/doolittleTable", methods=["GET", "POST"])
+def FlaskDoolittle():
+    m=request.form.get("m")
+    n=request.form.get("n")
+    A=request.form.get("A")
+    l_b=request.form.get("l_b")
+    b=request.form.get("b")
+    if n=='' or m=='' or A=='':
+        return "<h1 style='text-align: center;'>Check Values Entered</h1>"
+    
+    
+    lis_stage,lis_m,list_L,list_U,result = Doolittle(m,n,A,l_b,b)
+    x = len(lis_stage)
+    z = list(range(0,x))
+    return render_template("dataDoolittle.html",stage = lis_stage,M = lis_m, L=list_L,U=list_U,result = result,Z = z)
+
+
+>>>>>>> 238a61d0ad64cf9fe3f80342b2c6980b6a864416
 
 if __name__=="__main__":
     app.run(debug=True)
