@@ -48,6 +48,8 @@ def Lusimple(m,n,values_A,b_len,values_b):
     list_U=[]
     print("Stage 0")
     print(M)
+    lis_stage.append("Stage 0")
+    lis_m.append(M)
     print()
     for i in range(0,n-1):
         for j in range(i+1,n):
@@ -57,6 +59,11 @@ def Lusimple(m,n,values_A,b_len,values_b):
         U[i,i:n]=M[i,i:n]
         U[i+1,i+1:n]=M[i+1,i+1:n]
         print("Stage ", i+1)
+        string = "Stage " + str(i+1)
+        lis_stage.append(string)
+        lis_m.append(M)
+        list_L.append(L)
+        list_U.append(U)
         print(M)
         print()
         print("L: ", L)
@@ -72,6 +79,8 @@ def Lusimple(m,n,values_A,b_len,values_b):
     print("Results: ")
     print()
     print(back_subst(MUZ))
+    result = back_subst(MUZ)
+    return lis_stage,lis_m,list_L,list_U,result
     
 def data_input(m,n,values_A,b_len,values_b):
     print("LU_SIMPLE")

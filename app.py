@@ -7,6 +7,7 @@ from LinealPlotter import LinealPlotter
 from QuadraticPlotter import QuadraticPlotter
 from false_rule import reglaFalsa
 from fixed_point import Punto_Fijo
+from LUsimple import Lusimple
 
 app = Flask(__name__)
 
@@ -71,7 +72,7 @@ def FlaskFalseRule():
     err=request.form.get("err")
     string = reglaFalsa(iter,x0,x1,fun,err)
     return render_template("dataRule.html",string = string)
-"""
+
 @app.route("/fixed-point")
 def fixedpoint():
     return render_template("fixedPoint.html")
@@ -85,20 +86,23 @@ def FlaskFixedPoint():
     err=request.form.get("err")
     lis_it,lis_xi,lis_gx,lis_fx,lis_er,string2 = Punto_Fijo(iter,x0,fun,fun2,err)
     return render_template("dataFixedP.html",iter = lis_it,xi = lis_xi,gx = lis_gx,fx=lis_fx,er=lis_er,string=string2)
-"""
+
 @app.route("/LUsimple")
 def lusimple():
     return render_template("LUsimple.html")
 
-@app.route("/fixedPointInformation", methods=["GET", "POST"])
-def FlaskFixedPoint():
+@app.route("/LuSimpleInformation", methods=["GET", "POST"])
+def FlaskLUsimple():
     m=request.form.get("m")
     n=request.form.get("n")
     A=request.form.get("A")
     l_b=request.form.get("l_b")
     b=request.form.get("b")
-    lis_it,lis_xi,lis_gx,lis_fx,lis_er,string2 = Punto_Fijo(iter,x0,fun,fun2,err)
-    return render_template("dataFixedP.html",iter = lis_it,xi = lis_xi,gx = lis_gx,fx=lis_fx,er=lis_er,string=string2)
+    if n=='' or m=='' or A=='':
+        return "<h1 style='text-align: center;'>Check Values Entered</h1>"
+    
+    lis_stage,lis_m,list_L,list_U,result = Lusimple(m,n,A,l_b,b)
+    return render_template("dataLuSimple.html",stage = lis_stage,M = lis_m, L=list_L,U=list_U,result = result)
 
 @app.route("/vandermonde")
 def vandermonde():
