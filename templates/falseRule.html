@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
+    <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
+
+</head>
+<body>
+    <!--<p>{{lis_xi}}</p>
+    <p>{{lis_fx}}</p>
+    <p>{{lis_er}}</p>
+    <p>{{e}}</p>
+    <p>{{xa}}</p> -->
+
+    <h1>Información</h1>
+    <form method="post" action="{{ url_for('FlaskFalseRule') }}">
+        <p><input name="iter" type="text" placeholder="Iteraciones"></p>
+        <p><input name="x0" type="text" placeholder="Valor Inicial"></p>
+        <p><input name="x1" type="text" placeholder="Segundo Valor Inicial"></p>
+        <p><input name="fun" type="text" placeholder="Función a evaluar"></p>
+        <p><input name="err" type="text" placeholder="Error Aceptado"></p>
+        <input type="submit" value="Aceptar">
+    </form>
+    <!--
+    <h1>{{ titulo }}</h1>
+    <p>{{ lista }}</p>
+    {% for value in lista %}
+    <p>{{ value }}</p>
+    {% endfor %}
+    -->
+</body>
+</html>

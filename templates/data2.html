@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
+    <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
+    <style>
+        table, th, td {
+          border: 1px solid black;
+          text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tabla de Raices Multiples</h1>
+    <table style="width:30%">
+    <tr>
+        <th>Iteraciones</th>
+        <th>Xn</th> 
+        <th>f</th>
+        <th>fp</th>
+        <th>fpp</th>
+        <th>error</th>
+    </tr>
+    {%for i in lis_a %}
+    <tr>
+        <td>{{i}}</td>
+        <td>{{lis_x0[i]}}</td>
+        <td>{{lis_f0[i]}}</td>
+        <td>{{lis_f1[i]}}</td>
+        <td>{{lis_f2[i]}}</td>
+        <td>{{lis_er[i]}}</td>
+    </tr>
+    {%endfor%}
+    </table>
+
+    <p><input type="submit" value="Volver Al Inicio" onclick= "location='/'" class='boton container' ></p>
+
+</body>
+</html>

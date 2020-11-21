@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
+    <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
+    <style>
+        table, th, td {
+          border: 1px solid black;
+          text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!--<p>{{lis_xi}}</p>
+    <p> {{lis_a}} </p>
+    <p>{{lis_fx}}</p>
+    <p>{{lis_er}}</p>
+    <p>{{e}}</p>
+    <p>{{xa}}</p> -->
+    <h1>Tabla de Secante</h1>
+    <table style="width:30%">
+    <tr>
+        <th>Iteraciones</th>
+        <th>Xi</th> 
+        <th>f(Xi)</th>
+        <th>error</th>
+    </tr>
+    {%for i in lis_a %}
+    <tr>
+        <td>{{i}}</td>
+        <td>{{lis_xi[i]}}</td>
+        <td>{{lis_fx[i]}}</td>
+        <td>{{lis_er[i]}}</td>
+    </tr>
+    {%endfor%}
+    </table>
+
+    <p><input type="submit" value="Volver Al Inicio" onclick= "location='/'" class='boton container' ></p>
+
+</body>
+</html>
