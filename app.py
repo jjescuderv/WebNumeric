@@ -78,7 +78,19 @@ def FlaskFixedPoint():
     lis_it,lis_xi,lis_gx,lis_fx,lis_er,string2 = Punto_Fijo(iter,x0,fun,fun2,err)
     return render_template("dataFixedP.html",iter = lis_it,xi = lis_xi,gx = lis_gx,fx=lis_fx,er=lis_er,string=string2)
 
+@app.route("/LUsimple")
+def lusimple():
+    return render_template("LUsimple.html")
 
+@app.route("/fixedPointInformation", methods=["GET", "POST"])
+def FlaskFixedPoint():
+    m=request.form.get("m")
+    n=request.form.get("n")
+    A=request.form.get("A")
+    l_b=request.form.get("l_b")
+    b=request.form.get("b")
+    lis_it,lis_xi,lis_gx,lis_fx,lis_er,string2 = Punto_Fijo(iter,x0,fun,fun2,err)
+    return render_template("dataFixedP.html",iter = lis_it,xi = lis_xi,gx = lis_gx,fx=lis_fx,er=lis_er,string=string2)
 
 if __name__=="__main__":
     app.run(debug=True)
