@@ -24,17 +24,17 @@
     </style>
 </head>
 <body>
-    <h1>Newton</h1>
+    <h1><b>Newton Method</b></h1>
     <form method="post" action="{{ url_for('newtonTable') }}">
-        <label for="itera">Number of Iterations</label>
+        <label for="itera">Number of iterations</label>
         <p><input name="itera" type="text" placeholder="Exaple: 100"></p>
-        <label for="x0">Initial Value</label>
+        <label for="x0">Initial value</label>
         <p><input name="x0" type="text" placeholder="Example: 1.0"></p>
         <label for="fun">Function</label>
         <p><input name="fun" type="text" placeholder="Example log"></p>
         <label for="dfun">Function's derivative</label>
         <p><input name="dfun" type="text" placeholder="Example log(derivative)""></p>
-        <label for="tol">Error Acepted</label>
+        <label for="tol">Error acepted</label>
         <p><input name="tol" type="text" placeholder="Example: 10**-7"></p>
 
         <input type="submit" class="btn btn-success btn-lg" value="Run">
@@ -54,19 +54,19 @@
                 margin-left: auto;
                 margin-right: auto;
             }
-            h1, h3, p, pre{
+            h1, h3, p, h2, pre{
                 text-align: center;
             }
         </style>
     </head>
     <body>
-        <h1>Newton's Results Table</h1>
+        <h2>Newton's Results Table</h2>
         <table style="width:30%">
         <tr>
             <th>Iterations</th>
             <th>Xi</th> 
             <th>f(Xi)</th>
-            <th>error</th>
+            <th>E</th>
         </tr>
         {%for i in list_it %}
         <tr>
@@ -76,8 +76,10 @@
             <td>{{list_e[i]}}</td>
         </tr>
         {%endfor%}
+        
         </table>
-    
+        <h3>Root found in:  <b>{{ root }}</b></h3>
+
     </body>
 </footer>
 </html>

@@ -28,6 +28,11 @@ def Newton(iterastr, x0str, fstr, dfstr, tolstr):
     list_f = []
     list_e = []
 
+    
+    list_a.append(format(x0, "12.10f"))
+    list_f.append(format(f, "1.1e"))
+    list_e.append(format(" "))
+
     while (e > tol and c <= itera):
         a = x0-(f/df)
         f = fun.subs(x, a)
@@ -35,13 +40,15 @@ def Newton(iterastr, x0str, fstr, dfstr, tolstr):
         e = (abs(a-x0))
         x0 = a
 
+        c=c+1
+
         list_a.append(format(a, "12.10f"))
         list_f.append(format(f, "1.1e"))
         list_e.append(format(e, "1.1e"))
 
 
 
-    print("Root found in:", format(a, "12.15f"), '\n')
-    print("With an error of:", format(a, "1.1f"))
 
-    return list_a,list_f,list_e
+    root=format(a, "12.15f")
+
+    return list_a,list_f,list_e,root

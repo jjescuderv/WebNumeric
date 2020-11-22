@@ -203,11 +203,11 @@ def newtonTable():
     if itera =='' or x0 =='' or fun=='' or dfun=='' or tol=='':
         return "<h1 style='text-align: center;'>Check Values Entered</h1>" 
 
-    list_a,list_f,list_e=Newton(100,0.5,"log(sin(x)**2+1)-1/2","2*((sin(x)**2+1)**-1)*sin(x)*cos(x)","10**-7")
+    list_a,list_f,list_e,root=Newton(itera,x0,fun,dfun,tol)
 
     it=len(list_a)
     list_it=list(range(0,it))
-    return render_template("newton.html", list_a=list_a,list_f=list_f,list_e=list_e, list_it=list_it)
+    return render_template("newton.html", list_a=list_a,list_f=list_f,list_e=list_e, list_it=list_it, root=root)
 @app.route("/cubicplotter")
 def cubicplotter():
     return render_template('cubicplotter.html')
