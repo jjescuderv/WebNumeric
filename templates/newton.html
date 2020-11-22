@@ -24,7 +24,7 @@
     </style>
 </head>
 <body>
-    <h1><b>Newton Method</b></h1>
+    <h1><b>Newton's Method</b></h1>
     <form method="post" action="{{ url_for('newtonTable') }}">
         <label for="itera">Number of iterations</label>
         <p><input name="itera" type="text" placeholder="Exaple: 100"></p>
@@ -36,8 +36,19 @@
         <p><input name="dfun" type="text" placeholder="Example log(derivative)""></p>
         <label for="tol">Error acepted</label>
         <p><input name="tol" type="text" placeholder="Example: 10**-7"></p>
-
-        <input type="submit" class="btn btn-success btn-lg" value="Run">
+        <div class="container">
+            <div class="col-xs-4"></div>
+            <div class="center">
+                <div class="col-xs-4">
+                    <input type="submit" class="btn btn-success btn-lg" value="Run">
+                    <button type="button" class="btn btn-info btn-lg" onclick= "location='/'">Back</button>
+            </div>
+            </div>
+            </div>
+          </div>
+            
+       
+        
     </form>
 </body>
 <footer>
