@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
@@ -10,13 +13,13 @@
 <h1 style="text-align: center;">Numerical Methods Web</h1>
 
 <body>
-    <p><input type="submit" value="Secant" onclick= "location='/secant'"></p>
-    <p><input type="submit" value="Newton" onclick= "location='/newton'"></p>
-    <p><input type="submit" value="Multiple Roots" onclick= "location='/multipleRoots'"></p>
-    <p><input type="submit" value="Vandermonde" onclick= "location='/vandermonde'"></p>
-    <p><input type="submit" value="SOR" onclick= "location='/sor'"></p>
-    <p><input type="submit" value="Lineal Plotter" onclick= "location='/linealplotter'"></p>
-    <p><input type="submit" value="Quadratic Plotter" onclick= "location='/quadraticplotter'"></p>
+    <p><input type="submit" value="Secant" onclick= "location='/secant' " class='boton container' ></p>
+    <p><input type="submit" value="Newton" onclick= "location='/newton'" class='boton container'></p>
+    <p><input type="submit" value="Multiple Roots" onclick= "location='/multipleRoots'" class='boton container'></p>
+    <p><input type="submit" value="Vandermonde" onclick= "location='/vandermonde'" class='boton container'></p>
+    <p><input type="submit" value="SOR" onclick= "location='/sor'" class='boton container'></p>
+    <p><input type="submit" value="Lineal Plotter" onclick= "location='/linealplotter'" class='boton container'></p>
+    <p><input type="submit" value="Quadratic Plotter" onclick= "location='/quadraticplotter'" class='boton container'></p>
     <p><input type="submit" value="False Rule" onclick= "location='/false-rule'" class='boton container' ></p>
     <p><input type="submit" value="Fixed Point" onclick= "location='/fixed-point'" class='boton container' ></p>
     <p><input type="submit" value="LU simple" onclick= "location='/LUsimple'" class='boton container' ></p>
