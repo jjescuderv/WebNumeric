@@ -192,8 +192,8 @@ def FlaskQuadraticp():
 def newton():
     return render_template("newton.html")
 
-@app.route("/newtonTable", methods=["GET", "POST"])
-def newtonTable():
+@app.route("/newton_results", methods=["GET", "POST"])
+def newton_results():
     itera=request.form.get("itera")
     x0=request.form.get("x0")
     fun=request.form.get("fun")
@@ -208,6 +208,8 @@ def newtonTable():
     it=len(list_a)
     list_it=list(range(0,it))
     return render_template("newton.html", list_a=list_a,list_f=list_f,list_e=list_e, list_it=list_it, root=root)
+
+    
 @app.route("/cubicplotter")
 def cubicplotter():
     return render_template('cubicplotter.html')
