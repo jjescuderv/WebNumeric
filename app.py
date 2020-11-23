@@ -9,9 +9,12 @@ from false_rule import reglaFalsa
 from fixed_point import Punto_Fijo
 from LUsimple import Lusimple
 from newton import Newton
+from bisection import Bisection
 from CubicPlotter import CubicPlotter
 from Doolittle import Doolittle
 from Jacobi import jacobi
+import sympy as sp
+from sympy import sin, cos, log, exp
 
 app = Flask(__name__)
 
@@ -188,6 +191,8 @@ def FlaskQuadraticp():
 
     return render_template("quadraticplotterT.html", A=A, b=b, S=S)
 
+#------------------------------------------------------JHONATAN------------------------------------------------
+
 @app.route("/newton")
 def newton():
     return render_template("newton.html")
@@ -209,7 +214,64 @@ def newton_results():
     list_it=list(range(0,it))
     return render_template("newton.html", list_a=list_a,list_f=list_f,list_e=list_e, list_it=list_it, root=root)
 
+@app.route("/bisection")
+def bisection():
+    return render_template("bisection.html")
+
+@app.route("/bisection_results", methods=["GET", "POST"])
+def bisection_results():
+
+    iterastr=request.form.get("itera")
+    astr=request.form.get("a")
+    bstr=request.form.get("b")
+    fstr=request.form.get("f")
+    tolstr=request.form.get("tol")
+
+
+    if iterastr =='' or astr =='' or bstr =='' or fstr =='' or tolstr=='':
+        return "<h1 style='text-align: center;'>You are missing one or more values</h1>" 
+
+    try:
+        itera = int(iterastr)
+    except:
+        return "<h1 style='text-align: center;'>Check iteration value</h1>"
+
+    try:
+        a = float(astr)
+    except:
+        return "<h1 style='text-align: center;'>Check a value</h1>"
+
+    try:
+        b = float(bstr)
+    except:
+        return "<h1 style='text-align: center;'>Check b value</h1>"
+
+    if b==a:
+        return "<h1 style='text-align: center;'>Interval ends must be different</h1>"
+
+    try:
+        f = sp.sympify(fstr)
+    except:
+        return "<h1 style='text-align: center;'>Check function entered</h1>"
+
+    try:
+        tol = sp.sympify(tolstr)
+    except:
+        return "<h1 style='text-align: center;'>Check tolerance entered {{tol}}</h1>"
+
+
+    try:
+        list_a, list_xm, list_b, list_fxm, list_E, root= Bisection(itera,a,b,f,tol)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
     
+    it=len(list_a)
+    list_it=list(range(1,it+1))
+    return render_template("bisection.html", list_a=list_a, list_xm=list_xm, list_b=list_b, list_fxm = list_fxm,
+    list_E = list_E, list_it=list_it, root=root)
+
+#----------------------------------------------------END JHONATAN ---------------------------------------------
+   
 @app.route("/cubicplotter")
 def cubicplotter():
     return render_template('cubicplotter.html')

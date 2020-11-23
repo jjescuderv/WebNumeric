@@ -1,6 +1,6 @@
 import sympy as sp
 from sympy import sin, cos, log, exp
-import sys
+
 
 #itera = 100
 #x0 = 0.5
@@ -45,8 +45,6 @@ def Newton(iterastr, x0str, fstr, dfstr, tolstr):
         list_a.append(format(a, "12.10f"))
         list_f.append(format(f, "1.1e"))
         list_e.append(format(e, "1.1e"))
-
-
 
 
     root=format(a, "12.15f")
