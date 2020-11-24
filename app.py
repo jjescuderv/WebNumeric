@@ -69,11 +69,43 @@ def FlaskSecant():
     x1=request.form.get("x1")
     fun=request.form.get("fun")
     err=request.form.get("err")
-    
+
+
     if iter =='' or x0 =='' or x1=='' or fun=='' or err=='':
         return "<h1 style='text-align: center;'>Check Values Entered</h1>" 
 
-    lis_xi,lis_fx,lis_er,e,xa=Secant(iter,x0,x1,fun,err)
+    try:
+        itera = int(iter)
+    except:
+        return "<h1 style='text-align: center;'>Check iteration value</h1>"
+
+    try:
+        a = float(x0)
+    except:
+        return "<h1 style='text-align: center;'>Check first initial value</h1>"
+
+    try:
+        b = float(x1)
+    except:
+        return "<h1 style='text-align: center;'>Check second initial value</h1>"
+
+    if b==a:
+        return "<h1 style='text-align: center;'>Interval ends must be different</h1>"
+
+    try:
+        f = sp.sympify(fun)
+    except:
+        return "<h1 style='text-align: center;'>Check function entered</h1>"
+
+    try:
+        tol = sp.sympify(err)
+    except:
+        return "<h1 style='text-align: center;'>Check tolerance entered {{tol}}</h1>"
+
+    try:
+        lis_xi,lis_fx,lis_er,e,xa=Secant(iter,x0,x1,fun,err)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
 
     a=len(lis_xi)
     lis_a=list(range(0,a))
@@ -87,14 +119,36 @@ def multipleRoots():
 def FlaskmultRoots():
     iter=request.form.get("iter")
     x0=request.form.get("x0")
-    x1=request.form.get("x1")
     fun=request.form.get("fun")
     err=request.form.get("err")
 
-    if iter =='' or x0 =='' or x1=='' or fun=='' or err=='':
+    if iter =='' or x0 =='' or fun=='' or err=='':
         return "<h1 style='text-align: center;'>Check Values Entered</h1>"
 
-    lis_x0, lis_f0, lis_f1, lis_f2, lis_er, e, g = Multiple_roots(iter,x0,x1,fun,err)
+    try:
+        itera = int(iter)
+    except:
+        return "<h1 style='text-align: center;'>Check iteration value</h1>"
+
+    try:
+        a = float(x0)
+    except:
+        return "<h1 style='text-align: center;'>Check first initial value</h1>"
+
+    try:
+        f = sp.sympify(fun)
+    except:
+        return "<h1 style='text-align: center;'>Check function entered</h1>"
+
+    try:
+        tol = sp.sympify(err)
+    except:
+        return "<h1 style='text-align: center;'>Check tolerance entered {{tol}}</h1>"
+
+    try:
+        lis_x0, lis_f0, lis_f1, lis_f2, lis_er, e, g = Multiple_roots(iter,x0,fun,err)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
 
     a=len(lis_x0)
     lis_a=list(range(0,a))
@@ -113,7 +167,41 @@ def FlaskFalseRule():
     x1=request.form.get("x1")
     fun=request.form.get("fun")
     err=request.form.get("err")
-    string = reglaFalsa(iter,x0,x1,fun,err)
+    if iter =='' or x0 =='' or x1 =='' or fun =='' or err=='':
+        return "<h1 style='text-align: center;'>You are missing one or more values</h1>" 
+
+    try:
+        iter = int(iter)
+    except:
+        return "<h1 style='text-align: center;'>Check iteration value</h1>"
+
+    try:
+        x0 = float(x0)
+    except:
+        return "<h1 style='text-align: center;'>Check a value</h1>"
+
+    try:
+        x1 = float(x1)
+    except:
+        return "<h1 style='text-align: center;'>Check b value</h1>"
+
+    if x0==x1:
+        return "<h1 style='text-align: center;'>Interval ends must be different</h1>"
+
+    try:
+        fun = sp.sympify(fun)
+    except:
+        return "<h1 style='text-align: center;'>Check function entered</h1>"
+
+    try:
+        err = float(eval(err))
+    except:
+        return "<h1 style='text-align: center;'>Check tolerance entered {{tol}}</h1>"
+
+    try:
+        string = reglaFalsa(iter,x0,x1,fun,err)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
     return render_template("dataRule.html",string = string)
 
 @app.route("/fixed-point")
@@ -127,7 +215,40 @@ def FlaskFixedPoint():
     fun=request.form.get("fun")
     fun2=request.form.get("fun2")
     err=request.form.get("err")
-    lis_it,lis_xi,lis_gx,lis_fx,lis_er,string2 = Punto_Fijo(iter,x0,fun,fun2,err)
+    
+    if iter =='' or x0 =='' or  fun2 =='' or fun =='' or err=='':
+        return "<h1 style='text-align: center;'>You are missing one or more values</h1>" 
+
+    try:
+        iter = int(iter)
+    except:
+        return "<h1 style='text-align: center;'>Check iteration value</h1>"
+
+    try:
+        x0 = float(x0)
+    except:
+        return "<h1 style='text-align: center;'>Check initial value</h1>"
+
+    try:
+        fun2 = sp.sympify(fun2)
+    except:
+        return "<h1 style='text-align: center;'>Check function g entered</h1>"
+
+    try:
+        fun = sp.sympify(fun)
+    except:
+        return "<h1 style='text-align: center;'>Check function f entered</h1>"
+
+    try:
+        err = float(eval(err))
+    except:
+        return "<h1 style='text-align: center;'>Check tolerance entered {{tol}}</h1>"
+
+    try:
+        lis_it,lis_xi,lis_gx,lis_fx,lis_er,string2 = Punto_Fijo(iter,x0,fun,fun2,err)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
+   
     return render_template("dataFixedP.html",iter = lis_it,xi = lis_xi,gx = lis_gx,fx=lis_fx,er=lis_er,string=string2)
 
 @app.route("/LUsimple")
@@ -141,11 +262,29 @@ def FlaskLUsimple():
     A=request.form.get("A")
     l_b=request.form.get("l_b")
     b=request.form.get("b")
-    if n=='' or m=='' or A=='':
-        return "<h1 style='text-align: center;'>Check Values Entered</h1>"
-    
-    
-    lis_stage,lis_m,list_L,list_U,result = Lusimple(m,n,A,l_b,b)
+    if m =='' or n =='' or  A =='' or l_b =='' or b=='':
+        return "<h1 style='text-align: center;'>You are missing one or more values</h1>" 
+
+    try:
+        m = int(m)
+    except:
+        return "<h1 style='text-align: center;'>Check the number of rows</h1>"
+
+    try:
+       n = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check the number of columns</h1>"
+
+    try:
+        l_b = int(l_b)
+    except:
+        return "<h1 style='text-align: center;'>Check the length b vector</h1>"
+
+    try:
+        lis_stage,lis_m,list_L,list_U,result = Lusimple(m,n,A,l_b,b)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
+   
     x = len(lis_stage)
     z = list(range(0,x))
     return render_template("dataLuSimple.html",stage = lis_stage,M = lis_m, L=list_L,U=list_U,result = result,Z = z)
@@ -163,7 +302,25 @@ def FlaskVandermonde():
     if n=='' or x=='' or y=='':
         return "<h1 style='text-align: center;'>Check Values Entered</h1>"
 
-    A,b,a = Vandermonde(n,x,y)
+    try:
+        A = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check n value entered</h1>"
+
+    try:
+        values_x = list(map(float, x.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check x vector entered</h1>"
+
+    try:
+        values_y = list(map(float, y.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check y vector entered</h1>"
+
+    try:
+        A,b,a = Vandermonde(n,x,y)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
 
     return render_template("vandermondeT.html", A=A, b=b, a=a)
 
@@ -182,11 +339,54 @@ def FlaskSor():
     iter=request.form.get("iter")
     error=request.form.get("error")
     w=request.form.get("w")
-    
+
     if m == ''  or n=='' or A=='' or b=='' or x0=='' or iter=='' or error=='' or w=='' or m!=n:
         return "<h1 style='text-align: center;'>Check values entered</h1>"
 
-    Tw,re,Cw,x1,x2,x3,er = Sor(m,n,A,b,x0,iter,error,w)
+    try:
+        itera = int(iter)
+    except:
+        return "<h1 style='text-align: center;'>Check iteration value</h1>"
+
+    try:
+        M = int(m)
+    except:
+        return "<h1 style='text-align: center;'>Check m value</h1>"
+
+    try:
+        N = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check n value</h1>"
+
+    try:
+        values_A = list(map(float, A.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check A Matix entered</h1>"
+
+    try:
+        values_b = list(map(float, b.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check b vector entered</h1>"
+
+    try:
+        values_x0 = list(map(float, x0.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check b vector entered</h1>"
+
+    try:
+        valuesErr = float(eval(error))
+    except:
+        return "<h1 style='text-align: center;'>Check tolerance entered</h1>"
+
+    try:
+        valueW = float(w)
+    except:
+        return "<h1 style='text-align: center;'>Check w value entered</h1>"
+
+    try:
+        Tw,re,Cw,x1,x2,x3,er = Sor(m,n,A,b,x0,iter,error,w)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
 
     a=len(x1)
     lis_a=list(range(0,a))
@@ -206,7 +406,25 @@ def Flasklinealp():
     if n=='' or x=='' or y=='':
         return "<h1 style='text-align: center;'>Check Values Entered</h1>"
 
-    A,b,S = LinealPlotter(n,x,y)
+    try:
+        A = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check n value entered</h1>"
+
+    try:
+        values_x = list(map(float, x.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check x vector entered</h1>"
+
+    try:
+        values_y = list(map(float, y.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check y vector entered</h1>"
+
+    try:
+        A,b,S = LinealPlotter(n,x,y)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
 
     return render_template("linealplotterT.html", A=A, b=b, S=S)
 
@@ -223,7 +441,25 @@ def FlaskQuadraticp():
     if n=='' or x=='' or y=='':
         return "<h1 style='text-align: center;'>Check Values Entered</h1>"
 
-    A,b,S = QuadraticPlotter(n,x,y)
+    try:
+        A = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check n value entered</h1>"
+
+    try:
+        values_x = list(map(float, x.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check x vector entered</h1>"
+
+    try:
+        values_y = list(map(float, y.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check y vector entered</h1>"
+
+    try:
+        A,b,S = QuadraticPlotter(n,x,y)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
 
     return render_template("quadraticplotterT.html", A=A, b=b, S=S)
 
@@ -321,7 +557,25 @@ def FlaskCubicPlotter():
     if n=='' or x=='' or y=='':
         return "<h1 style='text-align: center;'>Check Values Entered</h1>"
 
-    A,b,S = CubicPlotter(n,x,y)
+    try:
+        n = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check n value entered</h1>"
+
+    try:
+        values_x = list(map(float, x.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check x vector entered</h1>"
+
+    try:
+        values_y = list(map(float, y.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check y vector entered</h1>"
+
+    try:
+        A,b,S = CubicPlotter(n,x,y)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
 
     return render_template("cubicplotterT.html", A=A, b=b, S=S)
 
@@ -336,11 +590,29 @@ def FlaskDoolittle():
     A=request.form.get("A")
     l_b=request.form.get("l_b")
     b=request.form.get("b")
-    if n=='' or m=='' or A=='':
-        return "<h1 style='text-align: center;'>Check Values Entered</h1>"
-    
-    
-    lis_stage,lis_m,list_L,list_U,result = Doolittle(m,n,A,l_b,b)
+    if m =='' or n =='' or  A =='' or l_b =='' or b=='':
+        return "<h1 style='text-align: center;'>You are missing one or more values</h1>" 
+
+    try:
+        m = int(m)
+    except:
+        return "<h1 style='text-align: center;'>Check the number of rows</h1>"
+
+    try:
+       n = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check the number of columns</h1>"
+
+    try:
+        l_b = int(l_b)
+    except:
+        return "<h1 style='text-align: center;'>Check the length b vector</h1>"
+
+    try:
+        lis_stage,lis_m,list_L,list_U,result = Doolittle(m,n,A,l_b,b)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
+     
     x = len(lis_stage)
     z = list(range(0,x))
     return render_template("dataDoolittle.html",stage = lis_stage,M = lis_m, L=list_L,U=list_U,result = result,Z = z)
@@ -361,10 +633,43 @@ def FlaskJacobi():
     lb=request.form.get("lb")
     lx0=request.form.get("lx0")
     
-    if m == ''  or n=='' or A=='' or b=='' or x0=='' or iter=='' or tol=='' or  m!=n:
+    if m == ''  or n=='' or A=='' or b=='' or x0=='' or tol=='' or lb=='' or  m!=n or Nmax=='' or lx0=='':
         return "<h1 style='text-align: center;'>Check values entered</h1>"
 
-    T,C,respect1,lis_iter,lis_er,lis_xi = jacobi(A,b,x0,tol,Nmax,m,n,lb,lx0)
+    try:
+        m = int(m)
+    except:
+        return "<h1 style='text-align: center;'>Check the number of rows</h1>"
+
+    try:
+       n = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check the number of columns</h1>"
+
+    try:
+        lb = int(lb)
+    except:
+        return "<h1 style='text-align: center;'>Check the length b vector</h1>"
+    
+    try:
+        Nmax = int(Nmax)
+    except:
+        return "<h1 style='text-align: center;'>Check iteration value</h1>"
+    
+    try:
+        lx0 = int(lx0)
+    except:
+        return "<h1 style='text-align: center;'>Check the length x0 vector</h1>"
+
+    try:
+        tol = sp.sympify(tol)
+    except:
+        return "<h1 style='text-align: center;'>Check tolerance entered {{tol}}</h1>"
+    
+    try:
+        T,C,respect1,lis_iter,lis_er,lis_xi = jacobi(A,b,x0,tol,Nmax,m,n,lb,lx0)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
 
     a=len(lis_iter)
     lis_a=list(range(0,a))

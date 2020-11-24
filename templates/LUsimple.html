@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+{% extends "layouts/master.html" %}
+{% block title %}
+Lu simple
+{% endblock %}
+
+{% block banner_title %}
+LU SIMPLE
+
+{% endblock %}
+{% block content %}
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
@@ -10,12 +20,12 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>LU Simple Data</title>
     <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
     <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
     <style>
         input {
-            width: 30%;
+            width: 35%;
             text-align: center;
         }
         form{
@@ -24,10 +34,30 @@
         h1{
             text-align: center;
         }
+        body {
+            padding-bottom:90px;   /* Height of the footer */
+            text-align: center;
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color:#5BC0DE;
+            color: white;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <h1>LU simple</h1>
+    <h2><b>--------------------||--------------------</b></h2>
+    <h3>In order to operate properly:</h3>
+    <p>A square matrix A of order n x n, we find a lower triangular
+     L matrix and an upper triangular U matrix. A = LU</p>
+    <p> -Ax = b </p>
+    <p> -LUx = b </p>
+    <p> -Lz = b, where z = Ux</p>
+    <h2><b>--------------------||--------------------</b></h2>
     <form method="post" action="{{ url_for('FlaskLUsimple') }}">
         <label for="m">Enter the number of rows</label>
         <p><input name="m" type="text" placeholder="Example: 4"></p>
@@ -50,4 +80,20 @@
         </div>
     </form>
 </body>
+
+<footer>
+    <br>
+    <div class="footer">
+        <p class="text-lg-CENTER" style="width: 125rem"> 
+            In linear algebra, LU factorization or decomposition (of Lower-Upper English) is a form of factorization of a matrix as the
+            product of a lower and a higher triangular matrix. Due to the instability of 
+            this method, some special cases must be taken into account, for example, if 
+            one or more elements of the main diagonal of the matrix to be factored is zero,
+            it is necessary to pre-multiply the matrix by one or several elementary permutation matrices.
+            There is a second method called factorization  PA = LU or LU with pivot. This decomposition is used in numerical analysis to solve systems of equations (more efficiently) or find inverse matrices.
+
+        </p>
+    </div>
+</footer>
 </html>
+{% endblock %}
