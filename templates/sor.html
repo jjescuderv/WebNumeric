@@ -25,7 +25,8 @@
         }
         body {
             padding:10px;
-            padding-bottom:60px;   /* Height of the footer */
+            padding-bottom:60px;
+            text-align: center;
         }
         .footer {
             position: fixed;
@@ -36,9 +37,20 @@
             color: white;
             text-align: center;
         }
+        .clear { clear: both; height: 60px; }
     </style>
 </head>
 <body>
+    <h1><b>SOR Method</b></h1>
+    <h2><b>--------------------||--------------------</b></h2>
+    <h3>In order to operate properly:</h3>
+    <p>-If \( w=1 \) you have Gauss Seidel</p>
+    <p>-If \(0 < w < 1 \) Sub-relaxation methods are obtained, used for the convergence of non-converging systems by Gauss Seidel.</p>
+    <p>-If \( 1 < w < 2 \) Sub-relaxation methods are obtained, used to accelerate the convergence of converging systems by Gauss Seidel.</p>
+    <h3>Strategies for faster convergence:</h3>
+    <p>-SOR Convergence: If \( A \) is a positive defined symmetric matrix and \( 0 < w < 2 \), then the relaxation method converges for any initial approach \( X^0 \)</p>
+    <h2><b>--------------------||--------------------</b></h2>
+
     <h1>SOR DATA</h1>
 
     <form method="post" action="{{ url_for('FlaskSor') }}">
@@ -71,19 +83,23 @@
     </form>
 </body>
 
-<footer>
-    <br>
-    <div class="footer">
-        <p class="text-lg-left" style="width: 125rem"> 
-            This method allows for improved convergence using relaxation. The relaxation represents a slight
-            modification of the Gauss-Seidel method and it allows to improve the convergence in some cases. 
-            After each new value of \(x\) is calculated, that value is modified by a weighted average of the 
-            results of the previous and current iterations.
-            <br>
-            \( X^{k+1} = w x^{k+1} + (1-w)xk  \) Algorithmically it remains: \(X^{k+1}=T_wx^k+Cw\)
-        </p>
+<div class="clear">
+    <div id="footer">
+    <footer>
+        <br>
+        <div class="footer">
+            <p class="text-lg-left" style="width: 125rem"> 
+                This method allows for improved convergence using relaxation. The relaxation represents a slight
+                modification of the Gauss-Seidel method and it allows to improve the convergence in some cases. 
+                After each new value of \(x\) is calculated, that value is modified by a weighted average of the 
+                results of the previous and current iterations.
+                <br>
+                \( X^{k+1} = w x^{k+1} + (1-w)xk  \) Algorithmically it remains: \(X^{k+1}=T_wx^k+Cw\)
+            </p>
+        </div>
+        <br>       
+    </footer>
     </div>
-    <br>       
-</footer>
+</div>
 
 </html>

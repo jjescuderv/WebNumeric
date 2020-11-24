@@ -25,7 +25,8 @@
         }
         body {
             padding:10px;
-            padding-bottom:60px;   /* Height of the footer */
+            padding-bottom:60px;
+            text-align: center;
         }
         .footer {
             position: fixed;
@@ -36,9 +37,17 @@
             color: white;
             text-align: center;
         }
+        .clear { clear: both; height: 60px; }
     </style>
 </head>
 <body>
+    <h1><b>Vandermonde Method</b></h1>
+    <h2><b>--------------------||--------------------</b></h2>
+    <h3>In order to operate properly:</h3>
+    <p>-You must be careful with the vectors that are introduced, the rounding error will prove that the</p>
+    <p>approach found by the method is not very accurate. If possible enter the full value</p>
+    <h2><b>--------------------||--------------------</b></h2>
+
     <h1>Vandermonde Data</h1>
     <form method="post" action="{{ url_for('FlaskVandermonde') }}">
         <label for="n">Number of X and Y elements</label>
@@ -60,30 +69,35 @@
           </div>
 
     </form>
+    <br><br><br><br><br>
 </body>
-<footer>
-    <br>
-    <div class="footer">
-        <p class="text-lg-left" style="width: 125rem"> 
-            Given a set with \(n + 1\) known points {\(f(x_0, y_0), (x_1, y_1), (x_2, y_2), ... , (x_n, y_n)\)}. By interpolation theorem, there is only one interpolating polynomial
-             \(p(x)\) of degree at most \(n\). It can be considered that the polynomial has the form:
-            \(p(x) = a_nx^n + a_{n-1}x^{n-1} + a_{n-2}x^{n-2 } + ... + a_2x^2 + a_1x + a_0  \)
-            <br>
-            To obtain the polynomial it is enough to determine the value of the coefficients \(a_i\) . To do this, the condition posed by the interpolation problem is used: 
-            \(\forall_i \) , \( 0 \le i \le n \) \(p(x_i) = y_i \)
-            <br>
-            \(p(x_0)= p(x_0) \to y_0 = a_nx_0^n + a_{n-1}x_0^{n-1} + a_{n-2}x_0^{n-2 } + ... + a_2x_0^2 + a_1x_0 + a_0 \)
-            <br>
-            \(p(x_1)= p(x_1) \to y_1 = a_nx_1^n + a_{n-1}x_1^{n-1} + a_{n-2}x_1^{n-2 } + ... + a_2x_1^2 + a_1x_1 + a_0 \)
-            <br>
-            \(...\)
-            <br>
-            \(p(x_n)= p(x_n) \to y_n = a_nx_n^n + a_{n-1}x_n^{n-1} + a_{n-2}x_n^{n-2 } + ... + a_2x_n^2 + a_1x_n + a_0 \)
-            <br>
-            This results in a system of \(n + 1\) linear equations with  \(n + 1\) unknowns, where 
-            \(a_n, an_1, an_2, . . . . a_2, a_1, a_0 \) are the variables. The resulting system's matrix of coefficients is known as the
-            <strong>Vandermonde matrix.</strong> 
-        </p>
+<div class="clear">
+    <div id="footer">
+    <footer>
+        <br>
+        <div class="footer">
+            <p class="text-lg-left" style="width: 125rem"> 
+                Given a set with \(n + 1\) known points {\(f(x_0, y_0), (x_1, y_1), (x_2, y_2), ... , (x_n, y_n)\)}. By interpolation theorem, there is only one interpolating polynomial
+                \(p(x)\) of degree at most \(n\). It can be considered that the polynomial has the form:
+                \(p(x) = a_nx^n + a_{n-1}x^{n-1} + a_{n-2}x^{n-2 } + ... + a_2x^2 + a_1x + a_0  \)
+                <br>
+                To obtain the polynomial it is enough to determine the value of the coefficients \(a_i\) . To do this, the condition posed by the interpolation problem is used: 
+                \(\forall_i \) , \( 0 \le i \le n \) \(p(x_i) = y_i \)
+                <br>
+                \(p(x_0)= p(x_0) \to y_0 = a_nx_0^n + a_{n-1}x_0^{n-1} + a_{n-2}x_0^{n-2 } + ... + a_2x_0^2 + a_1x_0 + a_0 \)
+                <br>
+                \(p(x_1)= p(x_1) \to y_1 = a_nx_1^n + a_{n-1}x_1^{n-1} + a_{n-2}x_1^{n-2 } + ... + a_2x_1^2 + a_1x_1 + a_0 \)
+                <br>
+                \(...\)
+                <br>
+                \(p(x_n)= p(x_n) \to y_n = a_nx_n^n + a_{n-1}x_n^{n-1} + a_{n-2}x_n^{n-2 } + ... + a_2x_n^2 + a_1x_n + a_0 \)
+                <br>
+                This results in a system of \(n + 1\) linear equations with  \(n + 1\) unknowns, where 
+                \(a_n, an_1, an_2, . . . . a_2, a_1, a_0 \) are the variables. The resulting system's matrix of coefficients is known as the
+                <strong>Vandermonde matrix.</strong> 
+            </p>
+        </div>
+    </footer>
     </div>
-</footer>
+</div>
 </html>

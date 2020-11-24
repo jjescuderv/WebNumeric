@@ -26,7 +26,8 @@
         }
         body {
             padding:10px;
-            padding-bottom:60px;   /* Height of the footer */
+            padding-bottom:60px;
+            text-align: center;
         }
         .footer {
             position: fixed;
@@ -37,9 +38,21 @@
             color: white;
             text-align: center;
         }
+        .clear { clear: both; height: 60px; }
     </style>
 </head>
 <body>
+    <h1><b>Multiple Roots Method</b></h1>
+    <h2><b>--------------------||--------------------</b></h2>
+    <h3>In order to operate properly:</h3>
+    <p>-In general all the roots of pair multiplicity are going to have this form.</p>
+    <p>-The method inherits many of Newton's things.</p>
+    <h3>Strategies for faster convergence:</h3>
+    <p>-The method converges quickly in generation, but care must be taken with the initial tolerance and approximation given to it.</p>
+    <p>-Care must be taken that the denominator of the formula that describes the method does not become zero.</p>
+    <p>-Taking a closer approximation is no guarantee that the method will converge.</p>
+    <h2><b>--------------------||--------------------</b></h2>
+
     <h1>Multiple Roots</h1>
     <form method="post" action="{{ url_for('FlaskmultRoots') }}">
         <label for="iter">Number of Iterations</label>
@@ -62,23 +75,28 @@
             </div>
           </div>
     </form>
-</body>
+    <br><br><br><br><br>
 
-<footer>
-    <br>
-    <div class="footer">
-        <p class="text-sm-left" style="width: 125rem">
-            A multiple root corresponds to a point where a function is tangential to the \(x\) - axis. When the root is 
-            repeated as for example in \(x^2=0\), the root \(x=0\) is repeated. Graphically multiple roots can be seen when 
-            the curve touches tangentially to the \(x\) - axis. Multiple roots are repeated an even number of times when
-            the function does not change sign, and an odd number of times when the function changes sign.
-            <br>
-            Its structure is very similar to that of Newton-Raphson, but the second derivative is required and can operate 
-            when the derivative is zero, even, making it more effective.  Its equation is given as follows:
-            <br>
-            \[x_{n+1} = {x_{n}} - { f(x_n) \times f'(x_n) \over [f'(x_n)]^2 - f(x_n) \times f''(x_n)}.\]
-        </p>
+</body>
+<div class="clear">
+    <div id="footer">
+    <footer>
+        <br>
+        <div class="footer">
+            <p class="text-sm-left" style="width: 125rem">
+                A multiple root corresponds to a point where a function is tangential to the \(x\) - axis. When the root is 
+                repeated as for example in \(x^2=0\), the root \(x=0\) is repeated. Graphically multiple roots can be seen when 
+                the curve touches tangentially to the \(x\) - axis. Multiple roots are repeated an even number of times when
+                the function does not change sign, and an odd number of times when the function changes sign.
+                <br>
+                Its structure is very similar to that of Newton-Raphson, but the second derivative is required and can operate 
+                when the derivative is zero, even, making it more effective.  Its equation is given as follows:
+                <br>
+                \[x_{n+1} = {x_{n}} - { f(x_n) \times f'(x_n) \over [f'(x_n)]^2 - f(x_n) \times f''(x_n)}.\]
+            </p>
+        </div>
+    </footer>
     </div>
-</footer>
+</div>
 
 </html>

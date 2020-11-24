@@ -25,7 +25,8 @@
         }
         body {
             padding:10px;
-            padding-bottom:60px;   /* Height of the footer */
+            padding-bottom:60px;
+            text-align: center;
         }
         .footer {
             position: fixed;
@@ -36,9 +37,17 @@
             color: white;
             text-align: center;
         }
+        .clear { clear: both; height: 60px; }
     </style>
 </head>
 <body>
+    <h1><b>Quadratic Plotter Method</b></h1>
+    <h2><b>--------------------||--------------------</b></h2>
+    <h3>In order to operate properly:</h3>
+    <p>The quadratic plotter must meet the following conditions: </p>
+    <p>interpolation, continuity and smoothness. These are described below.</p>
+    <h2><b>--------------------||--------------------</b></h2>
+
     <h1>Quadratic Plotter Data</h1>
     <form method="post" action="{{ url_for('FlaskQuadraticp') }}">
         <label for="n">Number of X and Y elements</label>
@@ -59,26 +68,30 @@
         </div>
 
     </form>
+    <br><br>
+
 </body>
-
-<footer>
-    <br>
-    <div class="footer">
-        <p class="text-lg-left" style="width: 125rem"> 
-            Given a function \(f\) in \([a, b]\) and nodes \( a = x_0 \lt x_1 \lt \cdots \lt x_n = b \) , an interpolating quadratic spline 
-            \(p\) for \(f\) is a function that satisfies the following conditions:
-            <br>
-            \(\bullet p(x) \) is a quadratic polynomial, defined \(p_j(x)\), over the interval \([x_{j-1}, x_{j}]\) for each \(j=1,...,n\)
-            <br>
-            \(\bullet p_j(x_{j-1}) = f(x_{j-1})\) and \(p_j(x_{j}) = f(x_{j})\) for each \(j=1,...,n\)
-            <br>
-            \(\bullet p_{j+1}(x_{j}) = p_j(x_j)\) for each \(j=1,...,n-1\)
-            <br>
-            \(\bullet p'_{j+1}(x_{j}) = p'_j(x_j)\) for each \(j=1,...,n-1\)
-            <br>
-            \(\bullet p''_1(x_1)=0 \)
-        </p>
+<div class="clear">
+    <div id="footer">
+    <footer>
+        <br>
+        <div class="footer">
+            <p class="text-lg-left" style="width: 125rem"> 
+                Given a function \(f\) in \([a, b]\) and nodes \( a = x_0 \lt x_1 \lt \cdots \lt x_n = b \) , an interpolating quadratic spline 
+                \(p\) for \(f\) is a function that satisfies the following conditions:
+                <br>
+                \(\bullet p(x) \) is a quadratic polynomial, defined \(p_j(x)\), over the interval \([x_{j-1}, x_{j}]\) for each \(j=1,...,n\)
+                <br>
+                \(\bullet p_j(x_{j-1}) = f(x_{j-1})\) and \(p_j(x_{j}) = f(x_{j})\) for each \(j=1,...,n\)
+                <br>
+                \(\bullet p_{j+1}(x_{j}) = p_j(x_j)\) for each \(j=1,...,n-1\)
+                <br>
+                \(\bullet p'_{j+1}(x_{j}) = p'_j(x_j)\) for each \(j=1,...,n-1\)
+                <br>
+                \(\bullet p''_1(x_1)=0 \)
+            </p>
+        </div>
+    </footer>
     </div>
-</footer>
-
+</div>
 </html>
