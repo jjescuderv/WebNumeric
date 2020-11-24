@@ -46,7 +46,7 @@ def Secant(iter,x0,x1,f,error):
     lis_er=['','',e]
     d = {'Xi':lis_xi,'f(Xi)':lis_fx,'E':lis_er}
 
-    while e>=error and c<=iter:  
+    while e>error and c<iter:  
         x0=x1
         x1=xa
 

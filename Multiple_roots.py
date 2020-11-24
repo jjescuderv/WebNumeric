@@ -54,7 +54,7 @@ def Multiple_roots(iter,x0,x1,f,error):
     lis_f2.append(f2)
     lis_er.append(e)
 
-    while e>=error and c<=iter:
+    while e>error and c<iter:
         x=g
         f0=eval(f)
         f1=eval(fp)
