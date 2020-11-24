@@ -1,77 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
-    <style>
-        body
-        {
-            background-image:url({{url_for('static', filename='builtin/3.jpg')}})
-        }
+{% extends "layouts/master.html" %}
+{% block title %}
+Home
+{% endblock %}
 
-
-    </style>
-    <title>Main Menu</title>
-</head>
-
-<h1 style="text-align: center;">NUMERICAL METHODS WEB</h1>
-
-<body>
-    
-    <div class="container">
-      
-        <div class="center">
-            <div class="col-xs-10">
-                <h3>Numerical methods for solving nonlinear equations:</h3>
-                <p></p>
-                <input type="submit" value="Incremental Searches" onclick= "location='/searches'" class="btn btn-success btn-lg">
-                <input type="submit" value="Newton" onclick= "location='/newton'" class="btn btn-info btn-lg">
-                <input type="submit" value="Bisection" onclick= "location='/bisection'" class="btn btn-success btn-lg">
-                <input type="submit" value="Secant" onclick= "location='/secant' " class='btn btn-info btn-lg' >
-                <input type="submit" value="Multiple Roots" onclick= "location='/multipleRoots'" class='btn btn-success btn-lg'>
-                <input type="submit" value="False Rule" onclick= "location='/false-rule'" class='btn btn-info btn-lg' >
-                <input type="submit" value="Fixed Point" onclick= "location='/fixed-point'" class='btn btn-success btn-lg' >
-                <p></p>
-            </div>
+{% block content %}
+<div class="container">
+    <div class="center">
+        <div class="col-xs-10">
+            <h3>Numerical methods for solving nonlinear equations:</h3>
+            <p></p>
+            <input type="submit" value="Incremental Searches" onclick="location='/searches'"
+                class="btn btn-success btn-lg">
+            <input type="submit" value="Newton" onclick="location='/newton'" class="btn btn-info btn-lg">
+            <input type="submit" value="Bisection" onclick="location='/bisection'" class="btn btn-success btn-lg">
+            <input type="submit" value="Secant" onclick="location='/secant' " class='btn btn-info btn-lg'>
+            <input type="submit" value="Multiple Roots" onclick="location='/multipleRoots'"
+                class='btn btn-success btn-lg'>
+            <input type="submit" value="False Rule" onclick="location='/false-rule'" class='btn btn-info btn-lg'>
+            <input type="submit" value="Fixed Point" onclick="location='/fixed-point'" class='btn btn-success btn-lg'>
+            <p></p>
         </div>
     </div>
-    </div>
-    <div class="container">
-       
-        <div class="center">
-            <div class="col-xs-10">
-                <h3>Numerical methods for solving systems of equations:</h3>
-                <p></p>
-                    <input type="submit" value="SOR" onclick= "location='/sor'" class='btn btn-info btn-lg'>
-                    <input type="submit" value="LU simple" onclick= "location='/LUsimple'" class="btn btn-success btn-lg" >
-                    <input type="submit" value="Doolittle" onclick= "location='/doolittle'" class='btn btn-info btn-lg' >
-                    <input type="submit" value="Jacobi" onclick= "location='/jacobi'" class="btn btn-success btn-lg" >
-                <p></p>
-            </div>
-        </div>
-    </div>
-    </div>
-    <div class="container">
-      
-        <div class="center">
-            <div class="col-xs-10">
-                <h3>Numerical methods for Interpotation:</h3>
-                <p></p>
-                    <input type="submit" value="Vandermonde" onclick= "location='/vandermonde'" class='btn btn-info btn-lg'>
-                    <input type="submit" value="Lineal Plotter" onclick= "location='/linealplotter'" class='btn btn-success btn-lg'>
-                    <input type="submit" value="Quadratic Plotter" onclick= "location='/quadraticplotter'" class='btn btn-info btn-lg'>
-                    <input type="submit" value="Cubic Plotter" onclick= "location='/cubicplotter'" class="btn btn-success btn-lg" >
-                <p></p>
-            </div>
-        </div>
-    </div>
-    </div>
+</div>
 
-    <p></p>
-    <p></p>
-</body>
-</html>
+<div class="container">
+    <div class="center">
+        <div class="col-xs-10">
+            <h3>Numerical methods for solving systems of equations:</h3>
+            <p></p>
+            <input type="submit" value="SOR" onclick="location='/sor'" class='btn btn-info btn-lg'>
+            <input type="submit" value="LU simple" onclick="location='/LUsimple'" class="btn btn-success btn-lg">
+            <input type="submit" value="Doolittle" onclick="location='/doolittle'" class='btn btn-info btn-lg'>
+            <input type="submit" value="Jacobi" onclick="location='/jacobi'" class="btn btn-success btn-lg">
+            <p></p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="center">
+        <div class="col-xs-10">
+            <h3>Numerical methods for Interpotation:</h3>
+            <p></p>
+            <input type="submit" value="Vandermonde" onclick="location='/vandermonde'" class='btn btn-info btn-lg'>
+            <input type="submit" value="Lineal Plotter" onclick="location='/linealplotter'"
+                class='btn btn-success btn-lg'>
+            <input type="submit" value="Quadratic Plotter" onclick="location='/quadraticplotter'"
+                class='btn btn-info btn-lg'>
+            <input type="submit" value="Cubic Plotter" onclick="location='/cubicplotter'"
+                class="btn btn-success btn-lg">
+            <p></p>
+        </div>
+    </div>
+</div>
+
+
+<p></p>
+<p></p>
+
+{% endblock %}
