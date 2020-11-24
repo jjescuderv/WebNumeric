@@ -1,0 +1,121 @@
+{% extends "layouts/master.html" %}
+{% block title %}
+Direct methods
+{% endblock %}
+
+{% block banner_title %}
+Direct Methods
+{% endblock %}
+
+{% block content %}
+
+{{ test }}
+
+<!-- Input -->
+<div class="row py-3 justify-content-center">
+    <label class="form-label"> <b>Method: </b></h5>
+        <select id="method_selected" required>
+            <option value="1" selected>Gaussian elimination (simple)</option>
+            <option value="2">Gaussian elimination (partial pivoting)</option>
+            <option value="3">Gaussian elimination (total pivoting)</option>
+        </select>
+</div>
+<div class="row justify-content-center">
+    <label class="form-label"> <b>Number of variables: </b></h5>
+        <input required type="number" id="n" style="width: 3em; margin-right:1em">
+        <button class="btn btn-dark" onClick="mat()">
+            Save
+        </button>
+</div>
+
+<hr>
+
+
+<!-- Matrix and vector -->
+<form method="POST" id="data" action="{{ url_for('gauss') }}">
+    <input required type="hidden" id="matrix_size" name="matrix_size">
+    <input required type="hidden" id="method" name="method">
+    <div class="row">
+        <div class="col-lg-8 py-3">
+            <div class="row justify-content-center">
+                <table id="matrix">
+
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-4 py-3">
+            <div class="row justify-content-center">
+                <table id="vector">
+
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="row justify-content-center">
+    <button type="submit" form="data" class="btn btn-outline-danger btn-lg btn-block"
+        onClick="print_results()">Solve</button>
+</div>
+
+<hr>
+
+<!-- Results -->
+<div class="row justify-content-center" style="background-color: violet;">
+    <span id="results">
+
+    </span>
+</div>
+
+{% if test|length > 1  %}
+    <div id="results">
+        <span>$$Iteration 0 = \begin{pmatrix}
+            2.000000 & -1.000000 & 0.000000 & 3.000000 & 1.000000\\
+            1.000000 & 0.500000 & 3.000000 & 8.000000 & 1.000000\\
+            0.000000 & 13.000000 & -2.000000 & 11.000000 & 1.000000\\
+            14.000000 & 5.000000 & -2.000000 & 3.000000 & 1.000000\\
+            \end{pmatrix}$$
+        </span>
+    </div>
+{% endif %}
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block script %}
+<script>
+    function mat() {
+        var n = document.getElementById("n").value;
+        var m = document.getElementById("method_selected").value;
+        if(n != '') {
+            $("#matrix_size").val(n);
+        }
+        $("#method").val(m);
+
+        console.log(n);
+        if (n < 2 || NaN) {
+            alert("Number of variables must be greater than 1");
+            return;
+        }
+
+        $("#matrix").empty();
+        $("#vector").empty();
+
+        var cont = 0;
+
+        for (var i = 0; i < n; i++) {
+            $("#matrix").append("<tr>");
+            $("#vector").append("<tr>");
+            for (var j = 0; j < n; j++) {
+                $("#matrix").append("<td>");
+                $("#matrix").append("<input required type='number' step='any' style='width: 3em' size='1' name='mat[]'>");
+            }
+            $("#vector").append("<td>");
+            $("#vector").append("<input required type='number' step='any' style='width: 3em' size='1' name='vec[]'>");
+            $("#matrix").append("<br>");
+        }
+    }
+</script>
+{% endblock %}
