@@ -380,9 +380,6 @@ def FlaskSor():
     except:
         return "<h1 style='text-align: center;'>Check n value</h1>"
 
-    if b==a:
-        return "<h1 style='text-align: center;'>Interval ends must be different</h1>"
-
     try:
         values_A = list(map(float, A.split()))
     except:
