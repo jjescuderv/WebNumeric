@@ -26,7 +26,8 @@
         }
         body {
             padding:10px;
-            padding-bottom:60px;   /* Height of the footer */
+            padding-bottom:90px;   /* Height of the footer */
+            text-align: center;
         }
         .footer {
             position: fixed;
@@ -40,7 +41,15 @@
     </style>
 </head>
 <body>
-    <h1>LU simple</h1>
+    <h1><b>LU simple</b></h1>
+    <h2><b>--------------------||--------------------</b></h2>
+    <h3>In order to operate properly:</h3>
+    <p>A square matrix A of order n x n, we find a lower triangular
+     L matrix and an upper triangular U matrix. A = LU</p>
+    <p> -Ax = b </p>
+    <p> -LUx = b </p>
+    <p> -Lz = b, where z = Ux</p>
+    <h2><b>--------------------||--------------------</b></h2>
     <form method="post" action="{{ url_for('FlaskLUsimple') }}">
         <label for="m">Enter the number of rows</label>
         <p><input name="m" type="text" placeholder="Example: 4"></p>

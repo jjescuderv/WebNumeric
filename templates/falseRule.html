@@ -27,12 +27,13 @@
         body {
             padding:10px;
             padding-bottom:80px;   /* Height of the footer */
+            text-align: center;
         }
         .footer {
             position: fixed;
             left: 0;
             bottom: 0;
-            width: 220%;
+            width: 120%;
             background-color:#5BC0DE;
             color: white;
             text-align: center;
@@ -41,6 +42,13 @@
 </head>
 <body>
     <h1><b>False Rule</b></h1>
+    <h2><b>--------------------||--------------------</b></h2>
+    <h3>In order to operate properly:</h3>
+    <p>-the function must be continuous on the interval</p>
+    <p>-The root must be in the interval</p>
+    <h3>Strategies for faster convergence:</h3>
+    <p>-Take as initial approximation the midpoint of the interval where the root is contained</p>
+    <h2><b>--------------------||--------------------</b></h2>
     <form method="post" action="{{ url_for('FlaskFalseRule') }}">
         <label for="itera">Number of iterations</label>
         <p><input name="iter" type="text" placeholder="Example: 100"></p>

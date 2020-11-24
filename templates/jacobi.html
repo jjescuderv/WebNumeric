@@ -25,6 +25,7 @@
         body {
             padding:10px;
             padding-bottom:60px;   /* Height of the footer */
+            text-align: center;
         }
         .footer {
             position: fixed;
@@ -39,7 +40,16 @@
 </head>
 <body>
     <h1><b>Jacobi Data</b></h1>
-
+    <h2><b>--------------------||--------------------</b></h2>
+    <h3>In order to operate properly, the jacobi functions:</h3>
+    <p> - Ax = b </p>
+    <p> - (D-L-U)x=b </p>
+    <p> - Dx-(L+U)x=b</p>
+    <p> - Dx=(L+U)x+b</p>
+    <p> - x=D^-1*(L+U)x+D^-1*b</p>
+    <p> - x=Tj*x+Cj</p>
+    <p> - Where Tj = D^-1*(L+U) and Cj=D^-1*b</p>
+    <h2><b>--------------------||--------------------</b></h2>
     <form method="post" action="{{ url_for('FlaskJacobi') }}">
         <label for="m">Enter size of m</label>
         <p><input name="m" type="number" placeholder="Example: 4"></p>

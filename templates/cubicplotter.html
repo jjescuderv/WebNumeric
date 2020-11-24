@@ -25,7 +25,8 @@
         }
         body {
             padding:10px;
-            padding-bottom:60px;   /* Height of the footer */
+            padding-bottom:90px;   /* Height of the footer */
+            text-align: center;
         }
         .footer {
             position: fixed;
@@ -39,7 +40,11 @@
     </style>
 </head>
 <body>
-    <h1>Cubic Plotter Data</h1>
+    <h1><b>Cubic Plotter Data</b></h1>
+    <h2><b>--------------------||--------------------</b></h2>
+    <h4>The polynomials P (x) through which we build the splines have grade 3, so they have the form:</h4>
+    <p>P (x) = ax ^ 3 + bx ^ 2 + cx + d</p>
+    <h2><b>--------------------||--------------------</b></h2>
     <form method="post" action="{{ url_for('FlaskCubicPlotter') }}">
         <label for="n">Number of X and Y elements</label>
         <p><input name="n" type="number" placeholder="Example: 4"></p>
@@ -47,7 +52,7 @@
         <p><input name="x" type="text" placeholder="Example: -1 0 3 4"></p>
         <label for="y">Enter the elements of Y separated by space</label>
         <p><input name="y" type="text" placeholder="Example: 15.5 3 8 1"></p>
-        
+       
         <div class="container">
             <div class="col-xs-4"></div>
             <div class="center">
@@ -76,10 +81,6 @@
             \(\bullet p'_{j+1}(x_{j}) = p'_j(x_j)\) for each \(j=1,...,n-1\)
             <br>
             \(\bullet p''_1(x_1)=0 \)
-            <br>
-            The polynomials P (x) through which we build the splines have grade 3, so they have the form:
-            <br>
-            P (x) = ax ^ 3 + bx ^ 2 + cx + d
         </p>
     </div>
 </footer>

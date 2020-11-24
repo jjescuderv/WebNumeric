@@ -26,6 +26,7 @@
         body {
             padding:10px;
             padding-bottom:60px;   /* Height of the footer */
+            text-align: center;
         }
         .footer {
             position: fixed;
@@ -41,6 +42,15 @@
 </head>
 <body>
     <h1><b>Fixed Point</b></h1>
+    <h2><b>--------------------||--------------------</b></h2>
+    <h3>In order to operate properly:</h3>
+    <p>-The continuous function on the interval [a, b] and for all x [a, b] it holds that
+     g (x) &#8712;  [a, b] then has a fixed point in [a; b]. </p>
+    <p>-If furthermore, for all &#8712; x (a, b) it is satisfied that g0'(x) exists in (a, b) and |g' (x)| <= k <=1, then it has a single
+    fixed point in [a, b]:</p>
+    <h3>Strategies for faster convergence:</h3>
+    <p>-Take as initial approximation the midpoint of the interval where the root is contained</p>
+    <h2><b>--------------------||--------------------</b></h2>
     <form method="post" action="{{ url_for('FlaskFixedPoint') }}">
         <label for="itera">Number of iterations</label>
         <p><input name="iter" type="text" placeholder="Example: 100"></p>
