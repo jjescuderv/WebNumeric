@@ -11,6 +11,7 @@ def gauss_simple(n, mat, vec):
 
     det = np.linalg.det(A)
     if(det == 0):
+        errors.append(A)
         errors.append("The matrix must be non singular")
         return errors
 
