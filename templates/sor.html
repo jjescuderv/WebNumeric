@@ -25,7 +25,8 @@
         }
         body {
             padding:10px;
-            padding-bottom:60px;   /* Height of the footer */
+            padding-bottom:60px;
+            text-align: center;
         }
         .footer {
             position: fixed;
@@ -36,9 +37,22 @@
             color: white;
             text-align: center;
         }
+        .clear { clear: both; height: 60px; }
     </style>
 </head>
 <body>
+    <h1><b>Secant Method</b></h1>
+    <h2><b>--------------------||--------------------</b></h2>
+    <h3>In order to operate properly:</h3>
+    <p>-The function must be continuous on the interval</p>
+    <p>-The root must be in the interval</p>
+    <p>-The derivative does not become 0 in the root</p>
+    <h3>Strategies for faster convergence:</h3>
+    <p>-Take as initial approximations the interval where the root is</p>
+    <p>-If you used one of the fixed-point methods, such as Newton, you can take the same initial 
+        approach and modify the figure minimally for the second value</p>
+    <h2><b>--------------------||--------------------</b></h2>
+
     <h1>SOR DATA</h1>
 
     <form method="post" action="{{ url_for('FlaskSor') }}">
@@ -71,19 +85,23 @@
     </form>
 </body>
 
-<footer>
-    <br>
-    <div class="footer">
-        <p class="text-lg-left" style="width: 125rem"> 
-            This method allows for improved convergence using relaxation. The relaxation represents a slight
-            modification of the Gauss-Seidel method and it allows to improve the convergence in some cases. 
-            After each new value of \(x\) is calculated, that value is modified by a weighted average of the 
-            results of the previous and current iterations.
-            <br>
-            \( X^{k+1} = w x^{k+1} + (1-w)xk  \) Algorithmically it remains: \(X^{k+1}=T_wx^k+Cw\)
-        </p>
+<div class="clear">
+    <div id="footer">
+    <footer>
+        <br>
+        <div class="footer">
+            <p class="text-lg-left" style="width: 125rem"> 
+                This method allows for improved convergence using relaxation. The relaxation represents a slight
+                modification of the Gauss-Seidel method and it allows to improve the convergence in some cases. 
+                After each new value of \(x\) is calculated, that value is modified by a weighted average of the 
+                results of the previous and current iterations.
+                <br>
+                \( X^{k+1} = w x^{k+1} + (1-w)xk  \) Algorithmically it remains: \(X^{k+1}=T_wx^k+Cw\)
+            </p>
+        </div>
+        <br>       
+    </footer>
     </div>
-    <br>       
-</footer>
+</div>
 
 </html>
