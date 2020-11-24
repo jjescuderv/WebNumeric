@@ -22,6 +22,10 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+@app.route("/prueba")
+def prueba():
+    return render_template("layouts/master.html")
+
 @app.route("/secant")
 def secant():
     return render_template("secant.html")
