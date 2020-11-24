@@ -189,7 +189,41 @@ def FlaskFalseRule():
     x1=request.form.get("x1")
     fun=request.form.get("fun")
     err=request.form.get("err")
-    string = reglaFalsa(iter,x0,x1,fun,err)
+    if iter =='' or x0 =='' or x1 =='' or fun =='' or err=='':
+        return "<h1 style='text-align: center;'>You are missing one or more values</h1>" 
+
+    try:
+        iter = int(iter)
+    except:
+        return "<h1 style='text-align: center;'>Check iteration value</h1>"
+
+    try:
+        x0 = float(x0)
+    except:
+        return "<h1 style='text-align: center;'>Check a value</h1>"
+
+    try:
+        x1 = float(x1)
+    except:
+        return "<h1 style='text-align: center;'>Check b value</h1>"
+
+    if x0==x1:
+        return "<h1 style='text-align: center;'>Interval ends must be different</h1>"
+
+    try:
+        fun = sp.sympify(fun)
+    except:
+        return "<h1 style='text-align: center;'>Check function entered</h1>"
+
+    try:
+        err = float(eval(err))
+    except:
+        return "<h1 style='text-align: center;'>Check tolerance entered {{tol}}</h1>"
+
+    try:
+        string = reglaFalsa(iter,x0,x1,fun,err)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
     return render_template("dataRule.html",string = string)
 
 @app.route("/fixed-point")
@@ -203,7 +237,40 @@ def FlaskFixedPoint():
     fun=request.form.get("fun")
     fun2=request.form.get("fun2")
     err=request.form.get("err")
-    lis_it,lis_xi,lis_gx,lis_fx,lis_er,string2 = Punto_Fijo(iter,x0,fun,fun2,err)
+    
+    if iter =='' or x0 =='' or  fun2 =='' or fun =='' or err=='':
+        return "<h1 style='text-align: center;'>You are missing one or more values</h1>" 
+
+    try:
+        iter = int(iter)
+    except:
+        return "<h1 style='text-align: center;'>Check iteration value</h1>"
+
+    try:
+        x0 = float(x0)
+    except:
+        return "<h1 style='text-align: center;'>Check initial value</h1>"
+
+    try:
+        fun2 = sp.sympify(fun2)
+    except:
+        return "<h1 style='text-align: center;'>Check function g entered</h1>"
+
+    try:
+        fun = sp.sympify(fun)
+    except:
+        return "<h1 style='text-align: center;'>Check function f entered</h1>"
+
+    try:
+        err = float(eval(err))
+    except:
+        return "<h1 style='text-align: center;'>Check tolerance entered {{tol}}</h1>"
+
+    try:
+        lis_it,lis_xi,lis_gx,lis_fx,lis_er,string2 = Punto_Fijo(iter,x0,fun,fun2,err)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
+   
     return render_template("dataFixedP.html",iter = lis_it,xi = lis_xi,gx = lis_gx,fx=lis_fx,er=lis_er,string=string2)
 
 @app.route("/LUsimple")
@@ -217,11 +284,29 @@ def FlaskLUsimple():
     A=request.form.get("A")
     l_b=request.form.get("l_b")
     b=request.form.get("b")
-    if n=='' or m=='' or A=='':
-        return "<h1 style='text-align: center;'>Check Values Entered</h1>"
-    
-    
-    lis_stage,lis_m,list_L,list_U,result = Lusimple(m,n,A,l_b,b)
+    if m =='' or n =='' or  A =='' or l_b =='' or b=='':
+        return "<h1 style='text-align: center;'>You are missing one or more values</h1>" 
+
+    try:
+        m = int(m)
+    except:
+        return "<h1 style='text-align: center;'>Check the number of rows</h1>"
+
+    try:
+       n = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check the number of columns</h1>"
+
+    try:
+        l_b = int(l_b)
+    except:
+        return "<h1 style='text-align: center;'>Check the length b vector</h1>"
+
+    try:
+        lis_stage,lis_m,list_L,list_U,result = Lusimple(m,n,A,l_b,b)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
+   
     x = len(lis_stage)
     z = list(range(0,x))
     return render_template("dataLuSimple.html",stage = lis_stage,M = lis_m, L=list_L,U=list_U,result = result,Z = z)
@@ -497,7 +582,25 @@ def FlaskCubicPlotter():
     if n=='' or x=='' or y=='':
         return "<h1 style='text-align: center;'>Check Values Entered</h1>"
 
-    A,b,S = CubicPlotter(n,x,y)
+    try:
+        n = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check n value entered</h1>"
+
+    try:
+        values_x = list(map(float, x.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check x vector entered</h1>"
+
+    try:
+        values_y = list(map(float, y.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check y vector entered</h1>"
+
+    try:
+        A,b,S = CubicPlotter(n,x,y)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
 
     return render_template("cubicplotterT.html", A=A, b=b, S=S)
 
@@ -512,11 +615,29 @@ def FlaskDoolittle():
     A=request.form.get("A")
     l_b=request.form.get("l_b")
     b=request.form.get("b")
-    if n=='' or m=='' or A=='':
-        return "<h1 style='text-align: center;'>Check Values Entered</h1>"
-    
-    
-    lis_stage,lis_m,list_L,list_U,result = Doolittle(m,n,A,l_b,b)
+    if m =='' or n =='' or  A =='' or l_b =='' or b=='':
+        return "<h1 style='text-align: center;'>You are missing one or more values</h1>" 
+
+    try:
+        m = int(m)
+    except:
+        return "<h1 style='text-align: center;'>Check the number of rows</h1>"
+
+    try:
+       n = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check the number of columns</h1>"
+
+    try:
+        l_b = int(l_b)
+    except:
+        return "<h1 style='text-align: center;'>Check the length b vector</h1>"
+
+    try:
+        lis_stage,lis_m,list_L,list_U,result = Doolittle(m,n,A,l_b,b)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
+     
     x = len(lis_stage)
     z = list(range(0,x))
     return render_template("dataDoolittle.html",stage = lis_stage,M = lis_m, L=list_L,U=list_U,result = result,Z = z)
@@ -537,10 +658,43 @@ def FlaskJacobi():
     lb=request.form.get("lb")
     lx0=request.form.get("lx0")
     
-    if m == ''  or n=='' or A=='' or b=='' or x0=='' or iter=='' or tol=='' or  m!=n:
+    if m == ''  or n=='' or A=='' or b=='' or x0=='' or tol=='' or lb=='' or  m!=n or Nmax=='' or lx0=='':
         return "<h1 style='text-align: center;'>Check values entered</h1>"
 
-    T,C,respect1,lis_iter,lis_er,lis_xi = jacobi(A,b,x0,tol,Nmax,m,n,lb,lx0)
+    try:
+        m = int(m)
+    except:
+        return "<h1 style='text-align: center;'>Check the number of rows</h1>"
+
+    try:
+       n = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check the number of columns</h1>"
+
+    try:
+        lb = int(lb)
+    except:
+        return "<h1 style='text-align: center;'>Check the length b vector</h1>"
+    
+    try:
+        Nmax = int(Nmax)
+    except:
+        return "<h1 style='text-align: center;'>Check iteration value</h1>"
+    
+    try:
+        lx0 = int(lx0)
+    except:
+        return "<h1 style='text-align: center;'>Check the length x0 vector</h1>"
+
+    try:
+        tol = sp.sympify(tol)
+    except:
+        return "<h1 style='text-align: center;'>Check tolerance entered {{tol}}</h1>"
+    
+    try:
+        T,C,respect1,lis_iter,lis_er,lis_xi = jacobi(A,b,x0,tol,Nmax,m,n,lb,lx0)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
 
     a=len(lis_iter)
     lis_a=list(range(0,a))

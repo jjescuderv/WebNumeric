@@ -7,7 +7,7 @@ def reglaFalsa(limite_iteraciones, a, b, funcion,tolerancia):
     fb = float(funcion.subs(x, b))
     a=float(a)
     b=float(b)
-    tolerancia=float(eval(tolerancia))
+    tolerancia=float((tolerancia))
     limite_iteraciones = float(limite_iteraciones)
     string = ""
     if(fa == 0):
