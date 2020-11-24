@@ -119,11 +119,10 @@ def multipleRoots():
 def FlaskmultRoots():
     iter=request.form.get("iter")
     x0=request.form.get("x0")
-    x1=request.form.get("x1")
     fun=request.form.get("fun")
     err=request.form.get("err")
 
-    if iter =='' or x0 =='' or x1=='' or fun=='' or err=='':
+    if iter =='' or x0 =='' or fun=='' or err=='':
         return "<h1 style='text-align: center;'>Check Values Entered</h1>"
 
     try:
@@ -137,14 +136,6 @@ def FlaskmultRoots():
         return "<h1 style='text-align: center;'>Check first initial value</h1>"
 
     try:
-        b = float(x1)
-    except:
-        return "<h1 style='text-align: center;'>Check second initial value</h1>"
-
-    if b==a:
-        return "<h1 style='text-align: center;'>Interval ends must be different</h1>"
-
-    try:
         f = sp.sympify(fun)
     except:
         return "<h1 style='text-align: center;'>Check function entered</h1>"
@@ -155,7 +146,7 @@ def FlaskmultRoots():
         return "<h1 style='text-align: center;'>Check tolerance entered {{tol}}</h1>"
 
     try:
-        lis_x0, lis_f0, lis_f1, lis_f2, lis_er, e, g = Multiple_roots(iter,x0,x1,fun,err)
+        lis_x0, lis_f0, lis_f1, lis_f2, lis_er, e, g = Multiple_roots(iter,x0,fun,err)
     except:
         return "<h1 style='text-align: center;'>Check values entered</h1>"
 
