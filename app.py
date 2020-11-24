@@ -82,11 +82,43 @@ def FlaskSecant():
     x1=request.form.get("x1")
     fun=request.form.get("fun")
     err=request.form.get("err")
-    
+
+
     if iter =='' or x0 =='' or x1=='' or fun=='' or err=='':
         return "<h1 style='text-align: center;'>Check Values Entered</h1>" 
 
-    lis_xi,lis_fx,lis_er,e,xa=Secant(iter,x0,x1,fun,err)
+    try:
+        itera = int(iter)
+    except:
+        return "<h1 style='text-align: center;'>Check iteration value</h1>"
+
+    try:
+        a = float(x0)
+    except:
+        return "<h1 style='text-align: center;'>Check first initial value</h1>"
+
+    try:
+        b = float(x1)
+    except:
+        return "<h1 style='text-align: center;'>Check second initial value</h1>"
+
+    if b==a:
+        return "<h1 style='text-align: center;'>Interval ends must be different</h1>"
+
+    try:
+        f = sp.sympify(fun)
+    except:
+        return "<h1 style='text-align: center;'>Check function entered</h1>"
+
+    try:
+        tol = sp.sympify(err)
+    except:
+        return "<h1 style='text-align: center;'>Check tolerance entered {{tol}}</h1>"
+
+    try:
+        lis_xi,lis_fx,lis_er,e,xa=Secant(iter,x0,x1,fun,err)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
 
     a=len(lis_xi)
     lis_a=list(range(0,a))
@@ -107,7 +139,38 @@ def FlaskmultRoots():
     if iter =='' or x0 =='' or x1=='' or fun=='' or err=='':
         return "<h1 style='text-align: center;'>Check Values Entered</h1>"
 
-    lis_x0, lis_f0, lis_f1, lis_f2, lis_er, e, g = Multiple_roots(iter,x0,x1,fun,err)
+    try:
+        itera = int(iter)
+    except:
+        return "<h1 style='text-align: center;'>Check iteration value</h1>"
+
+    try:
+        a = float(x0)
+    except:
+        return "<h1 style='text-align: center;'>Check first initial value</h1>"
+
+    try:
+        b = float(x1)
+    except:
+        return "<h1 style='text-align: center;'>Check second initial value</h1>"
+
+    if b==a:
+        return "<h1 style='text-align: center;'>Interval ends must be different</h1>"
+
+    try:
+        f = sp.sympify(fun)
+    except:
+        return "<h1 style='text-align: center;'>Check function entered</h1>"
+
+    try:
+        tol = sp.sympify(err)
+    except:
+        return "<h1 style='text-align: center;'>Check tolerance entered {{tol}}</h1>"
+
+    try:
+        lis_x0, lis_f0, lis_f1, lis_f2, lis_er, e, g = Multiple_roots(iter,x0,x1,fun,err)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
 
     a=len(lis_x0)
     lis_a=list(range(0,a))
@@ -176,7 +239,25 @@ def FlaskVandermonde():
     if n=='' or x=='' or y=='':
         return "<h1 style='text-align: center;'>Check Values Entered</h1>"
 
-    A,b,a = Vandermonde(n,x,y)
+    try:
+        A = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check n value entered</h1>"
+
+    try:
+        values_x = list(map(float, x.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check x vector entered</h1>"
+
+    try:
+        values_y = list(map(float, y.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check y vector entered</h1>"
+
+    try:
+        A,b,a = Vandermonde(n,x,y)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
 
     return render_template("vandermondeT.html", A=A, b=b, a=a)
 
@@ -195,11 +276,57 @@ def FlaskSor():
     iter=request.form.get("iter")
     error=request.form.get("error")
     w=request.form.get("w")
-    
+
     if m == ''  or n=='' or A=='' or b=='' or x0=='' or iter=='' or error=='' or w=='' or m!=n:
         return "<h1 style='text-align: center;'>Check values entered</h1>"
 
-    Tw,re,Cw,x1,x2,x3,er = Sor(m,n,A,b,x0,iter,error,w)
+    try:
+        itera = int(iter)
+    except:
+        return "<h1 style='text-align: center;'>Check iteration value</h1>"
+
+    try:
+        M = int(m)
+    except:
+        return "<h1 style='text-align: center;'>Check m value</h1>"
+
+    try:
+        N = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check n value</h1>"
+
+    if b==a:
+        return "<h1 style='text-align: center;'>Interval ends must be different</h1>"
+
+    try:
+        values_A = list(map(float, A.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check A Matix entered</h1>"
+
+    try:
+        values_b = list(map(float, b.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check b vector entered</h1>"
+
+    try:
+        values_x0 = list(map(float, x0.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check b vector entered</h1>"
+
+    try:
+        valuesErr = float(eval(error))
+    except:
+        return "<h1 style='text-align: center;'>Check tolerance entered</h1>"
+
+    try:
+        valueW = float(w)
+    except:
+        return "<h1 style='text-align: center;'>Check w value entered</h1>"
+
+    try:
+        Tw,re,Cw,x1,x2,x3,er = Sor(m,n,A,b,x0,iter,error,w)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
 
     a=len(x1)
     lis_a=list(range(0,a))
@@ -219,7 +346,25 @@ def Flasklinealp():
     if n=='' or x=='' or y=='':
         return "<h1 style='text-align: center;'>Check Values Entered</h1>"
 
-    A,b,S = LinealPlotter(n,x,y)
+    try:
+        A = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check n value entered</h1>"
+
+    try:
+        values_x = list(map(float, x.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check x vector entered</h1>"
+
+    try:
+        values_y = list(map(float, y.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check y vector entered</h1>"
+
+    try:
+        A,b,S = LinealPlotter(n,x,y)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
 
     return render_template("linealplotterT.html", A=A, b=b, S=S)
 
@@ -236,7 +381,25 @@ def FlaskQuadraticp():
     if n=='' or x=='' or y=='':
         return "<h1 style='text-align: center;'>Check Values Entered</h1>"
 
-    A,b,S = QuadraticPlotter(n,x,y)
+    try:
+        A = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check n value entered</h1>"
+
+    try:
+        values_x = list(map(float, x.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check x vector entered</h1>"
+
+    try:
+        values_y = list(map(float, y.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check y vector entered</h1>"
+
+    try:
+        A,b,S = QuadraticPlotter(n,x,y)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
 
     return render_template("quadraticplotterT.html", A=A, b=b, S=S)
 
