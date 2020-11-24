@@ -7,6 +7,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
+    <style>
+        body
+        {
+            background-image:url({{url_for('static', filename='builtin/3.jpg')}})
+        }
+
+
+    </style>
     <title>Main Menu</title>
 </head>
 
@@ -15,32 +23,55 @@
 <body>
     
     <div class="container">
-        <div class="col-xs-10"></div>
+      
         <div class="center">
-            <div class="col-xs-8">
+            <div class="col-xs-10">
                 <h3>Numerical methods for solving nonlinear equations:</h3>
                 <p></p>
+                <input type="submit" value="Incremental Searches" onclick= "location='/searches'" class="btn btn-success btn-lg">
                 <input type="submit" value="Newton" onclick= "location='/newton'" class="btn btn-info btn-lg">
                 <input type="submit" value="Bisection" onclick= "location='/bisection'" class="btn btn-success btn-lg">
+                <input type="submit" value="Secant" onclick= "location='/secant' " class='btn btn-info btn-lg' >
+                <input type="submit" value="Multiple Roots" onclick= "location='/multipleRoots'" class='btn btn-success btn-lg'>
+                <input type="submit" value="False Rule" onclick= "location='/false-rule'" class='btn btn-info btn-lg' >
+                <input type="submit" value="Fixed Point" onclick= "location='/fixed-point'" class='btn btn-success btn-lg' >
+                <p></p>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="container">
+       
+        <div class="center">
+            <div class="col-xs-10">
+                <h3>Numerical methods for solving systems of equations:</h3>
+                <p></p>
+                    <input type="submit" value="SOR" onclick= "location='/sor'" class='btn btn-info btn-lg'>
+                    <input type="submit" value="LU simple" onclick= "location='/LUsimple'" class="btn btn-success btn-lg" >
+                    <input type="submit" value="Doolittle" onclick= "location='/doolittle'" class='btn btn-info btn-lg' >
+                    <input type="submit" value="Jacobi" onclick= "location='/jacobi'" class="btn btn-success btn-lg" >
+                <p></p>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="container">
+      
+        <div class="center">
+            <div class="col-xs-10">
+                <h3>Numerical methods for Interpotation:</h3>
+                <p></p>
+                    <input type="submit" value="Vandermonde" onclick= "location='/vandermonde'" class='btn btn-info btn-lg'>
+                    <input type="submit" value="Lineal Plotter" onclick= "location='/linealplotter'" class='btn btn-success btn-lg'>
+                    <input type="submit" value="Quadratic Plotter" onclick= "location='/quadraticplotter'" class='btn btn-info btn-lg'>
+                    <input type="submit" value="Cubic Plotter" onclick= "location='/cubicplotter'" class="btn btn-success btn-lg" >
                 <p></p>
             </div>
         </div>
     </div>
     </div>
 
-    <p><input type="submit" value="Secant" onclick= "location='/secant' " class='boton container' ></p>
-    <p><input type="submit" value="Multiple Roots" onclick= "location='/multipleRoots'" class='boton container'></p>
-    <p><input type="submit" value="Vandermonde" onclick= "location='/vandermonde'" class='boton container'></p>
-    <p><input type="submit" value="SOR" onclick= "location='/sor'" class='boton container'></p>
-    <p><input type="submit" value="Lineal Plotter" onclick= "location='/linealplotter'" class='boton container'></p>
-    <p><input type="submit" value="Quadratic Plotter" onclick= "location='/quadraticplotter'" class='boton container'></p>
-    <p><input type="submit" value="False Rule" onclick= "location='/false-rule'" class='boton container' ></p>
-    <p><input type="submit" value="Fixed Point" onclick= "location='/fixed-point'" class='boton container' ></p>
-    <p><input type="submit" value="LU simple" onclick= "location='/LUsimple'" class='boton container' ></p>
-    <p><input type="submit" value="Cubic Plotter" onclick= "location='/cubicplotter'" class='boton container' ></p>
-    <p><input type="submit" value="Doolittle" onclick= "location='/doolittle'" class='boton container' ></p>
-
-
-    <p><input type="submit" value="Jacobi" onclick= "location='/jacobi'" class='boton container' ></p>
+    <p></p>
+    <p></p>
 </body>
 </html>

@@ -21,6 +21,10 @@
             width: 30%;
             text-align: center;
         }
+        body
+        {
+            background-image:url({{url_for('static', filename='builtin/3.jpg')}})
+        }
 
         form {
             text-align: center;
@@ -29,15 +33,28 @@
         h1 {
             text-align: center;
         }
+
+
+
     </style>
 </head>
 
 <body>
     <h1><b>Newton's Method</b></h1>
+    <h2><b>--------------------||--------------------</b></h2>
+    <h3>In order to operate properly:</h3>
+    <p>-Both the function and its derivative must be continuous on the interval</p>
+    <p>-The root must be in the interval</p>
+    <p>-The derivative does not become 0 in the root</p>
+    <h3>Strategies for faster convergence:</h3>
+    <p>-Take as initial approximation the midpoint of the interval where the root is contained</p>
+    <h2><b>--------------------||--------------------</b></h2>
     <form method="post" action="{{ url_for('newton_results') }}">
+        <p style="color:green"><b>To represent x to the power of y you must use x**y in your inputs</b></p>
+
         <label for="itera">Number of iterations</label>
-        <p><input name="itera" type="text" placeholder="Exaple: 100"></p>
-        <label for="x0">Initial value</label>
+        <p><input name="itera" type="text" placeholder="Example: 100"></p>
+        <label for="x0">Initial approximation</label>
         <p><input name="x0" type="text" placeholder="Example: 1.0"></p>
         <label for="fun">Function</label>
         <p><input name="fun" type="text" placeholder="Example: log(sin(x)**2+1)-1/2"></p>
