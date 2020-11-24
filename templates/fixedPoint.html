@@ -8,7 +8,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Fixed Point Data</title>
     <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
     <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
 
@@ -21,6 +21,19 @@
             text-align: center;
         }
         h1{
+            text-align: center;
+        }
+        body {
+            padding:10px;
+            padding-bottom:60px;   /* Height of the footer */
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color:#5BC0DE;
+            color: white;
             text-align: center;
         }
     </style>
@@ -51,4 +64,17 @@
     
     </form>
 </body>
+
+<footer>
+    <br>
+    <div class="footer">
+        <p class="text-lg-left" style="width: 125rem"> 
+            The fixed point method starts with an initial approximation x0 and x1 +1 = g(x1) generates a sequence of approximations which converges to the solution of the equation f(x) = 0. The g function is known as the iterator function. It can be shown that this sequence (xn) rangle $converges as long as (g´(x))<1
+            The fixed point method is an iterative method that allows solving systems of not necessarily linear equations. In particular, it can be used to determine roots of a function of the form  f (x), as long as the convergence criteria are met.
+            
+            The convergence of this method is established so that the change in x from one iteration to the next is not greater in magnitude to an amount of ε
+
+        </p>
+    </div>
+</footer>
 </html>

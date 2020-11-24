@@ -59,4 +59,29 @@
         </div>
     </form>
 </body>
+
+<footer>
+    <br>
+    <div class="footer">
+        <p class="text-lg-left" style="width: 125rem"> 
+            Given a function \(f\) in \([a, b]\) and nodes \( a = x_0 \lt x_1 \lt \cdots \lt x_n = b \) , an interpolating cubic spline 
+            \(p\) for \(f\) is a function that satisfies the following conditions:
+            <br>
+            \(\bullet p(x) \) is a quadratic polynomial, defined \(p_j(x)\), over the interval \([x_{j-1}, x_{j}]\) for each \(j=1,...,n\)
+            <br>
+            \(\bullet p_j(x_{j-1}) = f(x_{j-1})\) and \(p_j(x_{j}) = f(x_{j})\) for each \(j=1,...,n\)
+            <br>
+            \(\bullet p_{j+1}(x_{j}) = p_j(x_j)\) for each \(j=1,...,n-1\)
+            <br>
+            \(\bullet p'_{j+1}(x_{j}) = p'_j(x_j)\) for each \(j=1,...,n-1\)
+            <br>
+            \(\bullet p''_1(x_1)=0 \)
+            <br>
+            The polynomials P (x) through which we build the splines have grade 3, so they have the form:
+            <br>
+            P (x) = ax ^ 3 + bx ^ 2 + cx + d
+        </p>
+    </div>
+</footer>
+
 </html>

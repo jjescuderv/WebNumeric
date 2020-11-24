@@ -4,10 +4,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>False Rule</title>
     <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
     <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
 
@@ -20,6 +22,19 @@
             text-align: center;
         }
         h1{
+            text-align: center;
+        }
+        body {
+            padding:10px;
+            padding-bottom:80px;   /* Height of the footer */
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 220%;
+            background-color:#5BC0DE;
+            color: white;
             text-align: center;
         }
     </style>
@@ -48,4 +63,17 @@
         </div>
     </form>
 </body>
+
+<footer>
+    <br>
+    <div class="footer">
+        <p class="text-lg-left" style="width: 125rem"> 
+            The false rule method, or "false position," is another of the many iterative methods for solving problems with nonlinear equations. The peculiarity of this one is that it combines two methods: the bisection method and the secant method.
+            It is based on drawing a line that joins the ends of a given interval, considering that the solution is close to one of these extremes.
+            We have therefore added that straight line that joins the interval [a, b]. The main idea is that if we take the point where the line cuts the x-axis, we will be closer to finding the root.
+
+        </p>
+    </div>
+</footer>
+
 </html>

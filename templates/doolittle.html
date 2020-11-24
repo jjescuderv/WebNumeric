@@ -7,7 +7,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Doolittle</title>
     <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
     <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
 
@@ -20,6 +20,19 @@
             text-align: center;
         }
         h1{
+            text-align: center;
+        }
+        body {
+            padding:10px;
+            padding-bottom:60px;   /* Height of the footer */
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color:#5BC0DE;
+            color: white;
             text-align: center;
         }
     </style>
@@ -48,4 +61,18 @@
         </div>
     </form>
 </body>
+
+<footer>
+    <br>
+    <div class="footer">
+        <p class="text-sm-left" style="width: 125rem">
+            n linear algebra, the Doolittle matrix factorization is an LU decomposition which decomposes a matrix into a lower triangular matrix L and an upper triangular matrix U.
+            The Doolittle matrix decomposition method returns a lower triangular matrix L with ones in it’s diagonal, in such a way that A=LU.
+
+            It is a form of LU factorization of matrices, which consists of finding a square matrix A, the upper triangular matrix (U) and the lower triangular matrix (L). In this way, L * U = A For the factorization of this case it must be fulfilled that Lii = 1, with i = 1… .., n. 
+            This means that all numbers on the diagonal of the lower triangular matrix (L) must be equal to 1.
+        </p>
+    </div>
+</footer>
+
 </html>

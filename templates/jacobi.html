@@ -7,7 +7,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Jacobi</title>
     <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
     <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
 
@@ -20,6 +20,19 @@
             text-align: center;
         }
         h1{
+            text-align: center;
+        }
+        body {
+            padding:10px;
+            padding-bottom:60px;   /* Height of the footer */
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color:#5BC0DE;
+            color: white;
             text-align: center;
         }
     </style>
@@ -57,4 +70,20 @@
         </div>
     </form>
 </body>
+
+<footer>
+    <br>
+    <div class="footer">
+        <p class="text-sm-left" style="width: 125rem">
+            The Jacobi method is an iterative method to solve systems of linear equations of type AX = b. This method uses formulas like fixed point iteration.
+
+            The objective of this method is to build a convergent sequence iteratively defined. The limit of this succession is the solution of the system. For practicity, the algorithm is stopped after a number of steps to arrive at an approximation to the value of X of the system solution.
+
+            The sequence is constructed by decomposing the matrix of system A in the following way:
+
+            A = D + R
+        </p>
+    </div>
+</footer>
+
 </html>
