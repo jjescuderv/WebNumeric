@@ -2,11 +2,10 @@
 from sympy import *
 import pandas as pd
     
-def Multiple_roots(iter,x0,x1,f,error):
+def Multiple_roots(iter,x0,f,error):
     #print("Multiple roots")
     iter=float(iter)
     x0=float(x0)
-    x1=float(x1)
     x=Symbol('x')
     f=f
     error=float(eval(error))
@@ -77,4 +76,4 @@ def Multiple_roots(iter,x0,x1,f,error):
 
     return  lis_x0, lis_f0, lis_f1, lis_f2, lis_er, str(e), str(g)
 
-Multiple_roots(100,1.0,1.5,'ln(x**2+1)',('10**-7'))
+Multiple_roots(100,1.0,'ln(x**2+1)',('10**-7'))
