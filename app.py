@@ -38,32 +38,19 @@ def direct_methods():
 
 @app.route("/gauss", methods=["GET", "POST"])
 def gauss():
-    test = request.form.to_dict()
     mat = request.form.getlist('mat[]')
     vec = request.form.getlist('vec[]')
     method = int(request.form.get('method'))
     n = int(request.form.get('matrix_size'))
 
     if method == 1:
-        test = gauss_simple(n, mat, vec)
+        result = gauss_simple(n, mat, vec)
     elif method == 2:
-        pass
+        result = gauss_partial_pivoting(n, mat, vec)
     else:
-        pass
+        result = gauss_total_pivoting(n, mat, vec)
 
-    return render_template("matrices/direct_methods.html", test=test)
-
-# @app.route("/gauss_simple")
-# def gauss_simple():
-#     return render_template("matrices/gauss_simple.html")
-
-# @app.route("/gauss_partial")
-# def gauss_partial():
-#     return render_template("matrices/gauss_partial_pivoting.html")
-
-# @app.route("/gauss_total")
-# def gauss_total():
-#     return render_template("matrices/gauss_total_pivoting.html")
+    return render_template("matrices/direct_methods.html", result=result)
 
 #@app.route("/gauss_seidel")
 #@app.route("/lu_partial")
