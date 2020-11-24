@@ -41,16 +41,14 @@
     </style>
 </head>
 <body>
-    <h1><b>Secant Method</b></h1>
+    <h1><b>SOR Method</b></h1>
     <h2><b>--------------------||--------------------</b></h2>
     <h3>In order to operate properly:</h3>
-    <p>-The function must be continuous on the interval</p>
-    <p>-The root must be in the interval</p>
-    <p>-The derivative does not become 0 in the root</p>
+    <p>-If \( w=1 \) you have Gauss Seidel</p>
+    <p>-If \(0 < w < 1 \) Sub-relaxation methods are obtained, used for the convergence of non-converging systems by Gauss Seidel.</p>
+    <p>-If \( 1 < w < 2 \) Sub-relaxation methods are obtained, used to accelerate the convergence of converging systems by Gauss Seidel.</p>
     <h3>Strategies for faster convergence:</h3>
-    <p>-Take as initial approximations the interval where the root is</p>
-    <p>-If you used one of the fixed-point methods, such as Newton, you can take the same initial 
-        approach and modify the figure minimally for the second value</p>
+    <p>-SOR Convergence: If \( A \) is a positive defined symmetric matrix and \( 0 < w < 2 \), then the relaxation method converges for any initial approach \( X^0 \)</p>
     <h2><b>--------------------||--------------------</b></h2>
 
     <h1>SOR DATA</h1>
