@@ -4,7 +4,7 @@ Direct methods
 {% endblock %}
 
 {% block banner_title %}
-Direct Methods for solving linear systems
+Direct methods for solving linear systems
 {% endblock %}
 
 {% block content %}
@@ -29,6 +29,15 @@ Direct Methods for solving linear systems
 
     <hr>
 
+    {% if result|length == 1  %}
+        <div class="row justify-content-center" id="error_msg">
+            <div class="text-center p-2 rounded" style="background-color:#bf033b">
+                <h5> Error </h5>
+                <h5> {{ result[0] }} </h5>
+                <p style="color:white"> Check the 'help' section for more information. </p>
+            </div>
+        </div>
+    {% endif %}
 
     <!-- Matrix and vector -->
     <div class="row">
@@ -80,6 +89,15 @@ Direct Methods for solving linear systems
                 \end{pmatrix}$$
             </span>
         {% endfor %}
+        <span>
+        $$After \>\> performing \>\> back \>\> substitution$$ 
+        $$x = \begin{pmatrix}
+            {% for i in range(result[0]|length): %}
+                    & {{'%0.6f'| format(result[0][i]|float)}} &
+                    \\
+            {% endfor %}
+        \end{pmatrix}$$
+    </span>
     </span>
 </div>
 {% endif %}
@@ -93,7 +111,6 @@ Direct Methods for solving linear systems
 <script>
     function mat() {
         var n = document.getElementById("matrix_size").value;
-        var m = document.getElementById("method").value;
 
         const solve_button = document.getElementById("solve");
         solve_button.disabled = false;
