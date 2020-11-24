@@ -6,3 +6,7 @@ input::-webkit-inner-spin-button {
 #vector, #matrix tr {
     margin-top: 10px;
 }
+
+#error_msg h5 {
+    color: white;
+}
