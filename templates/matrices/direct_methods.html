@@ -4,37 +4,33 @@ Direct methods
 {% endblock %}
 
 {% block banner_title %}
-Direct Methods
+Direct Methods for solving linear systems
 {% endblock %}
 
 {% block content %}
 
-{{ test }}
-
 <!-- Input -->
-<div class="row py-3 justify-content-center">
-    <label class="form-label"> <b>Method: </b></h5>
-        <select id="method_selected" required>
-            <option value="1" selected>Gaussian elimination (simple)</option>
-            <option value="2">Gaussian elimination (partial pivoting)</option>
-            <option value="3">Gaussian elimination (total pivoting)</option>
-        </select>
-</div>
-<div class="row justify-content-center">
-    <label class="form-label"> <b>Number of variables: </b></h5>
-        <input required type="number" id="n" style="width: 3em; margin-right:1em">
-        <button class="btn btn-dark" onClick="mat()">
-            Save
-        </button>
-</div>
-
-<hr>
-
-
-<!-- Matrix and vector -->
 <form method="POST" id="data" action="{{ url_for('gauss') }}">
-    <input required type="hidden" id="matrix_size" name="matrix_size">
-    <input required type="hidden" id="method" name="method">
+    <div class="row py-3 justify-content-center">
+        <label class="form-label"> <b>Method: </b></h5>
+            <select id="method" name="method" required>
+                <option selected value="1">Gaussian elimination (simple)</option>
+                <option value="2">Gaussian elimination (partial pivoting)</option>
+                <option value="3">Gaussian elimination (total pivoting)</option>
+            </select>
+    </div>
+    <div class="row justify-content-center">
+        <label class="form-label"> <b>Number of variables: </b></h5>
+            <input required type="number" id="matrix_size" name="matrix_size" style="width: 3em; margin-right:1em">
+            <button class="btn btn-dark" onClick="mat()">
+                Save
+            </button>
+    </div>
+
+    <hr>
+
+
+    <!-- Matrix and vector -->
     <div class="row">
         <div class="col-lg-8 py-3">
             <div class="row justify-content-center">
@@ -54,8 +50,9 @@ Direct Methods
 </form>
 
 <div class="row justify-content-center">
-    <button type="submit" form="data" class="btn btn-outline-danger btn-lg btn-block"
-        onClick="print_results()">Solve</button>
+    <button id="solve" disabled type="submit" form="data" class="btn btn-outline-danger btn-lg btn-block">
+        Solve
+    </button>
 </div>
 
 <hr>
@@ -67,16 +64,24 @@ Direct Methods
     </span>
 </div>
 
-{% if test|length > 1  %}
-    <div id="results">
-        <span>$$Iteration 0 = \begin{pmatrix}
-            2.000000 & -1.000000 & 0.000000 & 3.000000 & 1.000000\\
-            1.000000 & 0.500000 & 3.000000 & 8.000000 & 1.000000\\
-            0.000000 & 13.000000 & -2.000000 & 11.000000 & 1.000000\\
-            14.000000 & 5.000000 & -2.000000 & 3.000000 & 1.000000\\
-            \end{pmatrix}$$
-        </span>
-    </div>
+{% if result|length > 1  %}
+<div id="results">
+    <span>
+        {% for i in range(result[1]|length): %}
+            <span>
+                $$Iteration {{ i }} = \begin{pmatrix}
+                    {% for j in range(result[1][i]|length): %}
+                        &
+                        {% for k in range(result[1][i][j]|length): %}
+                            {{'%0.6f'| format(result[1][i][j][k]|float)}} &
+                        {% endfor %}
+                        \\
+                    {% endfor %}
+                \end{pmatrix}$$
+            </span>
+        {% endfor %}
+    </span>
+</div>
 {% endif %}
 
 {% endblock %}
@@ -87,12 +92,11 @@ Direct Methods
 {% block script %}
 <script>
     function mat() {
-        var n = document.getElementById("n").value;
-        var m = document.getElementById("method_selected").value;
-        if(n != '') {
-            $("#matrix_size").val(n);
-        }
-        $("#method").val(m);
+        var n = document.getElementById("matrix_size").value;
+        var m = document.getElementById("method").value;
+
+        const solve_button = document.getElementById("solve");
+        solve_button.disabled = false;
 
         console.log(n);
         if (n < 2 || NaN) {
