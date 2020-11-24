@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+{% extends "layouts/master.html" %}
+{% block title %}
+Doolittle
+{% endblock %}
+
+{% block banner_title %}
+DOOLITTLE
+
+{% endblock %}
+{% block content %}
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
@@ -13,7 +23,7 @@
 
     <style>
         input {
-            width: 30%;
+            width: 35%;
             text-align: center;
         }
         form{
@@ -23,7 +33,6 @@
             text-align: center;
         }
         body {
-            padding:10px;
             padding-bottom:60px;   /* Height of the footer */
         }
         .footer {
@@ -38,7 +47,6 @@
     </style>
 </head>
 <body>
-    <h1><b>Doolittle</b></h1>
     <form method="post" action="{{ url_for('FlaskDoolittle') }}">
         <label for="m">Enter size of m</label>
         <p><input name="m" type="text" placeholder="Example: 4"></p>
@@ -65,8 +73,8 @@
 <footer>
     <br>
     <div class="footer">
-        <p class="text-sm-left" style="width: 125rem">
-            n linear algebra, the Doolittle matrix factorization is an LU decomposition which decomposes a matrix into a lower triangular matrix L and an upper triangular matrix U.
+        <p class="text-sm-CENTER" style="width: 125rem">
+            In linear algebra, the Doolittle matrix factorization is an LU decomposition which decomposes a matrix into a lower triangular matrix L and an upper triangular matrix U.
             The Doolittle matrix decomposition method returns a lower triangular matrix L with ones in it’s diagonal, in such a way that A=LU.
 
             It is a form of LU factorization of matrices, which consists of finding a square matrix A, the upper triangular matrix (U) and the lower triangular matrix (L). In this way, L * U = A For the factorization of this case it must be fulfilled that Lii = 1, with i = 1… .., n. 
@@ -74,5 +82,5 @@
         </p>
     </div>
 </footer>
-
+{% endblock %}
 </html>

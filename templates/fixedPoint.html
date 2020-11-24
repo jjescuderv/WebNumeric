@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+{% extends "layouts/master.html" %}
+{% block title %}
+Fixed Point
+{% endblock %}
+
+{% block banner_title %}
+FIXED POINT
+
+{% endblock %}
+{% block content %}
 <head>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -14,7 +24,7 @@
 
     <style>
         input {
-            width: 30%;
+            width: 35%;
             text-align: center;
         }
         form{
@@ -24,8 +34,7 @@
             text-align: center;
         }
         body {
-            padding:10px;
-            padding-bottom:60px;   /* Height of the footer */
+            padding-bottom:70px;   /* Height of the footer */
             text-align: center;
         }
         .footer {
@@ -41,7 +50,6 @@
 
 </head>
 <body>
-    <h1><b>Fixed Point</b></h1>
     <h2><b>--------------------||--------------------</b></h2>
     <h3>In order to operate properly:</h3>
     <p>-The continuous function on the interval [a, b] and for all x [a, b] it holds that
@@ -78,7 +86,7 @@
 <footer>
     <br>
     <div class="footer">
-        <p class="text-lg-left" style="width: 125rem"> 
+        <p class="text-lg-CENTER" style="width: 125rem"> 
             The fixed point method starts with an initial approximation x0 and x1 +1 = g(x1) generates a sequence of approximations which converges to the solution of the equation f(x) = 0. The g function is known as the iterator function. It can be shown that this sequence (xn) rangle $converges as long as (g´(x))<1
             The fixed point method is an iterative method that allows solving systems of not necessarily linear equations. In particular, it can be used to determine roots of a function of the form  f (x), as long as the convergence criteria are met.
             
@@ -87,4 +95,5 @@
         </p>
     </div>
 </footer>
+{% endblock %}
 </html>

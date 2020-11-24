@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+{% extends "layouts/master.html" %}
+{% block title %}
+Cubic Plotter
+{% endblock %}
+
+{% block banner_title %}
+CUBIC PLOTTER
+{% endblock %}
+
+{% block content %}
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
@@ -15,7 +25,7 @@
     <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
     <style>
         input {
-            width: 30%;
+            width: 35%;
           }
         form{
             text-align: center;
@@ -24,8 +34,7 @@
             text-align: center;
         }
         body {
-            padding:10px;
-            padding-bottom:90px;   /* Height of the footer */
+            padding-bottom:100px;   /* Height of the footer */
             text-align: center;
         }
         .footer {
@@ -40,7 +49,6 @@
     </style>
 </head>
 <body>
-    <h1><b>Cubic Plotter Data</b></h1>
     <h2><b>--------------------||--------------------</b></h2>
     <h4>The polynomials P (x) through which we build the splines have grade 3, so they have the form:</h4>
     <p>P (x) = ax ^ 3 + bx ^ 2 + cx + d</p>
@@ -68,7 +76,7 @@
 <footer>
     <br>
     <div class="footer">
-        <p class="text-lg-left" style="width: 125rem"> 
+        <p class="text-lg-CENTER" style="width: 125rem"> 
             Given a function \(f\) in \([a, b]\) and nodes \( a = x_0 \lt x_1 \lt \cdots \lt x_n = b \) , an interpolating cubic spline 
             \(p\) for \(f\) is a function that satisfies the following conditions:
             <br>
@@ -84,5 +92,5 @@
         </p>
     </div>
 </footer>
-
+{% endblock %}
 </html>

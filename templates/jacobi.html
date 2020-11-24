@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+{% extends "layouts/master.html" %}
+{% block title %}
+Jacobi
+{% endblock %}
+
+{% block banner_title %}
+JACOBI
+
+{% endblock %}
+{% block content %}
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
@@ -13,7 +23,7 @@
 
     <style>
         input {
-            width: 30%;
+            width: 35%;
             text-align: center;
         }
         form{
@@ -23,7 +33,6 @@
             text-align: center;
         }
         body {
-            padding:10px;
             padding-bottom:60px;   /* Height of the footer */
             text-align: center;
         }
@@ -39,7 +48,6 @@
     </style>
 </head>
 <body>
-    <h1><b>Jacobi Data</b></h1>
     <h2><b>--------------------||--------------------</b></h2>
     <h3>In order to operate properly, the jacobi functions:</h3>
     <p> - Ax = b </p>
@@ -84,7 +92,7 @@
 <footer>
     <br>
     <div class="footer">
-        <p class="text-sm-left" style="width: 125rem">
+        <p class="text-sm-center" style="width: 125rem">
             The Jacobi method is an iterative method to solve systems of linear equations of type AX = b. This method uses formulas like fixed point iteration.
 
             The objective of this method is to build a convergent sequence iteratively defined. The limit of this succession is the solution of the system. For practicity, the algorithm is stopped after a number of steps to arrive at an approximation to the value of X of the system solution.
@@ -95,5 +103,5 @@
         </p>
     </div>
 </footer>
-
+{% endblock %}
 </html>
