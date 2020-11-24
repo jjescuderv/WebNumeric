@@ -1,84 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "layouts/master.html" %}
+{% block title %}
+Newton-Raphson
+{% endblock %}
 
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
-        integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
-        crossorigin="anonymous"></script>
+{% block banner_title %}
+Newton-Raphson
+{% endblock %}
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Newton</title>
-    <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
-    <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
-    <style>
-        input {
-            width: 30%;
-            text-align: center;
-        }
-        body
-        {
-            background-image:url({{url_for('static', filename='builtin/3.jpg')}})
-        }
-
-        form {
-            text-align: center;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-
-
-    </style>
-</head>
+{% block content %}
 
 <body>
-    <h1><b>Newton's Method</b></h1>
-    <h2><b>--------------------||--------------------</b></h2>
-    <h3>In order to operate properly:</h3>
-    <p>-Both the function and its derivative must be continuous on the interval</p>
-    <p>-The root must be in the interval</p>
-    <p>-The derivative does not become 0 in the root</p>
-    <h3>Strategies for faster convergence:</h3>
-    <p>-Take as initial approximation the midpoint of the interval where the root is contained</p>
-    <h2><b>--------------------||--------------------</b></h2>
-    <form method="post" action="{{ url_for('newton_results') }}">
-        <p style="color:green"><b>To represent x to the power of y you must use x**y in your inputs</b></p>
-
-        <label for="itera">Number of iterations</label>
+    <form method="post" id="data" action="{{ url_for('newton_results') }}">
+        <div class="row justify-content-center">
+            <label for="itera">Number of iterations:</label>
+        </div>
         <p><input name="itera" type="text" placeholder="Example: 100"></p>
-        <label for="x0">Initial approximation</label>
+
+        <div class="row justify-content-center">
+            <label for="x0">Initial approximation</label>
+        </div>
         <p><input name="x0" type="text" placeholder="Example: 1.0"></p>
-        <label for="fun">Function</label>
+
+        <div class="row justify-content-center">
+            <label for="fun">Function</label>
+        </div>
         <p><input name="fun" type="text" placeholder="Example: log(sin(x)**2+1)-1/2"></p>
-        <label for="dfun">Function's derivative</label>
+
+        <div class="row justify-content-center">
+            <label for="dfun">Function's derivative</label>
+        </div>
         <p><input name="dfun" type="text" placeholder="Example: 2*((sin(x)**2+1)**-1)*sin(x)*cos(x)""></p>
-        <label for=" tol">Error acepted</label>
+
+        <div class="row justify-content-center">
+            <label for=" tol">Error acepted</label>
+        </div>
         <p><input name="tol" type="text" placeholder="Example: 10**-7"></p>
-        <div class="container">
-            <div class="col-xs-4"></div>
-            <div class="center">
-                <div class="col-xs-4">
-                    <input type="submit" class="btn btn-success btn-lg" value="Run">
-                    <button type="button" class="btn btn-info btn-lg" onclick="location='/'">Back</button>
-                </div>
-            </div>
-        </div>
-        </div>
-
-
-
+        
     </form>
+    
+    <div class="row justify-content-center">
+        <button id="solve" type="submit" form="data" class="btn btn-outline-danger btn-lg btn-block" onClick="mat()">
+            Solve
+        </button>
+    </div>
+
 </body>
 <footer>
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -94,7 +61,6 @@
                 margin-left: auto;
                 margin-right: auto;
             }
-
             h1,
             h3,
             p,
@@ -106,7 +72,9 @@
     </head>
 
     <body>
-        <h2>Newton's Results Table</h2>
+        <p></p>
+        <h2>Results Table</h2>
+        <p></p>
         <table style="width:30%">
             <tr>
                 <th>Iterations</th>
@@ -124,9 +92,22 @@
             {%endfor%}
 
         </table>
+        <p></p>
         <h3>Root found in: <b>{{ root }}</b></h3>
 
     </body>
 </footer>
 
-</html>
+{% endblock %}
+
+{% block footer_help %}
+    <li>To represent x to the power of y you must use x**y in your inputs.</li>
+    <li>Both the function and its derivative must be continuous on the interval.</li>
+    <li>The root must be in the interval.</li>
+    <li>The derivative does not become 0 in the root.</li>
+{% endblock %}
+
+{% block footer_strategies %}
+    <li>Take as initial approximation the midpoint of the interval where the root is contained.</li>
+{% endblock %}
+
