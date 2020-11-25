@@ -1,4 +1,4 @@
-{% extends "layouts/master.html" %}
+{% extends "layouts/index_master.html" %}
 {% block title %}
 Home
 {% endblock %}
@@ -9,13 +9,11 @@ Home
         <div class="col-xs-10">
             <h3>Numerical methods for solving nonlinear equations:</h3>
             <p></p>
-            <input type="submit" value="Incremental Searches" onclick="location='/searches'"
-                class="btn btn-danger btn-lg">
+            <input type="submit" value="Incremental Searches" onclick="location='/searches'" class="btn btn-danger btn-lg">
             <input type="submit" value="Newton" onclick="location='/newton'" class="btn btn-dark btn-lg">
             <input type="submit" value="Bisection" onclick="location='/bisection'" class="btn btn-danger btn-lg">
             <input type="submit" value="Secant" onclick="location='/secant' " class='btn btn-dark btn-lg'>
-            <input type="submit" value="Multiple Roots" onclick="location='/multipleRoots'"
-                class='btn btn-danger btn-lg'>
+            <input type="submit" value="Multiple Roots" onclick="location='/multipleRoots'" class='btn btn-danger btn-lg'>
             <input type="submit" value="False Rule" onclick="location='/false-rule'" class='btn btn-dark btn-lg'>
             <input type="submit" value="Fixed Point" onclick="location='/fixed-point'" class='btn btn-danger btn-lg'>
             <p></p>
@@ -23,21 +21,28 @@ Home
     </div>
 </div>
 
+<hr>
+
 <div class="container">
     <div class="center">
         <div class="col-xs-10">
             <h3>Numerical methods for solving systems of equations:</h3>
             <p></p>
+            <input type="submit" value="Direct methods" onclick="location='/direct_methods'" class="btn btn-dark btn-lg">
+            <input type="submit" value="LU Factorization" onclick="location='/lu_factorization'" class="btn btn-danger btn-lg">
             <input type="submit" value="SOR" onclick="location='/sor'" class='btn btn-dark btn-lg'>
-            <input type="submit" value="LU simple" onclick="location='/LUsimple'" class="btn btn-danger btn-lg">
-            <input type="submit" value="Doolittle" onclick="location='/doolittle'" class='btn btn-dark btn-lg'>
             <input type="submit" value="Jacobi" onclick="location='/jacobi'" class="btn btn-danger btn-lg">
+            <input type="submit" value="Gauss-Seidel" onclick="location='/gauss_seidel'" class="btn btn-dark btn-lg">
+            <input type="submit" value="Doolittle" onclick="location='/doolittle'" class='btn btn-danger btn-lg'>
             <input type="submit" value="Crout" onclick="location='/crout'" class="btn btn-dark btn-lg">
             <input type="submit" value="Cholesky" onclick="location='/chol'" class="btn btn-danger btn-lg">
+
             <p></p>
         </div>
     </div>
 </div>
+
+<hr>
 
 <div class="container">
     <div class="center">
@@ -47,7 +52,6 @@ Home
             
             <input type="submit" value="Lineal Plotter" onclick="location='/linealplotter'"
                 class='btn btn-danger btn-lg'>
-            
             <input type="submit" value="Quadratic Plotter" onclick="location='/quadraticplotter'"
                 class='btn btn-dark btn-lg'>
             <input type="submit" value="Cubic Plotter" onclick="location='/cubicplotter'"
