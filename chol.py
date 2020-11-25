@@ -62,7 +62,16 @@ def Cholesky(n, mat, vec):
         matrices.append(np.copy(iteration))
         iteration = []
 
-    L[n-1,n-1]=math.sqrt(A[n-1,n-1]-(np.dot(L[n-1,0:n-1], np.transpose(U[0:n-1,n-1])))) #Lonely stage
+
+    
+    
+    if(A[n-1,n-1]-(np.dot(L[n-1,0:n-1], np.transpose(U[0:n-1,n-1]))) < 0):
+        errors.append(A)
+        errors.append("An attempt was made to root a negative number, the stage's diagonal can not contain negative numbers")
+        return errors
+    else:    
+        L[n-1,n-1]=math.sqrt(A[n-1,n-1]-(np.dot(L[n-1,0:n-1], np.transpose(U[0:n-1,n-1])))) #Lonely stage
+    
     U[n-1,n-1]=L[n-1,n-1]
 
     iteration.append(np.copy(A))
