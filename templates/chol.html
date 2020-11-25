@@ -126,11 +126,13 @@ Cholesky
 
 {% block footer_help %}
     <li>The determinant of the matrix must not be 0.</li>
-    <li>The matrix should not have a 0 on the diagonal.</li>
+    <li>The stage's matrix can not contain a 0 on the diagonal.</li>
+    <li>The stage's matrix can not contain a negative number on the diagonal.</li>
 {% endblock %}
 
 {% block footer_strategies %}
     <li>If you are getting weird results you might want to check the elements in the diagonal. If one of them is really close to 0 you will get big numbers on the final matrix as a result.</li>
+    <li>With a positive definite symmetric matrix, the method will not have problems for complex numbers</li>
 {% endblock %}
 
 {% block script %}

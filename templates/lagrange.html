@@ -1,10 +1,10 @@
 {% extends "layouts/master.html" %}
 {% block title %}
-Newton with divided differences
+Lagrange
 {% endblock %}
 
 {% block banner_title %}
-Newton with divided differences
+Lagrange
 {% endblock %}
 
 {% block head %}
@@ -25,7 +25,7 @@ Newton with divided differences
 {% endblock %}
 
 {% block content %}
-    <form method="post" id="data" action="{{ url_for('diffdiv_results') }}">
+    <form method="post" id="data" action="{{ url_for('lagrange_results') }}">
         <label for="n">Number of X and Y elements</label>
         <p><input name="n" type="number" placeholder="Example: 4"></p>
         <label for="x">Enter the elements of X separated by space</label>
@@ -56,16 +56,16 @@ Newton with divided differences
         }
     </style>
     <p></p>
-    <h1 style="color:red">{{ error }}</h1>
-    <h3>Table of divided differences</h3>
+    
+    <h3>Lagrange's interpolating polynomials:</h3>
     <pre>
         {{A}}
     </pre>
     
-    <h3>Polynomial Coefficients</h3>
+    <h3>Polynomial coefficients:</h3>
     <p> {{b}} </p>
     
-    <h3>Newton's Polynomial</h3>
+    <h3>Lagrange's Polynomial:</h3>
     <p> \( {{a}} \) </p>
     
 
