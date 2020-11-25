@@ -95,11 +95,11 @@ Incremental searches
 
 {% block footer_help %}
 <li>To represent x to the power of y you must use x**y in your inputs.</li>
-<li>Both the function and its derivative must be continuous on the interval.</li>
-<li>The root must be in the interval.</li>
-<li>The derivative does not become 0 in the root.</li>
+<li>The function must be continuous.</li>
+<li>There is a change of sign.</li>
+<li>if you choose a very large delta, you take the risk of the root being skipped by the method.</li>
 {% endblock %}
 
 {% block footer_strategies %}
-<li>Take as initial approximation the midpoint of the interval where the root is contained.</li>
+<li>take a value close to the root as an initial approximation, considering the delta value to avoid skipping the root.</li>
 {% endblock %}

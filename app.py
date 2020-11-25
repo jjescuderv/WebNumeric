@@ -19,6 +19,7 @@ from Gauss_simple import gauss_simple
 from incremental_searches import Incremental_searches
 import sympy as sp
 from sympy import sin, cos, log, exp
+from crout import Crout
 
 app = Flask(__name__)
 
@@ -586,6 +587,23 @@ def bisection_results():
     list_it=list(range(1,it+1))
     return render_template("bisection.html", list_a=list_a, list_xm=list_xm, list_b=list_b, list_fxm = list_fxm,
     list_E = list_E, list_it=list_it, root=root)
+
+
+
+@app.route("/crout")
+def crout():
+    test = []
+    return render_template("crout.html", test=test)
+
+@app.route("/crout_results", methods=["GET", "POST"])
+def crout_results():
+    mat = request.form.getlist('mat[]')
+    vec = request.form.getlist('vec[]')
+    n = int(request.form.get('matrix_size'))
+
+    result = Crout(n, mat, vec)
+
+    return render_template("crout.html", result=result)
 
 #----------------------------------------------------END JHONATAN ---------------------------------------------
    
