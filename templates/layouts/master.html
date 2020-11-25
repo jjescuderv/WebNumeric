@@ -43,6 +43,8 @@
                             Functions
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url_for('secant') }}">Secant</a>
+                            <a class="dropdown-item" href="{{ url_for('multipleRoots') }}">Multiple Roots</a>
                             <a class="dropdown-item" href="#">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
                             <div class="dropdown-divider"></div>
@@ -57,6 +59,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ url_for('direct_methods') }}">Direct methods</a>
                             <a class="dropdown-item" href="{{ url_for('lu_factorization') }}">LU Factorization</a>
+                            <a class="dropdown-item" href="{{ url_for('sor') }}">SOR</a>
                             <a class="dropdown-item" href="#">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
                             <div class="dropdown-divider"></div>
@@ -69,6 +72,9 @@
                             Interpolation
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url_for('vandermonde') }}">Vandermonde</a>
+                            <a class="dropdown-item" href="{{ url_for('linealplotter') }}">Lineal Plotter</a>
+                            <a class="dropdown-item" href="{{ url_for('quadraticplotter') }}">Quadratic Plotter</a>
                             <a class="dropdown-item" href="#">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
                             <div class="dropdown-divider"></div>
