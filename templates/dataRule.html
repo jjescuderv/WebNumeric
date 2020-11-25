@@ -1,17 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>False Rule Data</title>
-    <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
-    <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
-</head>
-<body>
+{% extends "layouts/master.html" %}
+{% block title %}
+False Rule
+{% endblock %}
+
+{% block banner_title %}
+FALSE RULE
+{% endblock %}
+
+{% block head %}
+<style>
+    table, th, td {
+        border: 1px solid black;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    h1, h3, p, h2, pre{
+        text-align: center;
+    }
+    .container{
+        text-align: center;
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
     <h1>Results false rule</h1>
     <h5>{{string}}</h5>
 
-    <p><input type="submit" value="Volver Al Inicio" onclick= "location='/'" class='boton container' ></p>
+    <br>
+    <br>
+    <div class="container">
+        <div class="col-xs-6"></div>
+        <div class="center">
+            <div class="col-xs-6">
+                <button type="button" class="btn btn-dark btn-lg" onclick="location='/'">Back to main menu</button>
+            </div>
+        </div>
+    </div>
 
-</body>
-</html>
+    <br>
+
+{% endblock %}
