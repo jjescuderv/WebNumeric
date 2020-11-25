@@ -16,6 +16,7 @@ from Jacobi import jacobi
 from Gauss_partial_pivoting import gauss_partial_pivoting
 from Gauss_total_pivoting import gauss_total_pivoting
 from Gauss_simple import gauss_simple
+from incremental_searches import Incremental_searches
 import sympy as sp
 from sympy import sin, cos, log, exp
 
@@ -485,6 +486,50 @@ def newton_results():
     it=len(list_a)
     list_it=list(range(0,it))
     return render_template("newton.html", list_a=list_a,list_f=list_f,list_e=list_e, list_it=list_it, root=root)
+
+@app.route("/searches")
+def searches():
+    return render_template("searches.html")
+
+@app.route("/searches_results", methods=["GET", "POST"])
+def searches_results():
+
+    iterastr=request.form.get("itera")
+    x0str=request.form.get("x0")
+    deltastr=request.form.get("delta")
+    fstr=request.form.get("f")
+
+
+    if iterastr =='' or x0str =='' or deltastr =='' or fstr =='':
+        return "<h1 style='text-align: center;'>You are missing one or more values</h1>" 
+
+    try:
+        itera = int(iterastr)
+    except:
+        return "<h1 style='text-align: center;'>Check iteration value</h1>"
+
+    try:
+        x0 = float(x0str)
+    except:
+        return "<h1 style='text-align: center;'>Check a value</h1>"
+
+    try:
+        delta = float(deltastr)
+    except:
+        return "<h1 style='text-align: center;'>Check b value</h1>"
+
+    try:
+        f = sp.sympify(fstr)
+    except:
+        return "<h1 style='text-align: center;'>Check function entered</h1>"
+
+
+    try:
+        list_apr = Incremental_searches(itera,x0,delta,f)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
+
+    return render_template("searches.html", list_apr=list_apr)
 
 @app.route("/bisection")
 def bisection():
