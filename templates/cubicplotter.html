@@ -55,11 +55,19 @@ CUBIC PLOTTER
 {% endblock %}
 
 {% block footer_help %}
-<li></li>
-<li></li>
-{% endblock %}
-
-{% block footer_strategies %}
+<h3>In order to operate properly:</h3>
+<li>The linear tracer must meet the conditions of interpolation and continuity. These are described next.</li>
 <li>The polynomials P (x) through which we build the splines have grade 3, so they have the form: <br>
     P (x) = ax ^ 3 + bx ^ 2 + cx + d </li>
+{% endblock %}
+
+
+{% block footer_strategies %}
+<h3>Strategies for convergence:</h3>
+<li>Not necessarily more points implies a better approximation</li>
+Given a function \(f\) in \([a, b]\) and nodes \( a = x_0 \lt x_1 \lt \cdots \lt x_n = b \) , an interpolating linear spline 
+\(p\) for \(f\) is a function that satisfies the following conditions:
+<li>\( p(x) \) is a linear polynomial, defined \(p_j(x)\), over the interval \([x_{j-1}, x_{j}]\) for each \(j=1,...,n\)</li>
+<li>\( p_j(x_{j-1}) = f(x_{j-1})\) and \(p_j(x_{j}) = f(x_{j})\) for each \(j=1,...,n\)</li>
+<li>\( p_{j+1}(x_{j}) = p_j(x_j)\) for each \(j=1,...,n-1\)</li>
 {% endblock %}
