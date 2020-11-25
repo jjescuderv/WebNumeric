@@ -19,9 +19,12 @@ def Newton(itera, x0, fun, dfun, tol):
     
     f = fun.subs(x, x0)
     df = dfun.subs(x, x0)
+    
     c = 1
     a = x0-f/df
     e = (abs(a-x0))
+
+    
 
     list_a = []
     list_f = []
@@ -32,19 +35,32 @@ def Newton(itera, x0, fun, dfun, tol):
     list_f.append(format(f, "1.1e"))
     list_e.append(format(" "))
 
+
+    
+
     while (e > tol and c <= itera):
+        
         a = x0-(f/df)
+        
         f = fun.subs(x, a)
+       
         df = dfun.subs(x, a)
+        
         e = (abs(a-x0))
         x0 = a
-
+        
         c=c+1
 
+        
         list_a.append(format(a, "12.10f"))
-        list_f.append(format(f, "1.1e"))
+        
+        if(f == 0):
+            list_f.append(f)
+        else:
+            list_f.append(format(f, "1.1e"))
+        
         list_e.append(format(e, "1.1e"))
-
+    
 
     root=format(a, "12.15f")
 
