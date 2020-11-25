@@ -510,16 +510,45 @@ def newton():
 
 @app.route("/newton_results", methods=["GET", "POST"])
 def newton_results():
-    itera=request.form.get("itera")
-    x0=request.form.get("x0")
-    fun=request.form.get("fun")
-    dfun=request.form.get("dfun")
-    tol=request.form.get("tol")
-    
-    if itera =='' or x0 =='' or fun=='' or dfun=='' or tol=='':
-        return "<h1 style='text-align: center;'>Check Values Entered</h1>" 
+    iterastr=request.form.get("itera")
+    x0str=request.form.get("x0")
+    funstr=request.form.get("fun")
+    dfunstr=request.form.get("dfun")
+    tolstr=request.form.get("tol")
 
-    list_a,list_f,list_e,root=Newton(itera,x0,fun,dfun,tol)
+    if iterastr =='' or x0str =='' or funstr =='' or dfunstr =='' or tolstr =='':
+        return "<h1 style='text-align: center;'>You are missing one or more values</h1>" 
+
+    try:
+        itera = int(iterastr)
+    except:
+        return "<h1 style='text-align: center;'>Check iteration value</h1>"
+
+    try:
+        x0 = float(x0str)
+    except:
+        return "<h1 style='text-align: center;'>Check initial value</h1>"
+
+    try:
+        fun = sp.sympify(funstr)
+    except:
+        return "<h1 style='text-align: center;'>Check function entered</h1>"
+
+    try:
+        dfun = sp.sympify(dfunstr)
+    except:
+        return "<h1 style='text-align: center;'>Check </h1>"
+    try:
+        tol = sp.sympify(tolstr)
+    except:
+        return "<h1 style='text-align: center;'>Check tolerance entered {{tol}}</h1>"
+
+
+    try:
+        list_a,list_f,list_e,root=Newton(itera,x0,fun,dfun,tol)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
+
 
     it=len(list_a)
     list_it=list(range(0,it))
@@ -616,14 +645,14 @@ def bisection_results():
 
 
     try:
-        list_a, list_xm, list_b, list_fxm, list_E, root= Bisection(itera,a,b,f,tol)
+        list_a, list_xm, list_b, list_fxm, list_E, root, error= Bisection(itera,a,b,f,tol)
     except:
         return "<h1 style='text-align: center;'>Check values entered</h1>"
     
     it=len(list_a)
     list_it=list(range(1,it+1))
     return render_template("bisection.html", list_a=list_a, list_xm=list_xm, list_b=list_b, list_fxm = list_fxm,
-    list_E = list_E, list_it=list_it, root=root)
+    list_E = list_E, list_it=list_it, root=root, error = error)
 
 
 

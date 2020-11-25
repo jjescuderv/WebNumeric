@@ -11,17 +11,27 @@ from sympy import sin, cos, log, exp
 
 def Bisection(itera, a, b, f, tol):
     x = sp.Symbol('x')
-
+    error = ""
     xmi = (a+b)/2
     fxm = f.subs(x, xmi)
     e = abs(xmi-a)
     c = 1
+    root = ""
     
     list_a = []
     list_xm = []
     list_b = []
     list_fxm = []
     list_E = []
+
+    multa = f.subs(x, a)
+    multb = f.subs(x, b)
+    multc = multa*multb
+   
+    
+    if(multc > 0):
+        error = "The method will not run because no sign change was detected in the interval, check the 'help' section"
+        return  list_a, list_xm, list_b, list_fxm, list_E, root, error
 
     list_a.append(format(a, "12.10f"))
     list_xm.append(format(xmi, "12.10f"))
@@ -64,4 +74,4 @@ def Bisection(itera, a, b, f, tol):
 
     root=format(xmi, "12.15f")
 
-    return  list_a, list_xm, list_b, list_fxm, list_E, root
+    return  list_a, list_xm, list_b, list_fxm, list_E, root, error

@@ -8,15 +8,14 @@ from sympy import sin, cos, log, exp
 #dfun = 2*((sin(x)**2+1)**-1)*sin(x)*cos(x)
 #tol = 10**-7
 
-def Newton(iterastr, x0str, fstr, dfstr, tolstr):
+def Newton(itera, x0, fun, dfun, tol):
     x = sp.Symbol('x')
-    error = False
-    
-    itera = int(iterastr)
-    x0 = float(x0str)
-    fun = sp.sympify(fstr)
-    dfun = sp.sympify(dfstr)
-    tol = sp.sympify(tolstr)
+
+    #errors = []
+    #errors.append(x0str)
+    #errors.append("x0 is shitr")
+    #return errors
+   
     
     f = fun.subs(x, x0)
     df = dfun.subs(x, x0)
