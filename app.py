@@ -31,6 +31,10 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+@app.route("/plot")
+def plot():
+    return render_template("plotter/plot.html")
+
 # ----------------------------------------------------- Juan Escudero -----------------------------------------------------
 
 @app.route("/direct_methods")
