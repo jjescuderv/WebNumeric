@@ -1,0 +1,171 @@
+{% extends "layouts/master.html" %}
+{% block title %}
+Direct methods
+{% endblock %}
+
+{% block banner_title %}
+Direct methods for solving linear systems
+{% endblock %}
+
+{% block content %}
+
+<!-- Input -->
+<form method="POST" id="data" action="{{ url_for('gauss') }}">
+    <div class="row py-3 justify-content-center">
+        <label class="form-label"> <b>Method: </b></h5>
+            <select id="method" name="method" required>
+                <option selected value="1">Gauss-Seidel</option>
+                <option value="2">Jacobi</option>
+                <option value="3">SOR</option>
+            </select>
+    </div>
+    <div class="row justify-content-center">
+        <label class="form-label"> <b>Number of variables: </b></h5>
+            <input required type="number" id="matrix_size" name="matrix_size" style="width: 3em; margin-right:1em">
+            <button class="btn btn-dark" onClick="mat()">
+                Save
+            </button>
+    </div>
+
+    <hr>
+
+    {% if result|length == 2  %}
+    <div class="row justify-content-center" id="error_msg">
+        <div class="text-center p-2 rounded" style="background-color:#bf033b">
+            <h5> Error </h5>
+            <h5> {{ result[1] }} </h5>
+            <p style="color:white"> Check the 'help' section for more information. </p>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Matrix and vector -->
+    <div class="row">
+        <div class="col-lg-8 py-3">
+            <div class="row justify-content-center">
+                <table id="matrix">
+
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-2 py-3">
+            <div class="row justify-content-center">
+                <table id="vectorb">
+
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-2 py-3">
+            <div class="row justify-content-center">
+                <table id="vectorx">
+
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="row justify-content-center">
+    <button id="solve" disabled type="submit" form="data" class="btn btn-outline-danger btn-lg btn-block">
+        Solve
+    </button>
+</div>
+
+<hr>
+
+<!-- Results -->
+<div class="row justify-content-center" style="background-color: violet;">
+    <span id="results">
+
+    </span>
+</div>
+
+{% if result|length > 2  %}
+<div id="results">
+    <span>
+        {% for i in range(result[1]|length): %}
+            <span>
+                $$Iteration {{ i }} = \begin{pmatrix}
+                    {% for j in range(result[1][i]|length): %}
+                    &
+                        {% for k in range(result[1][i][j]|length): %}
+                            {{'%0.6f'| format(result[1][i][j][k]|float)}} &
+                        {% endfor %}
+                    \\
+                    {% endfor %}
+                \end{pmatrix}$$
+            </span>
+        {% endfor %}
+        <span>
+            $$After \>\> performing \>\> back \>\> substitution$$
+            $$x = \begin{pmatrix}
+                {% for i in range(result[0]|length): %}
+                    & {{'%0.6f'| format(result[0][i]|float)}} &
+                    \\
+                {% endfor %}
+            \end{pmatrix}$$
+        </span>
+    </span>
+</div>
+{% elif result|length == 2 %}
+<div id="results">
+    <span>
+        $$Matrix \>\> given$$
+        $$\begin{pmatrix}
+            {% for i in range(result[0]|length): %}
+                &
+                {% for j in range(result[0][i]|length): %}
+                    {{'%0.6f'| format(result[0][i][j]|float)}} &
+                {% endfor %}
+                \\
+            {% endfor %}
+        \end{pmatrix}$$
+        $$Determinant = 0$$
+    </span>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block footer_help %}
+    <li>The determinant of the matrix must not be 0.</li>
+    <li>The matrix should not have a 0 on the diagonal.</li>
+{% endblock %}
+
+{% block footer_strategies %}
+    <li>If you are getting weird results you might want to check the elements in the diagonal. If one of them is really close to 0 you will get big numbers on the final matrix as a result.</li>
+{% endblock %}
+
+{% block script %}
+<script>
+    function mat() {
+        var n = document.getElementById("matrix_size").value;
+
+        const solve_button = document.getElementById("solve");
+        solve_button.disabled = false;
+
+        console.log(n);
+        if (n < 2 || NaN) {
+            alert("Number of variables must be greater than 1");
+            return;
+        }
+
+        $("#matrix").empty();
+        $("#vector").empty();
+
+        var cont = 0;
+
+        for (var i = 0; i < n; i++) {
+            $("#matrix").append("<tr>");
+            $("#vector").append("<tr>");
+            for (var j = 0; j < n; j++) {
+                $("#matrix").append("<td>");
+                $("#matrix").append("<input required type='number' step='any' style='width: 3em' size='1' name='mat[]'>");
+            }
+            $("#vector").append("<td>");
+            $("#vector").append("<input required type='number' step='any' style='width: 3em' size='1' name='vec[]'>");
+            $("#matrix").append("<br>");
+        }
+    }
+</script>
+{% endblock %}

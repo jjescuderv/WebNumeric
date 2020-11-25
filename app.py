@@ -32,6 +32,15 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+
+@app.route("/plot")
+def plot():
+    return render_template("plotter/plot.html")
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
 # ----------------------------------------------------- Juan Escudero -----------------------------------------------------
 
 @app.route("/direct_methods")
@@ -41,6 +50,27 @@ def direct_methods():
 
 @app.route("/gauss", methods=["GET", "POST"])
 def gauss():
+    mat = request.form.getlist('mat[]')
+    vec = request.form.getlist('vec[]')
+    method = int(request.form.get('method'))
+    n = int(request.form.get('matrix_size'))
+
+    if method == 1:
+        result = gauss_simple(n, mat, vec)
+    elif method == 2:
+        result = gauss_partial_pivoting(n, mat, vec)
+    else:
+        result = gauss_total_pivoting(n, mat, vec)
+
+    return render_template("matrices/direct_methods.html", result=result)
+
+@app.route("/iterative_methods")
+def iterative_methods():
+    result = []
+    return render_template("matrices/direct_methods.html", result=result)
+
+@app.route("/iterative", methods=["GET", "POST"])
+def iterative():
     mat = request.form.getlist('mat[]')
     vec = request.form.getlist('vec[]')
     method = int(request.form.get('method'))
@@ -510,20 +540,50 @@ def newton():
 
 @app.route("/newton_results", methods=["GET", "POST"])
 def newton_results():
-    itera=request.form.get("itera")
-    x0=request.form.get("x0")
-    fun=request.form.get("fun")
-    dfun=request.form.get("dfun")
-    tol=request.form.get("tol")
-    
-    if itera =='' or x0 =='' or fun=='' or dfun=='' or tol=='':
-        return "<h1 style='text-align: center;'>Check Values Entered</h1>" 
+    iterastr=request.form.get("itera")
+    x0str=request.form.get("x0")
+    funstr=request.form.get("fun")
+    dfunstr=request.form.get("dfun")
+    tolstr=request.form.get("tol")
 
-    list_a,list_f,list_e,root=Newton(itera,x0,fun,dfun,tol)
+    if iterastr =='' or x0str =='' or funstr =='' or dfunstr =='' or tolstr =='':
+        return "<h1 style='text-align: center;'>You are missing one or more values</h1>" 
+
+    try:
+        itera = int(iterastr)
+    except:
+        return "<h1 style='text-align: center;'>Check iteration value</h1>"
+
+    try:
+        x0 = float(x0str)
+    except:
+        return "<h1 style='text-align: center;'>Check initial value</h1>"
+
+    try:
+        fun = sp.sympify(funstr)
+    except:
+        return "<h1 style='text-align: center;'>Check function entered</h1>"
+
+    try:
+        dfun = sp.sympify(dfunstr)
+    except:
+        return "<h1 style='text-align: center;'>Check </h1>"
+    try:
+        tol = sp.sympify(tolstr)
+    except:
+        return "<h1 style='text-align: center;'>Check tolerance entered {{tol}}</h1>"
+
+
+    try:
+        list_a,list_f,list_e,root=Newton(itera,x0,fun,dfun,tol)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
+
+    funplot = funstr.replace("**", "^")
 
     it=len(list_a)
     list_it=list(range(0,it))
-    return render_template("newton.html", list_a=list_a,list_f=list_f,list_e=list_e, list_it=list_it, root=root)
+    return render_template("newton.html", list_a=list_a,list_f=list_f,list_e=list_e, list_it=list_it, root=root, funplot = funplot)
 
 @app.route("/searches")
 def searches():
@@ -567,7 +627,9 @@ def searches_results():
     except:
         return "<h1 style='text-align: center;'>Check values entered</h1>"
 
-    return render_template("searches.html", list_apr=list_apr)
+    funplot = fstr.replace("**", "^")
+
+    return render_template("searches.html", list_apr=list_apr, funplot = funplot)
 
 @app.route("/bisection")
 def bisection():
@@ -616,14 +678,16 @@ def bisection_results():
 
 
     try:
-        list_a, list_xm, list_b, list_fxm, list_E, root= Bisection(itera,a,b,f,tol)
+        list_a, list_xm, list_b, list_fxm, list_E, root, error= Bisection(itera,a,b,f,tol)
     except:
         return "<h1 style='text-align: center;'>Check values entered</h1>"
+
+    funplot = fstr.replace("**", "^")
     
     it=len(list_a)
     list_it=list(range(1,it+1))
     return render_template("bisection.html", list_a=list_a, list_xm=list_xm, list_b=list_b, list_fxm = list_fxm,
-    list_E = list_E, list_it=list_it, root=root)
+    list_E = list_E, list_it=list_it, root=root, error = error, funplot = funplot)
 
 
 
@@ -686,11 +750,11 @@ def diffdiv_results():
         return "<h1 style='text-align: center;'>Check y vector entered</h1>"
 
     try:
-        A,b,a = Newton_diff(n,x,y)
+        A,b,a,error = Newton_diff(n,x,y)
     except:
         return "<h1 style='text-align: center;'>Check values entered</h1>"
 
-    return render_template("diffdiv.html", A=A, b=b, a=a)
+    return render_template("diffdiv.html", A=A, b=b, a=a, error = error)
 
 @app.route("/lagrange")
 def lagrange():
