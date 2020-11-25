@@ -44,6 +44,9 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ url_for('secant') }}">Secant</a>
+                            <a class="dropdown-item" href="{{ url_for('newton') }}">Newton</a>
+                            <a class="dropdown-item" href="{{ url_for('bisection') }}">Bisection</a>
+                            <a class="dropdown-item" href="{{ url_for('searches') }}">Incremental searches</a>
                             <a class="dropdown-item" href="{{ url_for('multipleRoots') }}">Multiple Roots</a>
                             <a class="dropdown-item" href="#">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
@@ -59,6 +62,8 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ url_for('direct_methods') }}">Direct methods</a>
                             <a class="dropdown-item" href="{{ url_for('lu_factorization') }}">LU Factorization</a>
+                            <a class="dropdown-item" href="{{ url_for('crout') }}">Crout</a>
+                            <a class="dropdown-item" href="{{ url_for('chol') }}">Cholesky</a>
                             <a class="dropdown-item" href="{{ url_for('sor') }}">SOR</a>
                             <a class="dropdown-item" href="#">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
@@ -73,6 +78,8 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ url_for('vandermonde') }}">Vandermonde</a>
+                            <a class="dropdown-item" href="{{ url_for('diffdiv') }}">Newton with div diff</a>
+                            <a class="dropdown-item" href="{{ url_for('lagrange') }}">Lagrange</a>
                             <a class="dropdown-item" href="{{ url_for('linealplotter') }}">Lineal Plotter</a>
                             <a class="dropdown-item" href="{{ url_for('quadraticplotter') }}">Quadratic Plotter</a>
                             <a class="dropdown-item" href="#">Action</a>
