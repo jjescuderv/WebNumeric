@@ -21,13 +21,6 @@ False rule
     h1 {
         text-align: center;
     }
-
-    body {
-        padding-bottom: 80px;
-        /* Height of the footer */
-        text-align: center;
-    }
-
     .footer {
         position: fixed;
         left: 0;
@@ -41,13 +34,7 @@ False rule
 {% endblock %}
 
 {% block content %}
-<h2><b>--------------------||--------------------</b></h2>
-<h3>In order to operate properly:</h3>
-<p>-the function must be continuous on the interval</p>
-<p>-The root must be in the interval</p>
-<h3>Strategies for faster convergence:</h3>
-<p>-Take as initial approximation the midpoint of the interval where the root is contained</p>
-<h2><b>--------------------||--------------------</b></h2>
+
 <form method="post" action="{{ url_for('FlaskFalseRule') }}">
     <label for="itera">Number of iterations</label>
     <p><input name="iter" type="text" placeholder="Example: 100"></p>
@@ -69,19 +56,13 @@ False rule
         </div>
     </div>
 </form>
+{% endblock %}
 
-<footer>
-    <br>
-    <div class="footer">
-        <p class="text-lg-CENTER" style="width: 125rem">
-            The false rule method, or "false position," is another of the many iterative methods for solving problems
-            with nonlinear equations. The peculiarity of this one is that it combines two methods: the bisection method
-            and the secant method.
-            It is based on drawing a line that joins the ends of a given interval, considering that the solution is
-            close to one of these extremes.
-            We have therefore added that straight line that joins the interval [a, b]. The main idea is that if we take
-            the point where the line cuts the x-axis, we will be closer to finding the root.
-        </p>
-    </div>
-</footer>
+{% block footer_help %}
+<li>The function must be continuous on the interval </li>
+<li>The root must be in the interval</li>
+{% endblock %}
+
+{% block footer_strategies %}
+    <li>Take as initial approximation the midpoint of the interval where the root is contained</li>
 {% endblock %}

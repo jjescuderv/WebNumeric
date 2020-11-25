@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 {% extends "layouts/master.html" %}
 {% block title %}
 Lu simple
@@ -9,20 +7,8 @@ Lu simple
 LU SIMPLE
 
 {% endblock %}
-{% block content %}
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+{% block head %}
 
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LU Simple Data</title>
-    <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
-    <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
     <style>
         input {
             width: 35%;
@@ -32,10 +18,6 @@ LU SIMPLE
             text-align: center;
         }
         h1{
-            text-align: center;
-        }
-        body {
-            padding-bottom:90px;   /* Height of the footer */
             text-align: center;
         }
         .footer {
@@ -48,16 +30,9 @@ LU SIMPLE
             text-align: center;
         }
     </style>
-</head>
-<body>
-    <h2><b>--------------------||--------------------</b></h2>
-    <h3>In order to operate properly:</h3>
-    <p>A square matrix A of order n x n, we find a lower triangular
-     L matrix and an upper triangular U matrix. A = LU</p>
-    <p> -Ax = b </p>
-    <p> -LUx = b </p>
-    <p> -Lz = b, where z = Ux</p>
-    <h2><b>--------------------||--------------------</b></h2>
+{% endblock %}
+
+{% block content %}
     <form method="post" action="{{ url_for('FlaskLUsimple') }}">
         <label for="m">Enter the number of rows</label>
         <p><input name="m" type="text" placeholder="Example: 4"></p>
@@ -79,21 +54,13 @@ LU SIMPLE
             </div>
         </div>
     </form>
-</body>
+{% endblock %}
 
-<footer>
-    <br>
-    <div class="footer">
-        <p class="text-lg-CENTER" style="width: 125rem"> 
-            In linear algebra, LU factorization or decomposition (of Lower-Upper English) is a form of factorization of a matrix as the
-            product of a lower and a higher triangular matrix. Due to the instability of 
-            this method, some special cases must be taken into account, for example, if 
-            one or more elements of the main diagonal of the matrix to be factored is zero,
-            it is necessary to pre-multiply the matrix by one or several elementary permutation matrices.
-            There is a second method called factorization  PA = LU or LU with pivot. This decomposition is used in numerical analysis to solve systems of equations (more efficiently) or find inverse matrices.
+{% block footer_help %}
+<li>The matrix must be square n x n </li>
+<li>The vector must be the size of the matrix</li>
+{% endblock %}
 
-        </p>
-    </div>
-</footer>
-</html>
+{% block footer_strategies %}
+    <li>If the matrix is dominant diagonal</li>
 {% endblock %}
