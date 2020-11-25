@@ -22,6 +22,8 @@ from incremental_searches import Incremental_searches
 import sympy as sp
 from sympy import sin, cos, log, exp
 from crout import Crout
+from chol import Cholesky
+from diffdiv import Newton_diff
 
 app = Flask(__name__)
 
@@ -638,6 +640,56 @@ def crout_results():
     result = Crout(n, mat, vec)
 
     return render_template("crout.html", result=result)
+
+@app.route("/chol")
+def chol():
+    test = []
+    return render_template("chol.html", test=test)
+
+@app.route("/chol_results", methods=["GET", "POST"])
+def chol_results():
+    mat = request.form.getlist('mat[]')
+    vec = request.form.getlist('vec[]')
+    n = int(request.form.get('matrix_size'))
+
+    result = Cholesky(n, mat, vec)
+
+    return render_template("chol.html", result=result)
+
+@app.route("/diffdiv")
+def diffdiv():
+    return render_template('diffdiv.html')
+
+@app.route("/diffdiv_results", methods=["GET", "POST"])
+def diffdiv_results():
+    n=request.form.get("n")
+    x=request.form.get("x")
+    y=request.form.get("y")
+    
+    if n=='' or x=='' or y=='':
+        return "<h1 style='text-align: center;'>Check Values Entered</h1>"
+
+    try:
+        A = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check n value entered</h1>"
+
+    try:
+        values_x = list(map(float, x.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check x vector entered</h1>"
+
+    try:
+        values_y = list(map(float, y.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check y vector entered</h1>"
+
+    try:
+        A,b,a = Newton_diff(n,x,y)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
+
+    return render_template("diffdiv.html", A=A, b=b, a=a)
 
 #----------------------------------------------------END JHONATAN ---------------------------------------------
    
