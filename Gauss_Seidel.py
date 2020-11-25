@@ -5,7 +5,7 @@ import math
 # Global variables declaration
 A = b = x0 = tol = Nmax = None
 
-def jacobi(A,b,x0,tol,Nmax,m,n,lb,lx0):
+def gauss_seidel(A,b,x0,tol,Nmax,m,n,lb,lx0):
     #global x0
     A,b,x0,tol,Nmax = data_input(A,b,x0,tol,Nmax,m,n,lb,lx0)
     
@@ -14,13 +14,12 @@ def jacobi(A,b,x0,tol,Nmax,m,n,lb,lx0):
     U=-np.triu(A,1)
     print("Results", '\n')
     print("T:", '\n')
-    T=  np.linalg.matrix_power(D,-1)*(np.matrix(L)+np.matrix(U))
+    T = np.matmul(np.linalg.inv(np.subtract(D, L)), U)
     print(T)
     print()
     print("C: ", '\n')
-    C=np.linalg.matrix_power(D,-1)*b
-    C=Diagonal(C)
-    print(C, '\n')
+    C=np.matmul(np.linalg.inv(np.subtract(D, L)), b)
+    print(C)
     
     lis_iter=[]
     lis_xi=[]
@@ -28,7 +27,7 @@ def jacobi(A,b,x0,tol,Nmax,m,n,lb,lx0):
     lis_er=[]
     respec,mat=(np.linalg.eig(T))
     respect1 = np.amax(np.abs(respec))
-    print("spectral radius: ", respect1, '\n')
+    print("Spectral radius: ", respect1, '\n')
     E = 1000
     cont = 0
 
@@ -40,7 +39,6 @@ def jacobi(A,b,x0,tol,Nmax,m,n,lb,lx0):
     while E > tol and cont < Nmax:
         
         xinic = T*np.matrix(x0)+np.matrix(C)
-        #print(xinic)
         E = np.linalg.norm(xinic-x0,2)
         x0 = xinic
         cont = cont+1
@@ -48,9 +46,8 @@ def jacobi(A,b,x0,tol,Nmax,m,n,lb,lx0):
         lis_iter.append(cont)
         lis_er.append(E)
         lis_xi.append(printRow(x0))
-        
-    return T,C,respect1,lis_iter,lis_er,lis_xi
 
+    return T,C,respect1,lis_iter,lis_er,lis_xi
 
 def printRow(ar):
     row = ""
@@ -58,10 +55,9 @@ def printRow(ar):
     for i in range(0,a):
         row += str(ar[i][0]) + " "
     return row
-        
 
 def data_input(A,b,x0,tol,Nmax,m,n,lb,lx0):
-    print("Jacobi")
+    print("Gauss-Sediel")
     #global A, b, x0 , tol , Nmax
 
     # For A
@@ -107,17 +103,8 @@ def data_input(A,b,x0,tol,Nmax,m,n,lb,lx0):
     Nmax = int(Nmax)
     
     return A,b,x0,tol,Nmax
-
-def Diagonal(m):
-    ar = []
-    a = np.size(m,1)
-    for i in range(0,np.size(m,1)):
-        ar.append(m[i][i])
-    arr = np.array(ar).reshape(a, 1)
-    return arr
-        
     
 if __name__ == "__main__":
     np.set_printoptions(formatter={'float': '{: f}'.format})
     data_input()
-    jacobi()
+    gauss_seidel()

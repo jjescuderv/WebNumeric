@@ -14,6 +14,7 @@ from bisection import Bisection
 from CubicPlotter import CubicPlotter
 from Doolittle import Doolittle
 from Jacobi import jacobi
+from Gauss_Seidel import gauss_seidel
 from Gauss_partial_pivoting import gauss_partial_pivoting
 from Gauss_total_pivoting import gauss_total_pivoting
 from Gauss_simple import gauss_simple
@@ -70,9 +71,64 @@ def lu():
 
     return render_template("matrices/lu_factorization.html", result=result)
 
-#@app.route("/gauss_seidel")
-#@app.route("/lu_partial")
-#@app.route("/lagrange")
+@app.route("/gauss_seidel")
+def gauss_seidelT():
+    return render_template('gauss_seidel.html')
+
+@app.route("/gauss_seidelTable", methods=["GET", "POST"])
+def Flask_gauss_seidel():
+    m=request.form.get("m")
+    n=request.form.get("n")
+    A=request.form.get("A")
+    b=request.form.get("b")
+    x0=request.form.get("x0")
+    Nmax=request.form.get("iter")
+    tol=request.form.get("error")
+    lb=request.form.get("lb")
+    lx0=request.form.get("lx0")
+    
+    if m == ''  or n=='' or A=='' or b=='' or x0=='' or tol=='' or lb=='' or  m!=n or Nmax=='' or lx0=='':
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
+
+    try:
+        m = int(m)
+    except:
+        return "<h1 style='text-align: center;'>Check the number of rows</h1>"
+
+    try:
+       n = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check the number of columns</h1>"
+
+    try:
+        lb = int(lb)
+    except:
+        return "<h1 style='text-align: center;'>Check the length b vector</h1>"
+    
+    try:
+        Nmax = int(Nmax)
+    except:
+        return "<h1 style='text-align: center;'>Check iteration value</h1>"
+    
+    try:
+        lx0 = int(lx0)
+    except:
+        return "<h1 style='text-align: center;'>Check the length x0 vector</h1>"
+
+    try:
+        tol = sp.sympify(tol)
+    except:
+        return "<h1 style='text-align: center;'>Check tolerance entered {{tol}}</h1>"
+    
+    try:
+        T,C,respect1,lis_iter,lis_er,lis_xi = gauss_seidel(A,b,x0,tol,Nmax,m,n,lb,lx0)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
+
+    a=len(lis_iter)
+    lis_a=list(range(0,a))
+
+    return render_template("gauss_seidelT.html", T=T,C=C,radio=respect1,iter=lis_iter,er=lis_er,xi=lis_xi,lis_a=lis_a)
 
 # --------------------------------------------------------------------------------------------------------------------------
 
@@ -364,7 +420,7 @@ def FlaskSor():
         return "<h1 style='text-align: center;'>Check w value entered</h1>"
 
     try:
-        Tw,re,Cw,x1,x2,x3,er = Sor(m,n,A,b,x0,iter,error,w)
+        Tw,re,Cw,x1,x2,x3,er = Sor(m,n,A,b,x0,itera,error,w)
     except:
         return "<h1 style='text-align: center;'>Check values entered</h1>"
 
