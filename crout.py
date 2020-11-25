@@ -9,9 +9,9 @@ import numpy as np
 def Crout(n, mat, vec):
     errors = []
     #Initialization
-    L = np.eye(n) #Identity matrix
-    U = np.eye(n) 
+ 
     matrices = []
+    iteration = []
     
     values_A = list(map(float, mat))
     A = np.array(values_A).reshape(n, n)
@@ -26,24 +26,42 @@ def Crout(n, mat, vec):
     values_b = list(map(float, vec))
     b = np.array(values_b).reshape(n, 1)
 
+    iteration.append(np.copy(A))
+    matrices.append(np.copy(iteration))
+    
+    L = np.eye(n) #Identity matrix
+    U = np.eye(n)
+    iteration = []
+
     #Factorization
     for i in range(0,n-1):#Cycle for stages
         for j in range(i,n):#Cycle for L construction
-            L[j,i]=A[j,i]-(np.dot(L[j,0:i],np.transpose(U[0:i,i]))) 
-        matrices.append(np.copy(L))
+            L[j,i]=A[j,i]-(np.dot(L[j,0:i],np.transpose(U[0:i,i])))
+
+        iteration.append(np.copy(A))
+        iteration.append(np.copy(L))
+
         for j in range(i+1,n):#Cycle for U construction
             if(L[i,i] == 0):
                 return 0
             U[i,j] = (A[i,j] - (np.dot(L[i,0:i],np.transpose(U[0:i,j]))))/L[i,i] #Division by the element of the diagonal of the stage
-        matrices.append(np.copy(U))
+        
+        iteration.append(np.copy(U))
+        matrices.append(np.copy(iteration))
+        iteration = []
+
     L[n-1,n-1]=A[n-1,n-1]-np.dot(L[n-1,0:n-1],np.transpose(U[0:n-1,n-1])) #Lonely stage
-    matrices.append(np.copy(L)) 
-    matrices.append(np.copy(U))
+    
+    iteration.append(np.copy(A))
+    iteration.append(np.copy(L))
+    iteration.append(np.copy(U))
+    matrices.append(np.copy(iteration))
 
     MLB = np.concatenate((L, b), axis=1)
     z = prog_subst(MLB)
     MUZ = np.concatenate((U,z), axis=1)
     x = back_subst(MUZ)
+
     ans = [x, matrices, n]
 
     return ans

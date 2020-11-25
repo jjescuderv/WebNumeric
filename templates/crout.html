@@ -71,20 +71,31 @@ Crout
     <span>
         {% for i in range(result[1]|length): %}
             <span>
-                $$Iteration {{ i }} = \begin{pmatrix}
-                {% if i%2 == 0}
-                    {% for j in range(result[1][i]|length): %}
-                    &
+                $$Iteration \>\> {{ i }}$$
+                {% for j in range(result[1][i]|length): %}
+                    {% if j == 0 %}
+                        $$M = 
+                    {% elif j == 1 %}
+                        $$L = 
+                    {% elif j == 2 %}
+                        $$U = 
+                    {% elif j == 3 %}
+                        $$P = 
+                    {% endif %}
+                    \begin{pmatrix}
                         {% for k in range(result[1][i][j]|length): %}
-                            {{'%0.6f'| format(result[1][i][j][k]|float)}} &
+                        &
+                            {% for h in range(result[1][i][j][k]|length): %}
+                                {{'%0.6f'| format(result[1][i][j][k][h]|float)}} &
+                            {% endfor %}
+                        \\
                         {% endfor %}
-                    \\
-                    {% endfor %}
-                \end{pmatrix}$$
+                    \end{pmatrix}$$
+                {% endfor %}
             </span>
         {% endfor %}
         <span>
-            $$After \>\> performing \>\> back \>\> substitution$$
+            $$After \>\> performing \>\> forward \>\> and \>\> back \>\> substitution$$
             $$x = \begin{pmatrix}
                 {% for i in range(result[0]|length): %}
                     & {{'%0.6f'| format(result[0][i]|float)}} &
