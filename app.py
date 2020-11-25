@@ -7,7 +7,8 @@ from LinealPlotter import LinealPlotter
 from QuadraticPlotter import QuadraticPlotter
 from false_rule import reglaFalsa
 from fixed_point import Punto_Fijo
-from LUsimple import Lusimple
+from LUsimple import lu_simple
+from LUpar import lu_partial_pivoting
 from newton import Newton
 from bisection import Bisection
 from CubicPlotter import CubicPlotter
@@ -26,16 +27,12 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
-@app.route("/prueba")
-def prueba():
-    return render_template("layouts/master.html")
-
 # ----------------------------------------------------- Juan Escudero -----------------------------------------------------
 
 @app.route("/direct_methods")
 def direct_methods():
-    test = []
-    return render_template("matrices/direct_methods.html", test=test)
+    result = []
+    return render_template("matrices/direct_methods.html", result=result)
 
 @app.route("/gauss", methods=["GET", "POST"])
 def gauss():
@@ -52,6 +49,25 @@ def gauss():
         result = gauss_total_pivoting(n, mat, vec)
 
     return render_template("matrices/direct_methods.html", result=result)
+
+@app.route("/lu_factorization")
+def lu_factorization():
+    result = []
+    return render_template("matrices/lu_factorization.html", result=result)
+
+@app.route("/lu", methods=["GET", "POST"])
+def lu():
+    mat = request.form.getlist('mat[]')
+    vec = request.form.getlist('vec[]')
+    method = int(request.form.get('method'))
+    n = int(request.form.get('matrix_size'))
+
+    if method == 1:
+        result = lu_simple(n, mat, vec)
+    else:
+        result = lu_partial_pivoting(n, mat, vec)
+
+    return render_template("matrices/lu_factorization.html", result=result)
 
 #@app.route("/gauss_seidel")
 #@app.route("/lu_partial")
@@ -251,44 +267,6 @@ def FlaskFixedPoint():
         return "<h1 style='text-align: center;'>Check values entered</h1>"
    
     return render_template("dataFixedP.html",iter = lis_it,xi = lis_xi,gx = lis_gx,fx=lis_fx,er=lis_er,string=string2)
-
-@app.route("/LUsimple")
-def lusimple():
-    return render_template("LUsimple.html")
-
-@app.route("/LuSimpleInformation", methods=["GET", "POST"])
-def FlaskLUsimple():
-    m=request.form.get("m")
-    n=request.form.get("n")
-    A=request.form.get("A")
-    l_b=request.form.get("l_b")
-    b=request.form.get("b")
-    if m =='' or n =='' or  A =='' or l_b =='' or b=='':
-        return "<h1 style='text-align: center;'>You are missing one or more values</h1>" 
-
-    try:
-        m = int(m)
-    except:
-        return "<h1 style='text-align: center;'>Check the number of rows</h1>"
-
-    try:
-       n = int(n)
-    except:
-        return "<h1 style='text-align: center;'>Check the number of columns</h1>"
-
-    try:
-        l_b = int(l_b)
-    except:
-        return "<h1 style='text-align: center;'>Check the length b vector</h1>"
-
-    try:
-        lis_stage,lis_m,list_L,list_U,result = Lusimple(m,n,A,l_b,b)
-    except:
-        return "<h1 style='text-align: center;'>Check values entered</h1>"
-   
-    x = len(lis_stage)
-    z = list(range(0,x))
-    return render_template("dataLuSimple.html",stage = lis_stage,M = lis_m, L=list_L,U=list_U,result = result,Z = z)
 
 @app.route("/vandermonde")
 def vandermonde():
