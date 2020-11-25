@@ -1,87 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+{% extends "layouts/master.html" %}
+{% block title %}
+Lineal Plotter
+{% endblock %}
 
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{% block banner_title %}
+Lineal Plotter Method
+{% endblock %}
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lineal Plotter</title>
-    <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
-    <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
-    <style>
-        input {
-            width: 30%;
-          }
-        form{
-            text-align: center;
-        }
-        h1{
-            text-align: center;
-        }
-        body {
-            padding:10px;
-            padding-bottom:60px;
-            text-align: center;
-        }
-        .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color:#5BC0DE;
-            color: white;
-            text-align: center;
-        }
-        .clear { clear: both; height: 60px; }
-    </style>
-</head>
-<body>
-    <h1><b>Lineal Plotter Method</b></h1>
-    <h2><b>--------------------||--------------------</b></h2>
-    <h3>In order to operate properly:</h3>
-    <p>The linear tracer must meet the conditions of interpolation and continuity. These are described below.</p>
-    <h2><b>--------------------||--------------------</b></h2>
+{% block head %}
+<style>
+    input {
+        width: 35%;
+        text-align: center;
+    }
 
-    <h1>Lineal Plotter Data</h1>
-    <form method="post" action="{{ url_for('Flasklinealp') }}">
-        <label for="n">Number of X and Y elements</label>
-        <p><input name="n" type="number" placeholder="Example: 4"></p>
-        <label for="x">Enter the elements of X separated by space</label>
-        <p><input name="x" type="text" placeholder="Example: -1 0 3 4"></p>
-        <label for="y">Enter the elements of Y separated by space</label>
-        <p><input name="y" type="text" placeholder="Example: 15.5 3 8 1"></p>
-        <div class="container">
-            <div class="col-xs-4"></div>
-            <div class="center">
-                <div class="col-xs-4">
-                    <input type="submit" class="btn btn-success btn-lg" value="Run">
-                    <button type="button" class="btn btn-info btn-lg" onclick= "location='/'">Back</button>
-                </div>
+    form {
+        text-align: center;
+    }
+
+    h1 {
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Lineal Plotter Data</h1>
+<form method="post" action="{{ url_for('Flasklinealp') }}">
+    <label for="n">Number of X and Y elements</label>
+    <p><input name="n" type="number" placeholder="Example: 4"></p>
+    <label for="x">Enter the elements of X separated by space</label>
+    <p><input name="x" type="text" placeholder="Example: -1 0 3 4"></p>
+    <label for="y">Enter the elements of Y separated by space</label>
+    <p><input name="y" type="text" placeholder="Example: 15.5 3 8 1"></p>
+    <div class="container">
+        <div class="col-xs-4"></div>
+        <div class="center">
+            <div class="col-xs-4">
+                <input type="submit" class="btn btn-danger btn-lg" value="Run">
+                <button type="button" class="btn btn-dark btn-lg" onclick="location='/'">Back</button>
             </div>
         </div>
-        <br><br>
-    </form>
-</body>
-
-<footer>
-    <br>
-    <div class="footer">
-        <p class="text-lg-left" style="width: 125rem"> 
-            Given a function \(f\) in \([a, b]\) and nodes \( a = x_0 \lt x_1 \lt \cdots \lt x_n = b \) , an interpolating linear spline 
-            \(p\) for \(f\) is a function that satisfies the following conditions:
-            <br>
-            \(\bullet p(x) \) is a linear polynomial, defined \(p_j(x)\), over the interval \([x_{j-1}, x_{j}]\) for each \(j=1,...,n\)
-            <br>
-            \(\bullet p_j(x_{j-1}) = f(x_{j-1})\) and \(p_j(x_{j}) = f(x_{j})\) for each \(j=1,...,n\)
-            <br>
-            \(\bullet p_{j+1}(x_{j}) = p_j(x_j)\) for each \(j=1,...,n-1\)
-        </p>
     </div>
-</footer>
+</form>
 
-</html>
+{% endblock %}
+
+{% block footer_help %}
+<h3>In order to operate properly:</h3>
+<li>The linear tracer must meet the conditions of interpolation and continuity. These are described next.
+</li>
+{% endblock %}
+
+
+{% block footer_strategies %}
+<h3>Strategies for convergence:</h3>
+<li>Not necessarily more points implies a better approximation</li>
+Given a function \(f\) in \([a, b]\) and nodes \( a = x_0 \lt x_1 \lt \cdots \lt x_n = b \) , an interpolating linear spline 
+\(p\) for \(f\) is a function that satisfies the following conditions:
+<li>\( p(x) \) is a linear polynomial, defined \(p_j(x)\), over the interval \([x_{j-1}, x_{j}]\) for each \(j=1,...,n\)</li>
+<li>\( p_j(x_{j-1}) = f(x_{j-1})\) and \(p_j(x_{j}) = f(x_{j})\) for each \(j=1,...,n\)</li>
+<li>\( p_{j+1}(x_{j}) = p_j(x_j)\) for each \(j=1,...,n-1\)</li>
+
+{% endblock %}

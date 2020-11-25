@@ -1,54 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+{% extends "layouts/master.html" %}
+{% block title %}
+Vandermonde
+{% endblock %}
 
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{% block banner_title %}
+Vandermonde Method
+{% endblock %}
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vandermonde</title>
-    <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
-    <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
-    <style>
-        input {
-            width: 30%;
-          }
-        form{
-            text-align: center;
-        }
-        h1{
-            text-align: center;
-        }
-        body {
-            padding:10px;
-            padding-bottom:60px;
-            text-align: center;
-        }
-        .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color:#5BC0DE;
-            color: white;
-            text-align: center;
-        }
-        .clear { clear: both; height: 60px; }
-    </style>
-</head>
-<body>
-    <h1><b>Vandermonde Method</b></h1>
-    <h2><b>--------------------||--------------------</b></h2>
-    <h3>In order to operate properly:</h3>
-    <p>-You must be careful with the vectors that are introduced, the rounding error will prove that the</p>
-    <p>approach found by the method is not very accurate. If possible enter the full value</p>
-    <h2><b>--------------------||--------------------</b></h2>
+{% block head %}
+<style>
+    input {
+        width: 35%;
+        text-align: center;
+    }
 
-    <h1>Vandermonde Data</h1>
+    form {
+        text-align: center;
+    }
+
+    h1 {
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Vandermonde Data</h1>
     <form method="post" action="{{ url_for('FlaskVandermonde') }}">
         <label for="n">Number of X and Y elements</label>
         <p><input name="n" type="number" placeholder="Example: 4"></p>
@@ -61,43 +38,25 @@
             <div class="col-xs-4"></div>
             <div class="center">
                 <div class="col-xs-4">
-                    <input type="submit" class="btn btn-success btn-lg" value="Run">
-                    <button type="button" class="btn btn-info btn-lg" onclick= "location='/'">Back</button>
+                    <input type="submit" class="btn btn-danger btn-lg" value="Run">
+                    <button type="button" class="btn btn-dark btn-lg" onclick="location='/'">Back</button>
+                </div>
             </div>
-            </div>
-            </div>
-          </div>
+        </div>
 
     </form>
-    <br><br><br><br><br>
-</body>
-<div class="clear">
-    <div id="footer">
-    <footer>
-        <br>
-        <div class="footer">
-            <p class="text-lg-left" style="width: 125rem"> 
-                Given a set with \(n + 1\) known points {\(f(x_0, y_0), (x_1, y_1), (x_2, y_2), ... , (x_n, y_n)\)}. By interpolation theorem, there is only one interpolating polynomial
-                \(p(x)\) of degree at most \(n\). It can be considered that the polynomial has the form:
-                \(p(x) = a_nx^n + a_{n-1}x^{n-1} + a_{n-2}x^{n-2 } + ... + a_2x^2 + a_1x + a_0  \)
-                <br>
-                To obtain the polynomial it is enough to determine the value of the coefficients \(a_i\) . To do this, the condition posed by the interpolation problem is used: 
-                \(\forall_i \) , \( 0 \le i \le n \) \(p(x_i) = y_i \)
-                <br>
-                \(p(x_0)= p(x_0) \to y_0 = a_nx_0^n + a_{n-1}x_0^{n-1} + a_{n-2}x_0^{n-2 } + ... + a_2x_0^2 + a_1x_0 + a_0 \)
-                <br>
-                \(p(x_1)= p(x_1) \to y_1 = a_nx_1^n + a_{n-1}x_1^{n-1} + a_{n-2}x_1^{n-2 } + ... + a_2x_1^2 + a_1x_1 + a_0 \)
-                <br>
-                \(...\)
-                <br>
-                \(p(x_n)= p(x_n) \to y_n = a_nx_n^n + a_{n-1}x_n^{n-1} + a_{n-2}x_n^{n-2 } + ... + a_2x_n^2 + a_1x_n + a_0 \)
-                <br>
-                This results in a system of \(n + 1\) linear equations with  \(n + 1\) unknowns, where 
-                \(a_n, an_1, an_2, . . . . a_2, a_1, a_0 \) are the variables. The resulting system's matrix of coefficients is known as the
-                <strong>Vandermonde matrix.</strong> 
-            </p>
-        </div>
-    </footer>
-    </div>
-</div>
-</html>
+
+{% endblock %}
+
+{% block footer_help %}
+<h3>In order to operate properly:</h3>
+<li>You must be careful with the vectors that are introduced, the rounding error will prove that the
+    approach found by the method is not very accurate. If possible enter the full value
+</li>
+{% endblock %}
+
+
+{% block footer_strategies %}
+<h3>Strategies for faster convergence:</h3>
+<li>Not necessarily more points implies a better approximation</li>
+{% endblock %}

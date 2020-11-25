@@ -9,20 +9,7 @@ Cubic Plotter
 CUBIC PLOTTER
 {% endblock %}
 
-{% block content %}
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cubic Plotter</title>
-    <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
-    <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
+{% block head %}
     <style>
         input {
             width: 35%;
@@ -31,10 +18,6 @@ CUBIC PLOTTER
             text-align: center;
         }
         h1{
-            text-align: center;
-        }
-        body {
-            padding-bottom:100px;   /* Height of the footer */
             text-align: center;
         }
         .footer {
@@ -47,12 +30,9 @@ CUBIC PLOTTER
             text-align: center;
         }
     </style>
-</head>
-<body>
-    <h2><b>--------------------||--------------------</b></h2>
-    <h4>The polynomials P (x) through which we build the splines have grade 3, so they have the form:</h4>
-    <p>P (x) = ax ^ 3 + bx ^ 2 + cx + d</p>
-    <h2><b>--------------------||--------------------</b></h2>
+{% endblock %}
+
+{% block content %}
     <form method="post" action="{{ url_for('FlaskCubicPlotter') }}">
         <label for="n">Number of X and Y elements</label>
         <p><input name="n" type="number" placeholder="Example: 4"></p>
@@ -71,26 +51,23 @@ CUBIC PLOTTER
             </div>
         </div>
     </form>
-</body>
 
-<footer>
-    <br>
-    <div class="footer">
-        <p class="text-lg-CENTER" style="width: 125rem"> 
-            Given a function \(f\) in \([a, b]\) and nodes \( a = x_0 \lt x_1 \lt \cdots \lt x_n = b \) , an interpolating cubic spline 
-            \(p\) for \(f\) is a function that satisfies the following conditions:
-            <br>
-            \(\bullet p(x) \) is a quadratic polynomial, defined \(p_j(x)\), over the interval \([x_{j-1}, x_{j}]\) for each \(j=1,...,n\)
-            <br>
-            \(\bullet p_j(x_{j-1}) = f(x_{j-1})\) and \(p_j(x_{j}) = f(x_{j})\) for each \(j=1,...,n\)
-            <br>
-            \(\bullet p_{j+1}(x_{j}) = p_j(x_j)\) for each \(j=1,...,n-1\)
-            <br>
-            \(\bullet p'_{j+1}(x_{j}) = p'_j(x_j)\) for each \(j=1,...,n-1\)
-            <br>
-            \(\bullet p''_1(x_1)=0 \)
-        </p>
-    </div>
-</footer>
 {% endblock %}
-</html>
+
+{% block footer_help %}
+<h3>In order to operate properly:</h3>
+<li>The linear tracer must meet the conditions of interpolation and continuity. These are described next.</li>
+<li>The polynomials P (x) through which we build the splines have grade 3, so they have the form: <br>
+    P (x) = ax ^ 3 + bx ^ 2 + cx + d </li>
+{% endblock %}
+
+
+{% block footer_strategies %}
+<h3>Strategies for convergence:</h3>
+<li>Not necessarily more points implies a better approximation</li>
+Given a function \(f\) in \([a, b]\) and nodes \( a = x_0 \lt x_1 \lt \cdots \lt x_n = b \) , an interpolating linear spline 
+\(p\) for \(f\) is a function that satisfies the following conditions:
+<li>\( p(x) \) is a linear polynomial, defined \(p_j(x)\), over the interval \([x_{j-1}, x_{j}]\) for each \(j=1,...,n\)</li>
+<li>\( p_j(x_{j-1}) = f(x_{j-1})\) and \(p_j(x_{j}) = f(x_{j})\) for each \(j=1,...,n\)</li>
+<li>\( p_{j+1}(x_{j}) = p_j(x_j)\) for each \(j=1,...,n-1\)</li>
+{% endblock %}
