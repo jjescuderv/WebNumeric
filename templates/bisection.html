@@ -1,57 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+{% extends "layouts/master.html" %}
+{% block title %}
+Bisection
+{% endblock %}
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bisection</title>
-    <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
-    <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
-    <style>
-        input {
-            width: 30%;
-            text-align: center;
-        }
-        form{
-            text-align: center;
-        }
-        h1{
-            text-align: center;
-        }
-    </style>
-</head>
+{% block banner_title %}
+Bisection
+{% endblock %}
+
+{% block content %}
+
 <body>
-    <h1><b>Bisection Method</b></h1>
     <form method="post" action="{{ url_for('bisection_results') }}">
-        <label for="itera">Number of iterations</label>
+
+        <div class="row justify-content-center">
+            <label for="itera">Number of iterations</label>
+        </div>
         <p><input name="itera" type="text" placeholder="Example: 100"></p>
-        <label for="a">left end of interval</label>
+
+        <div class="row justify-content-center">
+            <label for="a">left end of interval</label>
+        </div>
         <p><input name="a" type="text" placeholder="Example: 1.0"></p>
-        <label for="a">Right end of interval</label>
+        <div class="row justify-content-center">
+            <label for="a">Right end of interval</label>
+        </div>
         <p><input name="b" type="text" placeholder="Example: 5.0"></p>
-        <label for="f">Function</label>
+        <div class="row justify-content-center">
+            <label for="f">Function</label>
+        </div>
         <p><input name="f" type="text" placeholder="Example: log(sin(x)**2+1)-1/2"></p>
-        <label for="tol">Error acepted</label>
+        <div class="row justify-content-center">
+            <label for="tol">Error acepted</label>
+        </div>
         <p><input name="tol" type="text" placeholder="Example: 10**-7"></p>
-        <div class="container">
-            <div class="col-xs-4"></div>
-            <div class="center">
-                <div class="col-xs-4">
-                    <input type="submit" class="btn btn-success btn-lg" value="Run">
-                    <button type="button" class="btn btn-info btn-lg" onclick= "location='/'">Back</button>
-            </div>
-            </div>
-            </div>
-          </div>
-            
-       
-        
+
     </form>
+
+    <div class="row justify-content-center">
+        <button id="solve" type="submit" form="data" class="btn btn-outline-danger btn-lg btn-block" onClick="mat()">
+            Solve
+        </button>
+    </div>
+
 </body>
 <footer>
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,42 +52,65 @@
         <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
         <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
         <style>
-            table, th, td {
+            table,
+            th,
+            td {
                 border: 1px solid black;
                 text-align: center;
                 margin-left: auto;
                 margin-right: auto;
             }
-            h1, h3, p, h2, pre{
+
+            h1,
+            h3,
+            p,
+            h2,
+            pre {
                 text-align: center;
             }
         </style>
     </head>
+
     <body>
-        <h2>Bisection Results Table</h2>
+        <p></p>
+        <h2>Results Table</h2>
         <table style="width:30%">
-        <tr>
-            <th>Iterations</th>
-            <th>a</th> 
-            <th>X(mi)</th>
-            <th>b</th>
-            <th>f(xmi)</th>
-            <th>E</th>
-        </tr>
-        {%for i in list_it %}
-        <tr>
-            <td>{{i}}</td>
-            <td>{{list_a[i-1]}}</td>
-            <td>{{list_xm[i-1]}}</td>
-            <td>{{list_b[i-1]}}</td>
-            <td>{{list_fxm[i-1]}}</td>
-            <td>{{list_E[i-1]}}</td>
-        </tr>
-        {%endfor%}
-        
+            <tr>
+                <th>Iterations</th>
+                <th>a</th>
+                <th>X(mi)</th>
+                <th>b</th>
+                <th>f(xmi)</th>
+                <th>E</th>
+            </tr>
+            {%for i in list_it %}
+            <tr>
+                <td>{{i}}</td>
+                <td>{{list_a[i-1]}}</td>
+                <td>{{list_xm[i-1]}}</td>
+                <td>{{list_b[i-1]}}</td>
+                <td>{{list_fxm[i-1]}}</td>
+                <td>{{list_E[i-1]}}</td>
+            </tr>
+            {%endfor%}
+
         </table>
-        <h3>Root found in:  <b>{{ root }}</b></h3>
+        <p></p>
+        <h3>Root found in: <b>{{ root }}</b></h3>
 
     </body>
 </footer>
-</html>
+
+
+{% endblock %}
+
+{% block footer_help %}
+<li>To represent x to the power of y you must use x**y in your inputs.</li>
+<li>Both the function and its derivative must be continuous on the interval.</li>
+<li>The root must be in the interval.</li>
+<li>The derivative does not become 0 in the root.</li>
+{% endblock %}
+
+{% block footer_strategies %}
+<li>Take as initial approximation the midpoint of the interval where the root is contained.</li>
+{% endblock %}
