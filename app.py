@@ -24,6 +24,7 @@ from sympy import sin, cos, log, exp
 from crout import Crout
 from chol import Cholesky
 from diffdiv import Newton_diff
+from lagrange import Lagrange
 
 app = Flask(__name__)
 
@@ -690,6 +691,41 @@ def diffdiv_results():
         return "<h1 style='text-align: center;'>Check values entered</h1>"
 
     return render_template("diffdiv.html", A=A, b=b, a=a)
+
+@app.route("/lagrange")
+def lagrange():
+    return render_template('lagrange.html')
+
+@app.route("/lagrange_results", methods=["GET", "POST"])
+def lagrange_results():
+    n=request.form.get("n")
+    x=request.form.get("x")
+    y=request.form.get("y")
+    
+    if n=='' or x=='' or y=='':
+        return "<h1 style='text-align: center;'>Check Values Entered</h1>"
+
+    try:
+        A = int(n)
+    except:
+        return "<h1 style='text-align: center;'>Check n value entered</h1>"
+
+    try:
+        values_x = list(map(float, x.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check x vector entered</h1>"
+
+    try:
+        values_y = list(map(float, y.split()))
+    except:
+        return "<h1 style='text-align: center;'>Check y vector entered</h1>"
+
+    try:
+        A,b,a = Lagrange(n,x,y)
+    except:
+        return "<h1 style='text-align: center;'>Check values entered</h1>"
+
+    return render_template("lagrange.html", A=A, b=b, a=a)
 
 #----------------------------------------------------END JHONATAN ---------------------------------------------
    
