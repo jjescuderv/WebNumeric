@@ -32,6 +32,11 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+
+@app.route("/plot")
+def plot():
+    return render_template("plotter/plot.html")
+
 @app.route("/about")
 def about():
     return render_template("about.html")
@@ -45,6 +50,27 @@ def direct_methods():
 
 @app.route("/gauss", methods=["GET", "POST"])
 def gauss():
+    mat = request.form.getlist('mat[]')
+    vec = request.form.getlist('vec[]')
+    method = int(request.form.get('method'))
+    n = int(request.form.get('matrix_size'))
+
+    if method == 1:
+        result = gauss_simple(n, mat, vec)
+    elif method == 2:
+        result = gauss_partial_pivoting(n, mat, vec)
+    else:
+        result = gauss_total_pivoting(n, mat, vec)
+
+    return render_template("matrices/direct_methods.html", result=result)
+
+@app.route("/iterative_methods")
+def iterative_methods():
+    result = []
+    return render_template("matrices/direct_methods.html", result=result)
+
+@app.route("/iterative", methods=["GET", "POST"])
+def iterative():
     mat = request.form.getlist('mat[]')
     vec = request.form.getlist('vec[]')
     method = int(request.form.get('method'))
