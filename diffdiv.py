@@ -8,13 +8,14 @@ def Newton_diff(n, values_x, values_y):
     Y = list(map(float, values_y.split()))
 
     x = sp.Symbol('x')
+    n = len(X)
+    D = np.zeros((n,n))
+    coef = []
+    poly = []
     for i in range(0,len(X)):
         for j in range(i+1,len(X)):
             if(X[i]==X[j]):
-                return 0 
-    
-    n = len(X)
-    D = np.zeros((n,n))
+                return "", "", "", "X vector contain repeated values, the method will not run"
     
     D[:,0] = np.transpose(Y)
     for i in range(2,n+1):
@@ -25,7 +26,7 @@ def Newton_diff(n, values_x, values_y):
     
 
     coef = np.diag(np.transpose(D))
-    poly = []
+   
 
     listmult = []
     
@@ -42,4 +43,4 @@ def Newton_diff(n, values_x, values_y):
     for i in range(1,len(coef)):
         poly.append(str(coef[i])+"*"+listmult[i-1])
 
-    return str(D), str(coef), str(poly)
+    return str(D), str(coef), str(poly), ""

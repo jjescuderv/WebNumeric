@@ -719,11 +719,11 @@ def diffdiv_results():
         return "<h1 style='text-align: center;'>Check y vector entered</h1>"
 
     try:
-        A,b,a = Newton_diff(n,x,y)
+        A,b,a,error = Newton_diff(n,x,y)
     except:
         return "<h1 style='text-align: center;'>Check values entered</h1>"
 
-    return render_template("diffdiv.html", A=A, b=b, a=a)
+    return render_template("diffdiv.html", A=A, b=b, a=a, error = error)
 
 @app.route("/lagrange")
 def lagrange():
