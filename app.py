@@ -21,6 +21,7 @@ from incremental_searches import Incremental_searches
 import sympy as sp
 from sympy import sin, cos, log, exp
 from crout import Crout
+from chol import Cholesky
 
 app = Flask(__name__)
 
@@ -582,6 +583,21 @@ def crout_results():
     result = Crout(n, mat, vec)
 
     return render_template("crout.html", result=result)
+
+@app.route("/chol")
+def chol():
+    test = []
+    return render_template("chol.html", test=test)
+
+@app.route("/chol_results", methods=["GET", "POST"])
+def chol_results():
+    mat = request.form.getlist('mat[]')
+    vec = request.form.getlist('vec[]')
+    n = int(request.form.get('matrix_size'))
+
+    result = Cholesky(n, mat, vec)
+
+    return render_template("chol.html", result=result)
 
 #----------------------------------------------------END JHONATAN ---------------------------------------------
    
