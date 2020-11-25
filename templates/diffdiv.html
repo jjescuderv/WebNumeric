@@ -1,0 +1,86 @@
+{% extends "layouts/master.html" %}
+{% block title %}
+Newton with divided differences
+{% endblock %}
+
+{% block banner_title %}
+Newton with divided differences
+{% endblock %}
+
+{% block head %}
+<style>
+    input {
+        width: 35%;
+        text-align: center;
+    }
+
+    form {
+        text-align: center;
+    }
+
+    h1 {
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <form method="post" id="data" action="{{ url_for('diffdiv_results') }}">
+        <label for="n">Number of X and Y elements</label>
+        <p><input name="n" type="number" placeholder="Example: 4"></p>
+        <label for="x">Enter the elements of X separated by space</label>
+        <p><input name="x" type="text" placeholder="Example: -1 0 3 4"></p>
+        <label for="y">Enter the elements of Y separated by space</label>
+        <p><input name="y" type="text" placeholder="Example: 15.5 3 8 1"></p>
+
+        <div class="row justify-content-center">
+            <button id="solve" type="submit" form="data" class="btn btn-outline-danger btn-lg btn-block" onClick="mat()">
+                Solve
+            </button>
+        </div>
+
+    </form>
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h1, h3, p, h2, pre{
+            text-align: center;
+        }
+        .container{
+            text-align: center;
+        }
+    </style>
+    <p></p>
+    
+    <h3>Table of divided differences</h3>
+    <pre>
+        {{A}}
+    </pre>
+    
+    <h3>Polynomial Coefficients</h3>
+    <p> {{b}} </p>
+    
+    <h3>Newton's Polynomial</h3>
+    <p> \( {{a}} \) </p>
+    
+
+
+{% endblock %}
+
+{% block footer_help %}
+<h3>In order to operate properly:</h3>
+<li>You must be careful with the vectors that are introduced, the rounding error will prove that the
+    approach found by the method is not very accurate. If possible enter the full value
+</li>
+{% endblock %}
+
+
+{% block footer_strategies %}
+<h3>Strategies for faster convergence:</h3>
+<li>Not necessarily more points implies a better approximation</li>
+{% endblock %}
