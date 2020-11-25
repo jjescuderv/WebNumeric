@@ -57,7 +57,7 @@ def Punto_Fijo(itera,x0,f,g,error):
     lis_er.append(e)
     c = c + 1
 
-  string2 = '\n'+str("Se encontro una aproximacion de la raiz en "+ format(float(gx),"12.15f")+'\n')
+  string2 = '\n'+str("An approximation of the root was found in "+ format(float(gx),"12.15f")+'\n')
   return lis_it,lis_xi,lis_gx,lis_fx,lis_er,string2
   
 #Punto_Fijo()
