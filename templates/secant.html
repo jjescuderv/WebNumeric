@@ -1,103 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+{% extends "layouts/master.html" %}
+{% block title %}
+Secant
+{% endblock %}
 
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{% block banner_title %}
+Secant Method
+{% endblock %}
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secant</title>
-    <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
-    <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
-    <style>
-        input {
-            width: 30%;
-            text-align: center;
-        }
-        form{
-            text-align: center;
-        }
-        h1{
-            text-align: center;
-        }
-        body {
-            padding:10px;
-            padding-bottom:60px;
-            text-align: center;
-        }
-        .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color:#5BC0DE;
-            color: white;
-            text-align: center;
-        }
-        .clear { clear: both; height: 60px; }
-    </style>
-</head>
-<body>
-    <h1><b>Secant Method</b></h1>
-    <h2><b>--------------------||--------------------</b></h2>
-    <h3>In order to operate properly:</h3>
-    <p>-The function must be continuous on the interval</p>
-    <p>-The root must be in the interval</p>
-    <p>-The derivative does not become 0 in the root</p>
-    <h3>Strategies for faster convergence:</h3>
-    <p>-Take as initial approximations the interval where the root is</p>
-    <p>-If you used one of the fixed-point methods, such as Newton, you can take the same initial 
-        approach and modify the figure minimally for the second value</p>
-    <h2><b>--------------------||--------------------</b></h2>
+{% block head %}
+<style>
+    input {
+        width: 35%;
+        text-align: center;
+    }
 
-    <h1>Secant DATA</h1>
-    <form method="post" action="{{ url_for('FlaskSecant') }}">
-        <label for="iter">Number of Iterations</label>
-        <p><input name="iter" type="text" placeholder="Example: 100"></p>
-        <label for="x0">Initial Value</label>
-        <p><input name="x0" type="text" placeholder="Example: 1.0"></p>
-        <label for="x1">Second Initial Value</label>
-        <p><input name="x1" type="text" placeholder="Example 1.5"></p>
-        <label for="fun">Function to evaluate</label>
-        <p><input name="fun" type="text" placeholder="Example: exp(x)-x-1"></p>
-        <label for="err">Error Acepted</label>
-        <p><input name="err" type="text" placeholder="Example: 10**-7"></p>
-        <!--<input type="submit" value="Acept">-->
+    form {
+        text-align: center;
+    }
 
-        <div class="container">
-            <div class="col-xs-4"></div>
-            <div class="center">
-                <div class="col-xs-4">
-                    <input type="submit" class="btn btn-success btn-lg" value="Run">
-                    <button type="button" class="btn btn-info btn-lg" onclick= "location='/'">Back</button>
+    h1 {
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1><b>Secant Method</b></h1>
+<form method="post" action="{{ url_for('FlaskSecant') }}">
+    <label for="iter">Number of Iterations</label>
+    <p><input name="iter" type="text" placeholder="Example: 100"></p>
+    <label for="x0">Initial Value</label>
+    <p><input name="x0" type="text" placeholder="Example: 1.0"></p>
+    <label for="x1">Second Initial Value</label>
+    <p><input name="x1" type="text" placeholder="Example 1.5"></p>
+    <label for="fun">Function to evaluate</label>
+    <p><input name="fun" type="text" placeholder="Example: exp(x)-x-1"></p>
+    <label for="err">Error Acepted</label>
+    <p><input name="err" type="text" placeholder="Example: 10**-7"></p>
+    <div class="container">
+        <div class="col-xs-4"></div>
+        <div class="center">
+            <div class="col-xs-4">
+                <input type="submit" class="btn btn-danger btn-lg" value="Run">
+                <button type="button" class="btn btn-dark btn-lg" onclick="location='/'">Back</button>
             </div>
-            </div>
-            </div>
-          </div>
-    </form>
-    <br>
-
-</body>
-
-<div class="clear">
-    <div id="footer">
-    <footer>
-        <br>
-        <div class="footer">
-            <p class="text-lg-left" style="width: 125rem"> 
-                The Secant method can be thought of as a simplification of Newton-Raphson's method. Instead of taking the derivative of the function whose root we want to find, it approaches by a line
-                secant (hence the name) to the curve, whose slope is approximately equal to that derived in the
-                starting point. The main difference with the previous method is to know two points of the function for
-                to be able to generate such a line. Let \(x_0\) y \(x_1\) belonging to a certain \(f(x)\) can be defined:
-                \[x_{n+1} = {x_{n}} - { f(x_n) (x_n - x_{n-1}) \over f(x_n) - f(x_{n-1})}.\]
-
-            </p>
         </div>
-    </footer>
     </div>
-</div>
-</html>
+</form>
+
+{% endblock %}
+
+{% block footer_help %}
+<h3>In order to operate properly:</h3>
+<li>The function must be continuous on the interval</li>
+<li>The root must be in the interval</li>
+<li>The derivative does not become 0 in the root</li>
+{% endblock %}
+
+
+{% block footer_strategies %}
+<h3>Strategies for faster convergence:</h3>
+<li>Take as initial approximations the interval where the root is</li>
+<li>If you used one of the fixed-point methods, such as Newton, you can take the same initial 
+    approach and modify the figure minimally for the second value</li>
+{% endblock %}

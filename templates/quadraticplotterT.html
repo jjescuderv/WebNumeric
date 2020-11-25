@@ -1,26 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+{% extends "layouts/master.html" %}
+{% block title %}
+Quadratic Plotter Table
+{% endblock %}
 
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{% block banner_title %}
+Quadratic Plotter Table
+{% endblock %}
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quadratic Plotter Results</title>
-    <!--<link rel="shortcut icon" href="../static/imgs/favicon.ico"> -->
-    <link rel="shortcut icon" href="{{ url_for('static' , filename = 'imgs/favicon.ico') }}">
-    <style>
-        h1, h3, p, pre{
-            text-align: center;
-        } 
-    </style>
-</head>
-<body>
-    <h1>Quadratic Plotter</h1>
+{% block head %}
+<style>
+    table, th, td {
+        border: 1px solid black;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    h1, h3, p, h2, pre{
+        text-align: center;
+    }
+    .container{
+        text-align: center;
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+<h1>Quadratic Plotter</h1>
 
     <h3>Quadratic Plotter A Matrix</h3>
     <pre>
@@ -38,16 +44,14 @@
 
     <br>
     <div class="container">
-        <div class="col-md-5"></div>
+        <div class="col-xs-6"></div>
         <div class="center">
-            <div class="col-md-6">
-                <button type="button" class="btn btn-info btn-lg" onclick= "location='/'">Back to main menu</button>
+            <div class="col-xs-6">
+                <button type="button" class="btn btn-dark btn-lg" onclick="location='/'">Back to main menu</button>
+            </div>
         </div>
-        </div>
-        </div>
-      </div>
+    </div>
 
     <br>
 
-</body>
-</html>
+    {% endblock %}

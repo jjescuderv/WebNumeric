@@ -1,16 +1,16 @@
 {% extends "layouts/master.html" %}
 {% block title %}
-Bisection
+Incremental searches
 {% endblock %}
 
 {% block banner_title %}
-Bisection
+Incremental searches
 {% endblock %}
 
 {% block content %}
 
 <body>
-    <form method="post" id="data" action="{{ url_for('bisection_results') }}">
+    <form method="post" id="data" action="{{ url_for('searches_results') }}">
 
         <div class="row justify-content-center">
             <label for="itera">Number of iterations</label>
@@ -18,26 +18,24 @@ Bisection
         <p><input name="itera" type="text" placeholder="Example: 100"></p>
 
         <div class="row justify-content-center">
-            <label for="a">left end of interval</label>
+            <label for="x0">Initial approximation</label>
         </div>
-        <p><input name="a" type="text" placeholder="Example: 0"></p>
+        <p><input name="x0" type="text" placeholder="Example: -3"></p>
+
         <div class="row justify-content-center">
-            <label for="a">Right end of interval</label>
+            <label for="delta">Delta</label>
         </div>
-        <p><input name="b" type="text" placeholder="Example: 1"></p>
+        <p><input name="delta" type="text" placeholder="Example: 0.5"></p>
+
         <div class="row justify-content-center">
             <label for="f">Function</label>
         </div>
-        <p><input name="f" type="text" placeholder="Example: log(sin(x-2))"></p>
-        <div class="row justify-content-center">
-            <label for="tol">Error acepted</label>
-        </div>
-        <p><input name="tol" type="text" placeholder="Example: 10**-7"></p>
+        <p><input name="f" type="text" placeholder="Example: log(sin(x))"></p>
 
     </form>
 
     <div class="row justify-content-center">
-        <button id="solve" type="submit" form="data" class="btn btn-outline-danger btn-lg btn-block" onClick="mat()">
+        <button id="solve" type="submit" form="data" class="btn btn-outline-danger btn-lg btn-block">
             Solve
         </button>
     </div>
@@ -74,29 +72,20 @@ Bisection
     <body>
         <p></p>
         <h2>Results Table</h2>
-        <table style="width:70%">
+        <table style="width:40%">
             <tr>
                 <th>Iterations</th>
-                <th>a</th>
-                <th>X(mi)</th>
-                <th>b</th>
-                <th>f(xmi)</th>
-                <th>E</th>
+
             </tr>
-            {%for i in list_it %}
+            {%for iteration in list_apr %}
             <tr>
-                <td>{{i}}</td>
-                <td>{{list_a[i-1]}}</td>
-                <td>{{list_xm[i-1]}}</td>
-                <td>{{list_b[i-1]}}</td>
-                <td>{{list_fxm[i-1]}}</td>
-                <td>{{list_E[i-1]}}</td>
+                <td>{{iteration}}</td>
             </tr>
             {%endfor%}
 
         </table>
         <p></p>
-        <h3>Root found in: <b>{{ root }}</b></h3>
+
 
     </body>
 </footer>
