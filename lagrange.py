@@ -27,6 +27,11 @@ def Lagrange(n, values_x, values_y):
     print(coef,"\n")
     print(poly,"\n")
 
-    return str(L), str(coef), str(poly)
+    strpoly = ""
+
+    for i in range (0, len(poly)):
+        strpoly += poly[i]
+
+    return str(L), str(coef), strpoly
 
 np.set_printoptions(formatter={'float': '{: f}'.format})

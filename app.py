@@ -579,10 +579,11 @@ def newton_results():
     except:
         return "<h1 style='text-align: center;'>Check values entered</h1>"
 
+    funplot = funstr.replace("**", "^")
 
     it=len(list_a)
     list_it=list(range(0,it))
-    return render_template("newton.html", list_a=list_a,list_f=list_f,list_e=list_e, list_it=list_it, root=root)
+    return render_template("newton.html", list_a=list_a,list_f=list_f,list_e=list_e, list_it=list_it, root=root, funplot = funplot)
 
 @app.route("/searches")
 def searches():
@@ -626,7 +627,9 @@ def searches_results():
     except:
         return "<h1 style='text-align: center;'>Check values entered</h1>"
 
-    return render_template("searches.html", list_apr=list_apr)
+    funplot = fstr.replace("**", "^")
+
+    return render_template("searches.html", list_apr=list_apr, funplot = funplot)
 
 @app.route("/bisection")
 def bisection():
@@ -678,11 +681,13 @@ def bisection_results():
         list_a, list_xm, list_b, list_fxm, list_E, root, error= Bisection(itera,a,b,f,tol)
     except:
         return "<h1 style='text-align: center;'>Check values entered</h1>"
+
+    funplot = fstr.replace("**", "^")
     
     it=len(list_a)
     list_it=list(range(1,it+1))
     return render_template("bisection.html", list_a=list_a, list_xm=list_xm, list_b=list_b, list_fxm = list_fxm,
-    list_E = list_E, list_it=list_it, root=root, error = error)
+    list_E = list_E, list_it=list_it, root=root, error = error, funplot = funplot)
 
 
 

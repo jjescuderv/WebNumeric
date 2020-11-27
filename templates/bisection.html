@@ -37,7 +37,7 @@ Bisection
     </form>
 
     <div class="row justify-content-center">
-        <button id="solve" type="submit" form="data" class="btn btn-outline-danger btn-lg btn-block" onClick="mat()">
+        <button id="solve" type="submit" form="data" class="btn btn-outline-danger btn-lg btn-block" onClick="plot()">
             Solve
         </button>
     </div>
@@ -100,6 +100,24 @@ Bisection
         <h3>Root found in: <b>{{ root }}</b></h3>
 
     </body>
+    <div class="row cols-sm">
+        <div class="col-lg-4 py-3">
+            <div class="col-lg-6 py-3 float-right" id="plotSettings" style="border:4px solid grey; border-radius:15px;">
+                <label for="function"><b>Function: </b></label>
+                <input id="function" type="text" value="{{funplot}}"" onchange="plot();" size="13">
+                <p></p>
+                <label for="color"><b>Color: </b></label>
+                <input type=color id="color" onchange="plot();">
+                <p></p>
+                <button class="btn btn-danger float-right" id="plot" onclick="plot();">Plot</button>
+            </div>
+        </div>
+        <div class="col-lg-8 py-3">
+            <div id="myFunction">
+    
+            </div>
+        </div>
+    </div>
 </footer>
 
 
@@ -114,4 +132,31 @@ Bisection
 
 {% block footer_strategies %}
 <li>Take as initial approximation the midpoint of the interval where the root is contained.</li>
+{% endblock %}
+
+{% block script %}
+<script>
+    var parameters = {
+        target: '#myFunction',
+        data: [{
+            fn: 'sin(2x)',
+            color: 'red'
+        }],
+        grid: false,
+        yAxis: { domain: [-1, 1] },
+        xAxis: { domain: [0, 2 * Math.PI] }
+    };
+
+    function plot() {
+        var f = document.querySelector("#function").value;
+        var color = document.querySelector("#color").value;
+
+        parameters.data[0].fn = f;
+        parameters.data[0].color = color;
+
+        functionPlot(parameters);
+    }
+</script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://mauriciopoppe.github.io/function-plot/js/function-plot.js"></script>
 {% endblock %}

@@ -39,8 +39,19 @@ def Newton_diff(n, values_x, values_y):
             straux += "*(x-("+str(X[i])+"))"
             listmult.append(straux)
 
+
+
     poly.append(str(coef[0]))
     for i in range(1,len(coef)):
         poly.append(str(coef[i])+"*"+listmult[i-1])
 
-    return str(D), str(coef), str(poly), ""
+
+    strpoly = ""
+    for i in range(0,len(poly)):
+        if(poly[i].startswith("-")):
+            strpoly += poly[i]
+        else:
+            strpoly += " + "
+            strpoly += poly[i]
+
+    return str(D), str(coef), strpoly, ""
